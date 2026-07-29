@@ -7,21 +7,85 @@
 #   niche  -> small, specific tags (<50k posts). Slower but more targeted
 #             engagement, better chance of hitting "top posts".
 #
-# Add/replace entries per topic as content is defined. "general" is used as a
-# fallback when a post has no matching topic.
+# Hesabın kesin niş/konusu henüz seçilmediği için burada Instagram'da en
+# yaygın kullanılan içerik kategorileri gerçek, bilinen hashtag'lerle
+# dolduruldu. Niş netleşince: (a) o kategoriyi olduğu gibi kullanabilir,
+# (b) altına daha spesifik alt-etiketler ekleyebilir, ya da (c) kullanılmayan
+# kategorileri silebilirsiniz. `general` her zaman fallback olarak kalır.
+# ContentPost.topics alanına buradaki anahtarlardan birini (örn. "fitness")
+# yazmak yeterli - HashtagManager geri kalanını otomatik seçer.
 
 general:
-  mega: ["instagood", "photooftheday", "instadaily", "picoftheday", "love"]
-  medium: ["contentcreator", "dailypost", "instacontent", "creativity", "aesthetic"]
-  niche: ["smallcreator", "growwithus", "contentstrategy", "dailyinspo"]
+  mega: ["instagood", "photooftheday", "instadaily", "picoftheday", "love", "follow", "instagram"]
+  medium: ["contentcreator", "dailypost", "instacontent", "creativity", "aesthetic", "goodvibes"]
+  niche: ["smallcreator", "growwithus", "contentstrategy", "dailyinspo", "communityovercompetition"]
 
-# Example topic buckets - copy this pattern for real topics once content is decided.
 lifestyle:
-  mega: ["lifestyle", "instalife", "life"]
-  medium: ["lifestyleblogger", "dailylife", "lifeinspiration"]
-  niche: ["slowlifestyle", "simplelifeideas"]
+  mega: ["lifestyle", "instalife", "life", "lifestyleblog"]
+  medium: ["lifestyleblogger", "dailylife", "lifeinspiration", "slowliving"]
+  niche: ["slowlifestyle", "simplelifeideas", "intentionalliving", "mindfulliving"]
 
 travel:
-  mega: ["travel", "travelgram", "wanderlust"]
-  medium: ["travelblogger", "travelphotography", "exploremore"]
-  niche: ["hiddengems", "offthebeatenpath"]
+  mega: ["travel", "travelgram", "wanderlust", "instatravel"]
+  medium: ["travelblogger", "travelphotography", "exploremore", "traveltheworld"]
+  niche: ["hiddengems", "offthebeatenpath", "solotravelblog", "traveldiaries"]
+
+food:
+  mega: ["food", "foodporn", "foodie", "instafood"]
+  medium: ["foodphotography", "foodblogger", "homemadefood", "foodstagram"]
+  niche: ["foodstyling", "recipeoftheday", "plantbasedfood", "comfortfoodlovers"]
+
+fitness:
+  mega: ["fitness", "gym", "fitnessmotivation", "workout"]
+  medium: ["fitnessjourney", "gymlife", "homeworkout", "fitfam"]
+  niche: ["strengthtraining", "progressnotperfection", "fitnessforbeginners"]
+
+fashion:
+  mega: ["fashion", "style", "ootd", "fashionista"]
+  medium: ["fashionblogger", "streetstyle", "outfitinspo", "styleinspiration"]
+  niche: ["slowfashion", "capsulewardrobe", "sustainablefashion"]
+
+business:
+  mega: ["business", "entrepreneur", "marketing", "smallbusiness"]
+  medium: ["businessowner", "entrepreneurlife", "digitalmarketing", "businesstips"]
+  niche: ["solopreneur", "bootstrappedbusiness", "indiehackers"]
+
+photography:
+  mega: ["photography", "photooftheday", "photographer", "instaphoto"]
+  medium: ["photographylovers", "naturephotography", "portraitphotography"]
+  niche: ["filmphotography", "moodygrams", "photographytips"]
+
+art:
+  mega: ["art", "artist", "artwork", "design"]
+  medium: ["digitalart", "illustration", "contemporaryart", "graphicdesign"]
+  niche: ["dailyart", "artistsoninstagram", "processart"]
+
+tech:
+  mega: ["technology", "tech", "innovation"]
+  medium: ["techlife", "coding", "softwaredeveloper", "programming"]
+  niche: ["buildinpublic", "indiedev", "techtips"]
+
+motivation:
+  mega: ["motivation", "inspiration", "mindset", "success"]
+  medium: ["motivationalquotes", "personaldevelopment", "selfimprovement"]
+  niche: ["growthmindset", "dailymotivationboost", "mindsetshift"]
+
+beauty:
+  mega: ["beauty", "makeup", "skincare"]
+  medium: ["makeuptutorial", "skincareroutine", "beautycommunity"]
+  niche: ["cleanbeauty", "skincaretips", "naturalmakeuplook"]
+
+petcare:
+  mega: ["dog", "cat", "petsofinstagram", "pets"]
+  medium: ["doglover", "catlover", "dogsofinstagram", "catsofinstagram"]
+  niche: ["rescuedog", "dogtraining", "catcafe"]
+
+homedecor:
+  mega: ["homedecor", "interiordesign", "home"]
+  medium: ["homedesign", "interiorstyling", "homeinspo"]
+  niche: ["smallspaceliving", "minimalisthome", "cozyhome"]
+
+music:
+  mega: ["music", "musician", "newmusic"]
+  medium: ["indiemusic", "musicproducer", "singersongwriter"]
+  niche: ["unsignedartist", "homestudio", "musiccommunity"]
