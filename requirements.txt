@@ -1,0 +1,9 @@
+PyYAML>=6.0
+python-dotenv>=1.0
+requests>=2.31
+
+# Optional, only needed for the unofficial "instagrapi" publisher backend:
+# instagrapi>=2.1
+
+# Dev/test only:
+pytest>=8.0

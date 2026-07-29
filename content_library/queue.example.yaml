@@ -1,0 +1,13 @@
+# Copy to content_library/queue.yaml and fill in real posts once content is decided.
+# This file IS the schema reference - insta_man/queue/content_queue.py reads exactly this shape.
+
+- id: "2026-08-01-launch-post"
+  caption: "Merhaba! Bu hesaptaki ilk paylaşımımız."
+  media:
+    - path: "https://example.com/media/launch.jpg"  # public HTTPS URL for graph_api, or local path for instagrapi
+      type: image                                    # image | video | reel | carousel item
+  scheduled_at: "2026-08-01T09:00:00+03:00"
+  topics: ["general"]           # matched against insta_man/hashtags/seed_hashtags.yaml
+  extra_hashtags: ["mybrand"]   # always included, e.g. a branded/account tag
+  max_hashtags: 25              # optional override of INSTA_MAN_MAX_HASHTAGS
+  status: pending                # pending | publishing | posted | failed | skipped

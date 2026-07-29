@@ -1,0 +1,34 @@
+# Rename to scheduled_post.yml to activate. Requires repo secrets:
+#   IG_GRAPH_USER_ID, IG_GRAPH_ACCESS_TOKEN (or IG_USERNAME/IG_PASSWORD for instagrapi)
+#
+# Note: content_library/queue.yaml is git-ignored by default (see .gitignore).
+# For this workflow to see your real queue, either commit it deliberately to
+# a private repo, or fetch it from external storage in an extra step before
+# "Run scheduler".
+
+name: Scheduled Instagram post
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"  # every 3 hours - adjust to your posting cadence
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scheduler
+        env:
+          INSTA_MAN_PUBLISHER: graph_api
+          IG_GRAPH_USER_ID: ${{ secrets.IG_GRAPH_USER_ID }}
+          IG_GRAPH_ACCESS_TOKEN: ${{ secrets.IG_GRAPH_ACCESS_TOKEN }}
+        run: python -m insta_man.cli run

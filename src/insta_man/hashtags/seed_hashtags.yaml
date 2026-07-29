@@ -1,0 +1,27 @@
+# Seed hashtag pools, organized by topic and by reach tier.
+#
+# Tiers:
+#   mega   -> extremely broad tags (>1M posts). High reach, high competition,
+#             your post disappears from the feed within minutes.
+#   medium -> mid-size tags (~50k-1M posts). Best reach-to-competition ratio.
+#   niche  -> small, specific tags (<50k posts). Slower but more targeted
+#             engagement, better chance of hitting "top posts".
+#
+# Add/replace entries per topic as content is defined. "general" is used as a
+# fallback when a post has no matching topic.
+
+general:
+  mega: ["instagood", "photooftheday", "instadaily", "picoftheday", "love"]
+  medium: ["contentcreator", "dailypost", "instacontent", "creativity", "aesthetic"]
+  niche: ["smallcreator", "growwithus", "contentstrategy", "dailyinspo"]
+
+# Example topic buckets - copy this pattern for real topics once content is decided.
+lifestyle:
+  mega: ["lifestyle", "instalife", "life"]
+  medium: ["lifestyleblogger", "dailylife", "lifeinspiration"]
+  niche: ["slowlifestyle", "simplelifeideas"]
+
+travel:
+  mega: ["travel", "travelgram", "wanderlust"]
+  medium: ["travelblogger", "travelphotography", "exploremore"]
+  niche: ["hiddengems", "offthebeatenpath"]

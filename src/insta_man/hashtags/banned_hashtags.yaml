@@ -1,0 +1,18 @@
+# Hashtags Instagram has historically flagged/blocked/shadow-banned.
+# This list changes over time and is NOT exhaustive - check current status
+# periodically (search the tag in-app; if Instagram shows no "recent posts"
+# or a moderation notice, drop it from seed_hashtags.yaml too).
+banned:
+  - alone
+  - beautyblogger
+  - curvy
+  - girlsonly
+  - instasize
+  - master
+  - nasty
+  - petite
+  - pushup
+  - single
+  - snapchat
+  - todayimwearing
+  - workflow
