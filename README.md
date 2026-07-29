@@ -10,6 +10,7 @@ in [`CLAUDE.md`](./CLAUDE.md) — start there.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e .                # installs insta_man itself so `python -m insta_man.cli` works
 cp .env.example .env            # fill in your credentials
 cp content_library/queue.example.yaml content_library/queue.yaml  # add real posts
 

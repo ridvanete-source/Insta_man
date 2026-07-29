@@ -136,6 +136,7 @@ public repo'da görünmesin diye. İçerikler netleştiğinde bu dosyayı doldur
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e .                # insta_man'i editable kurar, PYTHONPATH gerekmez
 cp .env.example .env
 cp content_library/queue.example.yaml content_library/queue.yaml
 
