@@ -13,7 +13,7 @@ from pathlib import Path
 
 import yaml
 
-from insta_man.models import ContentPost, MediaItem, MediaType, PostStatus
+from insta_man.models import ContentPost, MediaItem, MediaType, PostStatus, PostTarget
 
 
 class ContentQueue:
@@ -41,6 +41,7 @@ class ContentQueue:
                     topics=item.get("topics", []),
                     extra_hashtags=item.get("extra_hashtags", []),
                     max_hashtags=item.get("max_hashtags"),
+                    target=PostTarget(item.get("target", "feed")),
                     status=PostStatus(item.get("status", "pending")),
                     published_at=_parse_dt(item["published_at"]) if item.get("published_at") else None,
                     platform_post_id=item.get("platform_post_id"),
@@ -61,6 +62,7 @@ class ContentQueue:
                     "topics": post.topics,
                     "extra_hashtags": post.extra_hashtags,
                     "max_hashtags": post.max_hashtags,
+                    "target": post.target.value,
                     "status": post.status.value,
                     "published_at": post.published_at.isoformat() if post.published_at else None,
                     "platform_post_id": post.platform_post_id,

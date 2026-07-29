@@ -24,7 +24,7 @@ from __future__ import annotations
 import logging
 
 from insta_man.config import Config
-from insta_man.models import ContentPost, MediaType, PublishResult
+from insta_man.models import ContentPost, MediaType, PostTarget, PublishResult
 
 from .base import BasePublisher
 
@@ -95,6 +95,9 @@ class InstagrapiPublisher(BasePublisher):
     def publish(self, post: ContentPost, caption_with_hashtags: str) -> PublishResult:
         client = self._get_client()
         try:
+            if post.target == PostTarget.STORY:
+                return self._publish_story(client, post)
+
             if len(post.media) > 1:
                 paths = [m.path for m in post.media]
                 result = client.album_upload(paths, caption_with_hashtags)
@@ -109,3 +112,13 @@ class InstagrapiPublisher(BasePublisher):
             return PublishResult(success=True, platform_post_id=str(result.pk))
         except Exception as exc:  # instagrapi raises many distinct exception types
             return PublishResult(success=False, error=str(exc))
+
+    def _publish_story(self, client, post: ContentPost) -> PublishResult:
+        # Stories are ephemeral single-media items - only the first media
+        # entry is used even if the post lists more than one.
+        media = post.media[0]
+        if media.media_type == MediaType.VIDEO or media.media_type == MediaType.REEL:
+            result = client.video_upload_to_story(media.path)
+        else:
+            result = client.photo_upload_to_story(media.path)
+        return PublishResult(success=True, platform_post_id=str(result.pk))

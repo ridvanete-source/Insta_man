@@ -22,6 +22,13 @@ class PostStatus(str, Enum):
     SKIPPED = "skipped"
 
 
+class PostTarget(str, Enum):
+    """Where the post goes: the normal feed grid, or an ephemeral Story."""
+
+    FEED = "feed"
+    STORY = "story"
+
+
 @dataclass
 class MediaItem:
     path: str
@@ -41,6 +48,7 @@ class ContentPost:
     extra_hashtags: list[str] = field(default_factory=list)
     """Hashtags to always include regardless of the topic-based selection."""
     max_hashtags: int | None = None
+    target: PostTarget = PostTarget.FEED
     status: PostStatus = PostStatus.PENDING
     published_at: datetime | None = None
     platform_post_id: str | None = None

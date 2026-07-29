@@ -21,7 +21,7 @@ import time
 import requests
 
 from insta_man.config import Config
-from insta_man.models import ContentPost, MediaType, PublishResult
+from insta_man.models import ContentPost, MediaType, PostTarget, PublishResult
 
 from .base import BasePublisher
 
@@ -47,6 +47,11 @@ class GraphAPIPublisher(BasePublisher):
         resp.raise_for_status()
 
     def publish(self, post: ContentPost, caption_with_hashtags: str) -> PublishResult:
+        if post.target == PostTarget.STORY:
+            return PublishResult(
+                success=False,
+                error="Story publishing is not implemented for the graph_api backend; use instagrapi.",
+            )
         try:
             if len(post.media) > 1:
                 container_id = self._create_carousel_container(post, caption_with_hashtags)
