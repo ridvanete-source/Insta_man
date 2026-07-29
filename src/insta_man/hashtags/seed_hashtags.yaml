@@ -94,3 +94,8 @@ city:
   mega: ["city", "cityscape", "citylife", "urban"]
   medium: ["citygram", "cityphotography", "streetphotography", "urbanphotography"]
   niche: ["cityaesthetic", "citymood", "urbanexploration", "citylights"]
+
+nature:
+  mega: ["nature", "naturephotography", "birds", "birdwatching"]
+  medium: ["birdsofinstagram", "wildlifephotography", "goodmorning", "morningvibes"]
+  niche: ["birdphotography", "naturelovers", "goodmorningpost", "earlybirds"]
