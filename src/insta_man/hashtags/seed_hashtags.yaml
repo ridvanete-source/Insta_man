@@ -89,3 +89,8 @@ music:
   mega: ["music", "musician", "newmusic"]
   medium: ["indiemusic", "musicproducer", "singersongwriter"]
   niche: ["unsignedartist", "homestudio", "musiccommunity"]
+
+city:
+  mega: ["city", "cityscape", "citylife", "urban"]
+  medium: ["citygram", "cityphotography", "streetphotography", "urbanphotography"]
+  niche: ["cityaesthetic", "citymood", "urbanexploration", "citylights"]
