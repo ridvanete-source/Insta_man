@@ -6,6 +6,3 @@ __pycache__/
 
 .env
 .ig_session.json
-
-content_library/queue.yaml
-media/

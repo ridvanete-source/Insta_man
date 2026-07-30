@@ -1,0 +1,50 @@
+name: Auto-post queue
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install "instagrapi>=2.18"
+
+      - name: Write .env
+        run: |
+          cat > .env << EOF
+          INSTA_MAN_PUBLISHER=instagrapi
+          INSTA_MAN_QUEUE_FILE=content_library/queue.yaml
+          INSTA_MAN_MAX_HASHTAGS=25
+          INSTA_MAN_TIMEZONE=Europe/Istanbul
+          IG_USERNAME=${{ secrets.IG_USERNAME }}
+          IG_PASSWORD=${{ secrets.IG_PASSWORD }}
+          IG_SESSION_FILE=.ig_session.json
+          EOF
+
+      - name: Restore Instagram session
+        run: echo "${{ secrets.IG_SESSION_B64 }}" | base64 -d > .ig_session.json
+
+      - name: Run due posts
+        run: python -m insta_man.cli run
+
+      - name: Commit queue updates
+        run: |
+          git config user.name "insta-man-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add content_library/queue.yaml
+          git diff --cached --quiet || git commit -m "chore: update queue status [skip ci]"
+          git push
