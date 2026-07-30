@@ -1,3 +1,25 @@
+:root {
+  --sky-top: #241b3a;
+  --sky-mid: #6a3f6b;
+  --sky-bottom: #f0895a;
+  --sun-core: #ffe08a;
+  --sun-glow: #ffb15c;
+  --sand: #d9a066;
+  --sand-dark: #a86b3f;
+  --sand-rim: #7a4a2a;
+  --mtn-far: #4a3358;
+  --mtn-near: #37243f;
+  --ink: #241733;
+  --rock: #4a3547;
+  --rock-dark: #33222f;
+  --cream: #fbead9;
+  --cream-dim: #e7cdb8;
+  --amber: #ffb545;
+  --amber-dark: #a85f1d;
+  --panel: rgba(36, 23, 51, 0.72);
+  --panel-border: rgba(255, 224, 138, 0.18);
+}
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -10,8 +32,8 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #1e2a3a;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--sky-top);
+  font-family: ui-rounded, "SF Pro Rounded", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
   touch-action: manipulation;
 }
 
@@ -26,45 +48,63 @@ html, body {
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#7ec8f2, #cdeafe);
 }
 
 #hud {
   position: absolute;
-  top: env(safe-area-inset-top, 12px);
+  top: max(env(safe-area-inset-top, 0px), 14px);
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 12px 20px;
+  align-items: flex-start;
+  padding: 0 18px;
   pointer-events: none;
-  color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
 
 #score {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: clamp(30px, 8vw, 42px);
+  font-weight: 800;
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 10px rgba(20, 10, 30, 0.45);
+  letter-spacing: 0.01em;
 }
 
 #best {
-  font-size: 16px;
-  font-weight: 600;
-  align-self: flex-end;
-  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(36, 23, 51, 0.4);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(4px);
+}
+
+#best .label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  opacity: 0.85;
+}
+
+#best .value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--amber);
+  font-variant-numeric: tabular-nums;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  background: rgba(10, 15, 25, 0.55);
-  color: #fff;
-  text-align: center;
   padding: 24px;
 }
 
@@ -72,30 +112,93 @@ html, body {
   display: none;
 }
 
-.overlay h1 {
-  margin: 0;
-  font-size: 40px;
+.card {
+  width: min(360px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 34px 28px;
+  border-radius: 28px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 20px 60px rgba(10, 5, 20, 0.4);
 }
 
-.overlay p {
-  margin: 0;
-  font-size: 16px;
-  max-width: 320px;
-  opacity: 0.9;
-}
-
-.overlay button {
-  margin-top: 12px;
-  padding: 14px 36px;
-  font-size: 18px;
+.eyebrow {
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.card h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--cream);
+  text-wrap: balance;
+  letter-spacing: -0.01em;
+}
+
+.card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  max-width: 280px;
+}
+
+.stat-row {
+  display: flex;
+  gap: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--panel-border);
+}
+
+.stat .stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  opacity: 0.8;
+}
+
+.stat .stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--cream);
+}
+
+button {
+  margin-top: 4px;
+  padding: 15px 40px;
+  font-size: 17px;
+  font-weight: 800;
+  font-family: inherit;
   border: none;
   border-radius: 999px;
-  background: #ffcf3f;
-  color: #1e2a3a;
+  background: linear-gradient(180deg, #ffcf6e, var(--amber));
+  color: #3a1f05;
+  box-shadow: 0 8px 24px rgba(168, 95, 29, 0.4);
   cursor: pointer;
 }
 
-.overlay button:active {
+button:active {
   transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
 }

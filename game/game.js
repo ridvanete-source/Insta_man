@@ -3,7 +3,7 @@
   const ctx = canvas.getContext('2d');
 
   const scoreEl = document.getElementById('score');
-  const bestEl = document.getElementById('best');
+  const bestValueEl = document.getElementById('best-value');
   const startScreen = document.getElementById('start-screen');
   const gameoverScreen = document.getElementById('gameover-screen');
   const startBtn = document.getElementById('start-btn');
@@ -22,18 +22,18 @@
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    groundY = height * 0.78;
+    groundY = height * 0.76;
   }
   window.addEventListener('resize', resize);
 
   const GRAVITY = 2200;
   const JUMP_VELOCITY = -820;
-  const PLAYER_SIZE = 40;
+  const PLAYER_SIZE = 42;
 
   let player, obstacles, particles;
   let speed, spawnTimer, spawnInterval, elapsed, score, best;
+  let farScroll = 0, nearScroll = 0, groundScroll = 0;
   let running = false;
-  let started = false;
 
   function loadBest() {
     return Number(localStorage.getItem(STORAGE_KEY) || 0);
@@ -43,13 +43,7 @@
   }
 
   function resetState() {
-    player = {
-      x: width * 0.18,
-      y: groundY - PLAYER_SIZE,
-      vy: 0,
-      onGround: true,
-      rotation: 0,
-    };
+    player = { x: width * 0.18, y: groundY - PLAYER_SIZE, vy: 0, onGround: true, rotation: 0 };
     obstacles = [];
     particles = [];
     speed = 380;
@@ -59,7 +53,7 @@
     score = 0;
     best = loadBest();
     scoreEl.textContent = '0';
-    bestEl.textContent = 'En iyi: ' + best;
+    bestValueEl.textContent = String(best);
   }
 
   function jump() {
@@ -74,20 +68,17 @@
     const isTall = Math.random() < 0.35;
     const w = isTall ? 26 : 32 + Math.random() * 18;
     const h = isTall ? 60 + Math.random() * 20 : 30 + Math.random() * 16;
-    obstacles.push({
-      x: width + w,
-      y: groundY - h,
-      w, h,
-      passed: false,
-    });
+    obstacles.push({ x: width + w, y: groundY - h, w, h, passed: false });
   }
 
   function update(dt) {
     elapsed += dt;
     speed += dt * 14;
     spawnInterval = Math.max(0.7, 1.3 - elapsed * 0.01);
+    farScroll += dt * 18;
+    nearScroll += dt * 46;
+    groundScroll += speed * dt;
 
-    // player physics
     player.vy += GRAVITY * dt;
     player.y += player.vy * dt;
     if (player.y >= groundY - PLAYER_SIZE) {
@@ -95,20 +86,14 @@
       player.vy = 0;
       player.onGround = true;
     }
-    if (!player.onGround) {
-      player.rotation += dt * 8;
-    } else {
-      player.rotation = 0;
-    }
+    player.rotation = player.onGround ? 0 : player.rotation + dt * 8;
 
-    // spawn obstacles
     spawnTimer += dt;
     if (spawnTimer >= spawnInterval) {
       spawnTimer = 0;
       spawnObstacle();
     }
 
-    // move obstacles
     for (const o of obstacles) {
       o.x -= speed * dt;
       if (!o.passed && o.x + o.w < player.x) {
@@ -119,23 +104,16 @@
     }
     obstacles = obstacles.filter(o => o.x + o.w > -10);
 
-    // collision (slightly forgiving hitbox)
-    const pad = 8;
+    const pad = 9;
     const px = player.x + pad, py = player.y + pad;
     const pw = PLAYER_SIZE - pad * 2, ph = PLAYER_SIZE - pad * 2;
     for (const o of obstacles) {
-      if (
-        px < o.x + o.w &&
-        px + pw > o.x &&
-        py < o.y + o.h &&
-        py + ph > o.y
-      ) {
+      if (px < o.x + o.w && px + pw > o.x && py < o.y + o.h && py + ph > o.y) {
         gameOver();
         return;
       }
     }
 
-    // dust particles while running on ground
     if (player.onGround && Math.random() < 0.4) {
       particles.push({
         x: player.x + PLAYER_SIZE * 0.3,
@@ -154,38 +132,99 @@
     particles = particles.filter(p => p.age < p.life);
   }
 
+  function ridgeY(x, offset, baseY, amp) {
+    return baseY
+      - amp * (0.55 + 0.45 * Math.sin((x + offset) * 0.0032))
+      - amp * 0.35 * Math.sin((x + offset) * 0.009 + 1.7);
+  }
+
+  function drawRidge(offset, baseY, amp, color) {
+    ctx.beginPath();
+    ctx.moveTo(0, groundY + 2);
+    for (let x = 0; x <= width; x += 24) {
+      ctx.lineTo(x, ridgeY(x, offset, baseY, amp));
+    }
+    ctx.lineTo(width, groundY + 2);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  function roundRectPath(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
   function draw() {
     ctx.clearRect(0, 0, width, height);
 
-    // ground
-    ctx.fillStyle = '#3f6b3f';
-    ctx.fillRect(0, groundY, width, height - groundY);
-    ctx.fillStyle = '#2f5230';
-    ctx.fillRect(0, groundY, width, 4);
+    const sky = ctx.createLinearGradient(0, 0, 0, groundY);
+    sky.addColorStop(0, '#241b3a');
+    sky.addColorStop(0.55, '#6a3f6b');
+    sky.addColorStop(1, '#f0895a');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, width, groundY);
 
-    // particles
-    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    const sunX = width * 0.76, sunY = height * 0.22, sunR = Math.min(width, height) * 0.16;
+    const glow = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunR * 2.2);
+    glow.addColorStop(0, 'rgba(255, 177, 92, 0.55)');
+    glow.addColorStop(1, 'rgba(255, 177, 92, 0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, width, groundY);
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, sunR * 0.55, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffe08a';
+    ctx.fill();
+
+    drawRidge(farScroll, groundY - height * 0.02, height * 0.16, '#4a3358');
+    drawRidge(nearScroll, groundY, height * 0.1, '#37243f');
+
+    const groundGrad = ctx.createLinearGradient(0, groundY, 0, height);
+    groundGrad.addColorStop(0, '#d9a066');
+    groundGrad.addColorStop(1, '#a86b3f');
+    ctx.fillStyle = groundGrad;
+    ctx.fillRect(0, groundY, width, height - groundY);
+    ctx.fillStyle = '#7a4a2a';
+    ctx.fillRect(0, groundY, width, 3);
+
+    ctx.strokeStyle = 'rgba(122, 74, 42, 0.5)';
+    ctx.lineWidth = 3;
+    const tickOffset = groundScroll % 46;
+    ctx.beginPath();
+    for (let x = -tickOffset; x < width; x += 46) {
+      ctx.moveTo(x, groundY + 14);
+      ctx.lineTo(x + 18, groundY + 14);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = 'rgba(251, 234, 217, 0.65)';
     for (const p of particles) {
-      const alpha = 1 - p.age / p.life;
-      ctx.globalAlpha = alpha;
+      ctx.globalAlpha = 1 - p.age / p.life;
       ctx.fillRect(p.x, p.y, 4, 4);
     }
     ctx.globalAlpha = 1;
 
-    // obstacles
-    ctx.fillStyle = '#c0392b';
     for (const o of obstacles) {
-      ctx.fillRect(o.x, o.y, o.w, o.h);
+      roundRectPath(o.x, o.y, o.w, o.h, 6);
+      ctx.fillStyle = '#4a3547';
+      ctx.fill();
+      ctx.fillStyle = '#33222f';
+      ctx.fillRect(o.x, o.y + o.h - 5, o.w, 5);
     }
 
-    // player
     ctx.save();
     ctx.translate(player.x + PLAYER_SIZE / 2, player.y + PLAYER_SIZE / 2);
     ctx.rotate(player.rotation);
-    ctx.fillStyle = '#ffcf3f';
-    ctx.fillRect(-PLAYER_SIZE / 2, -PLAYER_SIZE / 2, PLAYER_SIZE, PLAYER_SIZE);
-    ctx.fillStyle = '#1e2a3a';
-    ctx.fillRect(-PLAYER_SIZE / 2 + 24, -PLAYER_SIZE / 2 + 8, 6, 6);
+    roundRectPath(-PLAYER_SIZE / 2, -PLAYER_SIZE / 2, PLAYER_SIZE, PLAYER_SIZE, 10);
+    ctx.fillStyle = '#ffb545';
+    ctx.fill();
+    ctx.fillStyle = '#3a1f05';
+    ctx.fillRect(-PLAYER_SIZE / 2 + 25, -PLAYER_SIZE / 2 + 9, 6, 6);
     ctx.restore();
   }
 
@@ -193,13 +232,10 @@
   function loop(ts) {
     if (!running) return;
     if (lastTime === null) lastTime = ts;
-    let dt = (ts - lastTime) / 1000;
+    let dt = Math.min((ts - lastTime) / 1000, 0.033);
     lastTime = ts;
-    dt = Math.min(dt, 0.033);
-
     update(dt);
     draw();
-
     requestAnimationFrame(loop);
   }
 
@@ -207,7 +243,6 @@
     resize();
     resetState();
     running = true;
-    started = true;
     lastTime = null;
     startScreen.classList.add('hidden');
     gameoverScreen.classList.add('hidden');
@@ -220,24 +255,26 @@
       best = score;
       saveBest(best);
     }
-    finalScoreEl.textContent = 'Skor: ' + score;
-    finalBestEl.textContent = 'En iyi: ' + best;
-    bestEl.textContent = 'En iyi: ' + best;
+    finalScoreEl.textContent = String(score);
+    finalBestEl.textContent = String(best);
+    bestValueEl.textContent = String(best);
     gameoverScreen.classList.remove('hidden');
   }
 
   function handleInput(e) {
-    if (e.type === 'keydown' && e.code !== 'Space' && e.code !== 'ArrowUp') return;
-    if (e.type === 'keydown') e.preventDefault();
+    if (e.type === 'keydown') {
+      if (e.code !== 'Space' && e.code !== 'ArrowUp') return;
+      e.preventDefault();
+    }
     jump();
   }
 
   canvas.addEventListener('pointerdown', jump);
   window.addEventListener('keydown', handleInput);
-
   startBtn.addEventListener('click', startGame);
   retryBtn.addEventListener('click', startGame);
 
   resize();
-  bestEl.textContent = 'En iyi: ' + loadBest();
+  bestValueEl.textContent = String(loadBest());
+  draw();
 })();

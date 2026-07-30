@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Zıpla Kaç!</title>
+<title>Zıpla Kaç! — Çöl Koşusu</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,20 +12,37 @@
 
     <div id="hud">
       <div id="score">0</div>
-      <div id="best">En iyi: 0</div>
+      <div id="best">
+        <span class="label">En İyi</span>
+        <span class="value" id="best-value">0</span>
+      </div>
     </div>
 
     <div id="start-screen" class="overlay">
-      <h1>Zıpla Kaç!</h1>
-      <p>Ekrana dokun ya da <b>boşluk</b> tuşuna bas, engellerden kaç.</p>
-      <button id="start-btn">Başla</button>
+      <div class="card">
+        <span class="eyebrow">Çöl Koşusu</span>
+        <h1>Zıpla Kaç!</h1>
+        <p>Ekrana dokun ya da <b>boşluk</b> tuşuna bas, kayalardan zıplayarak kaç.</p>
+        <button id="start-btn">Koşuya Başla</button>
+      </div>
     </div>
 
     <div id="gameover-screen" class="overlay hidden">
-      <h1>Oyun Bitti</h1>
-      <p id="final-score">Skor: 0</p>
-      <p id="final-best">En iyi: 0</p>
-      <button id="retry-btn">Tekrar Oyna</button>
+      <div class="card">
+        <span class="eyebrow">Koşu Bitti</span>
+        <h1>Toza Yenildin</h1>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-label">Skor</div>
+            <div class="stat-value" id="final-score">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">En İyi</div>
+            <div class="stat-value" id="final-best">0</div>
+          </div>
+        </div>
+        <button id="retry-btn">Tekrar Koş</button>
+      </div>
     </div>
   </div>
 
