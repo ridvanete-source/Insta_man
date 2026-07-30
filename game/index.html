@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Zıpla Kaç!</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game"></canvas>
+
+    <div id="hud">
+      <div id="score">0</div>
+      <div id="best">En iyi: 0</div>
+    </div>
+
+    <div id="start-screen" class="overlay">
+      <h1>Zıpla Kaç!</h1>
+      <p>Ekrana dokun ya da <b>boşluk</b> tuşuna bas, engellerden kaç.</p>
+      <button id="start-btn">Başla</button>
+    </div>
+
+    <div id="gameover-screen" class="overlay hidden">
+      <h1>Oyun Bitti</h1>
+      <p id="final-score">Skor: 0</p>
+      <p id="final-best">En iyi: 0</p>
+      <button id="retry-btn">Tekrar Oyna</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
