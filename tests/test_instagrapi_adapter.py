@@ -91,6 +91,23 @@ def test_authenticate_falls_back_to_challenge_resolve(tmp_path, monkeypatch):
     assert len(resolved) == 1
 
 
+def test_authenticate_raises_clear_error_when_non_interactive(tmp_path, monkeypatch):
+    class FakeClient(FakeClientBase):
+        def login(self, username, password, verification_code=""):
+            raise TwoFactorRequired("2FA required")
+
+    monkeypatch.setattr(instagrapi, "Client", FakeClient)
+
+    def no_stdin(*_):
+        raise EOFError()
+
+    monkeypatch.setattr("builtins.input", no_stdin)
+
+    publisher = InstagrapiPublisher(make_config(tmp_path))
+    with pytest.raises(RuntimeError, match="etkilesimli degil"):
+        publisher.authenticate()
+
+
 def test_authenticate_requires_credentials(tmp_path):
     config = Config(publisher="instagrapi", ig_username=None, ig_password=None)
     publisher = InstagrapiPublisher(config)

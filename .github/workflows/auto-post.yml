@@ -22,6 +22,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install "instagrapi>=2.18"
+          pip install -e .
 
       - name: Write .env
         run: |

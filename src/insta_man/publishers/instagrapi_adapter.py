@@ -33,7 +33,15 @@ logger = logging.getLogger("insta_man.publishers.instagrapi")
 
 def _prompt_for_code(prompt: str) -> str:
     while True:
-        code = input(prompt).strip()
+        try:
+            code = input(prompt).strip()
+        except EOFError as exc:
+            raise RuntimeError(
+                "Instagram bir dogrulama kodu istedi ama bu ortam etkilesimli degil "
+                "(ör. GitHub Actions) - kod girilemedi. Yerel makinede "
+                "`python -m insta_man.cli run` calistirip session'i (.ig_session.json) "
+                "tazeleyin, ardindan IG_SESSION_B64 secret'ini guncelleyin."
+            ) from exc
         if code.isdigit():
             return code
         print("Code must be numeric digits only, try again.")

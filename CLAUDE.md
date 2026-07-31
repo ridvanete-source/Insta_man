@@ -1,18 +1,23 @@
 # Insta_man
 
 Instagram için otomatik paylaşım ve etkileşim odaklı hashtag seçimi yapan bir
-araç seti. İçerikler (fotoğraf/video/reels ve metinler) henüz belirlenmedi;
-bu proje **içerik olmadan çalışan bir altyapı**dır — içerikler netleştiğinde
-`content_library/queue.yaml` dosyasına eklenir ve otomatik olarak paylaşılır.
+araç seti. Sistem canlıda: gerçek bir hesapta (`instagrapi` backend,
+`.env` içinde gerçek kimlik bilgileri) saatlik GitHub Actions cron'u ile
+çalışıyor, `content_library/queue.yaml` içinde gerçek içerikler var ve
+bunlar otomatik paylaşılıyor. Kuyruk hâlâ esnek/genel amaçlı tutuluyor;
+yeni içerik geldikçe `content_library/queue.yaml`'a eklenmesi yeterli.
 
 ## Proje amacı
 
-1. Yeni açılacak bir Instagram hesabında paylaşımları otomatik zamanlamak.
-2. Her paylaşım için, hesabın konusuna/etikete göre etkileşim alması
-   beklenen hashtag'leri otomatik seçmek (geniş + orta + niş etiket
-   karışımı, banlı etiketleri filtreleyerek, tekrarı azaltarak).
-3. İçerik türü/sıklığı/teması henüz karara bağlanmadığı için, sistemin
-   "içerik nedir" sorusundan bağımsız, esnek bir kuyruk üzerinden çalışması.
+1. Instagram hesabında paylaşımları otomatik zamanlamak (feed + Story).
+2. Her paylaşım için, konu etiketine göre etkileşim alması beklenen
+   hashtag'leri otomatik seçmek (geniş + orta + niş etiket karışımı,
+   banlı etiketleri filtreleyerek, tekrarı azaltarak).
+3. İçerik teması sabit tek bir niş değil (şehir/sokak, doğa, seyahat, spor
+   anları gibi karışık konular olabiliyor), bu yüzden sistem "içerik nedir"
+   sorusundan bağımsız, esnek bir kuyruk üzerinden çalışıyor -
+   `seed_hashtags.yaml` içindeki 16 konu havuzundan hangisi uygunsa
+   `ContentPost.topics` alanına o yazılıyor.
 
 ## Mimari
 
@@ -37,7 +42,21 @@ src/insta_man/
 
 content_library/
 ├── README.md
-└── queue.example.yaml    # queue.yaml şeması - gerçek queue.yaml git'e girmez
+├── media/                 # gerçek medya dosyaları (instagrapi yerel dosya yolu bekler)
+├── queue.example.yaml     # queue.yaml şeması
+└── queue.yaml             # gerçek kuyruk - git'e commit'lenir, gerçek postları içerir
+
+scripts/
+├── generate_score_graphic.py  # maç skoru gibi anlık Story görselleri üretir
+└── run_and_sync.ps1           # yerel makinede: pull -> `insta_man run` -> queue.yaml'daki
+                                 # durum değişikliğini commit+push eder (Windows Task
+                                 # Scheduler ile tetiklenmesi düşünülerek yazıldı; GitHub
+                                 # Actions'a alternatif/yedek olarak çalışır)
+
+.github/workflows/
+└── auto-post.yml          # CANLI: her saat başı `insta_man run` çalıştırır (instagrapi,
+                             # IG_USERNAME/IG_PASSWORD/IG_SESSION_B64 secrets), queue.yaml
+                             # değişikliğini otomatik commit+push eder
 
 tests/                    # hashtag seçimi ve queue mantığı için birim testler (ağ çağrısı yok)
 ```
@@ -45,12 +64,12 @@ tests/                    # hashtag seçimi ve queue mantığı için birim test
 ### Neden adapter (publisher) yapısı?
 
 Instagram'a paylaşım atmanın iki yolu var ve ikisinin de ciddi tradeoff'ları
-var (aşağıya bakın). Hangisinin kullanılacağına henüz karar verilmediği için
-`BasePublisher` arayüzü arkasında iki backend de hazır: `config.py` içindeki
-`INSTA_MAN_PUBLISHER` değişkeni ("graph_api" veya "instagrapi") ile hangisinin
-aktif olacağı seçilir; `scheduler/runner.py` ve `queue` katmanı hangi
-backend'in kullanıldığını hiç bilmez. Backend değiştirmek `.env` içinde tek
-satır değiştirmektir, kod değişikliği gerekmez.
+var (aşağıya bakın). `instagrapi` kullanılıyor olarak karara bağlansa da,
+`BasePublisher` arayüzü arkasında iki backend de kodda duruyor: `config.py`
+içindeki `INSTA_MAN_PUBLISHER` değişkeni ("graph_api" veya "instagrapi") ile
+hangisinin aktif olacağı seçilir; `scheduler/runner.py` ve `queue` katmanı
+hangi backend'in kullanıldığını hiç bilmez. Backend değiştirmek `.env`
+içinde tek satır değiştirmektir, kod değişikliği gerekmez.
 
 ## ⚠️ İki paylaşım yöntemi ve risk farkı
 
@@ -63,10 +82,13 @@ satır değiştirmektir, kod değişikliği gerekmez.
 | Medya kaynağı | **Genel erişime açık HTTPS URL** gerekir (dosya yükleme değil, API URL'den çeker) | Yerel dosya yolu yeterli |
 | Rate limit | Meta'nın resmi limitleri, öngörülebilir | Instagram'ın "bot tespiti" davranışına bağlı, öngörülemez |
 
-**Öneri: Graph API ile başlayın.** Hesap gerçek bir hesap olacaksa (banlanırsa
-kaybedilecek bir şey varsa) risk almaya değmez. instagrapi backend'i sadece
-Story gibi Graph API'nin desteklemediği bir şey şart olursa, riski kabul
-ederek devreye alınacak şekilde hazır tutuldu.
+**Karar verildi: şu an `instagrapi` kullanılıyor.** `.env` ve GitHub Actions
+secrets'ları gerçek IG_USERNAME/IG_PASSWORD ile `INSTA_MAN_PUBLISHER=instagrapi`
+olarak ayarlı; Story desteği bu kararda belirleyici oldu (Graph API Story'yi
+desteklemiyor). Risk kabul edildi - hesap kısıtlama/ban ihtimali bilinerek
+devam ediliyor. `graph_api.py` backend'i hâlâ kodda duruyor ve gerekirse
+`.env`'de tek satır değiştirerek geri dönülebilir, ama aktif olarak
+kullanılmıyor.
 
 ### Graph API kurulum kontrol listesi
 1. Instagram hesabını **Professional (Business veya Creator)** hesaba çevir.
@@ -107,9 +129,12 @@ ederek devreye alınacak şekilde hazır tutuldu.
   algılanıp erişimi düşürebiliyor).
 - `extra_hashtags` (örn. hesabın marka etiketi) her zaman dahil edilir.
 
-İçerik/niş belirlendiğinde yapılacak iş: `seed_hashtags.yaml`'a gerçek konu
-başlıklarını ve o konuya uygun gerçek hashtag'leri eklemek (şu an sadece
-`general`, `lifestyle`, `travel` örnek/placeholder olarak var).
+`seed_hashtags.yaml` 16 konu havuzu ile dolu (general, lifestyle, travel,
+food, fitness, fashion, business, photography, art, tech, motivation,
+beauty, petcare, homedecor, music, city, nature). Yeni bir konu/niş
+paylaşımı geldiğinde ya mevcut havuzlardan biri `topics`'e yazılır ya da
+buraya yeni bir kategori eklenir - `general` her zaman fallback olarak
+kalır.
 
 ## İçerik kuyruğu (`content_library/queue.yaml`)
 
@@ -125,11 +150,19 @@ başlıklarını ve o konuya uygun gerçek hashtag'leri eklemek (şu an sadece
   topics: ["general"]
   extra_hashtags: ["mybrand"]
   max_hashtags: 25
+  target: feed                          # feed | story
   status: pending                       # pending | publishing | posted | failed | skipped
+  published_at: null                    # scheduler tarafından publish sonrası doldurulur
+  platform_post_id: null
+  error: null
 ```
 
-`queue.yaml` `.gitignore`'da - içindeki yayımlanmamış caption/medya linkleri
-public repo'da görünmesin diye. İçerikler netleştiğinde bu dosyayı doldurun.
+`queue.yaml` **git-ignored değil** - gerçek postlar (caption, medya yolu,
+durumu) doğrudan repoya commit'leniyor; hem GitHub Actions hem
+`scripts/run_and_sync.ps1` her çalıştırmadan sonra durum değişikliğini
+otomatik push ediyor. Medya dosyaları `content_library/media/` altında
+tutuluyor (instagrapi yerel dosya yolu bekliyor, genel erişime açık URL
+değil).
 
 ## Çalıştırma
 
@@ -145,15 +178,22 @@ python -m insta_man.cli list       # kuyruktaki postları ve durumlarını liste
 python -m insta_man.cli run        # şu an zamanı gelmiş postları paylaşır
 ```
 
-### Zamanlama (henüz karara bağlanmadı, iki seçenek hazır)
+### Zamanlama (karar verildi: GitHub Actions, canlı)
 
-- **cron (kendi sunucu/bilgisayar):** `crontab -e` ile örn. her saat
-  `cd /path/to/Insta_man && .venv/bin/python -m insta_man.cli run` çalıştırın.
-- **GitHub Actions:** `.github/workflows/scheduled_post.yml.example`
-  dosyasını `scheduled_post.yml` olarak yeniden adlandırın, repo secrets'a
-  `IG_GRAPH_USER_ID`/`IG_GRAPH_ACCESS_TOKEN` ekleyin. Not: `queue.yaml`
-  git-ignored olduğu için, Actions'ın gerçek kuyruğu görmesi için ayrı bir
-  adımda (private repo commit'i veya harici depolama) çekilmesi gerekir.
+- **GitHub Actions (aktif):** `.github/workflows/auto-post.yml` her saat
+  başı (`cron: "0 * * * *"`) çalışır; `IG_USERNAME`, `IG_PASSWORD`,
+  `IG_SESSION_B64` repo secrets'larından `.env` ve `.ig_session.json`
+  üretir, `insta_man.cli run` çalıştırır, `content_library/queue.yaml`
+  içindeki durum değişikliğini otomatik commit+push eder
+  (`[skip ci]` ile kendi kendini tetiklemez). `queue.yaml` git-ignored
+  *değil* artık - gerçek postlar doğrudan repoya commit'leniyor.
+- **Yerel yedek (`scripts/run_and_sync.ps1`):** Aynı akışı yerel makinede
+  çalıştırır (pull --rebase --autostash -> `insta_man.cli run` -> queue.yaml
+  değiştiyse commit+push). Windows Task Scheduler ile tetiklenmek üzere
+  yazıldı; GitHub Actions'ın devre dışı kaldığı durumlarda veya yerelde test
+  ederken kullanılır.
+- Eski `.github/workflows/scheduled_post.yml.example` dosyası artık
+  kullanılmıyor (Graph API'ye özgüydü) - referans amaçlı repoda duruyor.
 
 ## Testler
 
@@ -161,28 +201,31 @@ python -m insta_man.cli run        # şu an zamanı gelmiş postları paylaşır
 pytest
 ```
 
-Testler ağ çağrısı yapmaz; sadece hashtag seçim mantığını (`test_hashtags.py`)
-ve queue durum geçişlerini (`test_content_queue.py`) doğrular. Publisher
-backend'leri (`graph_api.py`, `instagrapi_adapter.py`) gerçek kimlik bilgisi
-gerektirdiği için testlerde mock'lanmadı - bu bir sonraki adım (Yol haritası).
+Testler ağ çağrısı yapmaz; hashtag seçim mantığını (`test_hashtags.py`),
+queue durum geçişlerini (`test_content_queue.py`) ve instagrapi'nin
+login/2FA/challenge akışını (`test_instagrapi_adapter.py`, sahte bir
+`instagrapi.Client` ile) doğrular. Asıl `publish()`/medya upload çağrıları
+(`instagrapi_adapter.py` ve `graph_api.py` içindeki upload kısımları) henüz
+mock'lanmadı - bkz. Yol haritası.
 
 ## Yol haritası / henüz yapılmadı
 
-- [ ] Hangi publisher backend'inin kullanılacağına karar verilmesi (Graph API önerilir).
-- [ ] Hesap açılıp Business/Creator'a çevrilmesi, Meta App onayı.
-- [ ] Gerçek içerik konusu/niş belirlenince `seed_hashtags.yaml`'ın doldurulması.
-- [ ] `content_library/queue.yaml`'a gerçek postların eklenmesi.
-- [ ] Zamanlama ortamının seçilmesi (cron vs GitHub Actions) ve devreye alınması.
-- [ ] Graph API access token'ının otomatik yenilenmesi (şu an manuel).
-- [ ] Publisher'lar için mock'lu entegrasyon testleri.
+- [x] Hangi publisher backend'inin kullanılacağına karar verilmesi -> `instagrapi` seçildi (Story desteği belirleyici oldu).
+- [x] Gerçek içerik konusu/niş belirlenince `seed_hashtags.yaml`'ın doldurulması -> 16 konu havuzu eklendi.
+- [x] `content_library/queue.yaml`'a gerçek postların eklenmesi -> devam eden bir süreç, yeni içerik geldikçe ekleniyor.
+- [x] Zamanlama ortamının seçilmesi ve devreye alınması -> GitHub Actions (`auto-post.yml`, saatlik) + yerel yedek (`run_and_sync.ps1`).
+- [ ] Graph API kullanılmıyor olsa da kod tabanında duruyor; ileride geri dönülürse access token otomatik yenileme hâlâ eksik.
+- [ ] Publisher'ların `publish()`/medya upload çağrıları için mock'lu testler (login/2FA akışı zaten test edildi).
 - [ ] Paylaşım sonrası basit bir performans/etkileşim log'u (hangi hashtag seti hangi postta kullanıldı - `recent_hashtags` bunun temelini atıyor, raporlama yok).
+- [ ] Hesap yeni açıldığı için Instagram'ın bot tespiti / geçici kısıtlama riskine karşı paylaşım sıklığı ve saatleri gözden geçirilmeli (özellikle saatlik cron ile).
 
-## Hesap adı önerileri
+## Hesap adı önerileri (karar verildi, tarihsel referans)
 
-Niş/konu henüz belirlenmediği için isimler **nötr ve esnek** seçildi - ileride
-hangi içerik türüne dönerse dönsün (yaşam tarzı, seyahat, kişisel, vb.)
-sıkışmayacak şekilde. Instagram'da kullanılabilirliği uygulama içinden manuel
-kontrol edin (otomatik/scraping ile kontrol ToS ihlali olur).
+Otomasyon mevcut/kişisel bir hesap üzerinden (`.env`'deki `IG_USERNAME`)
+devreye alındı - aşağıdaki öneriler yeni bir marka hesabı açılması
+ihtimaline karşı daha önce hazırlanmıştı ve şu an kullanılan hesap bu
+listedeki isimlerden biri değil. Liste, ileride ayrı/nötr bir hesaba
+geçilmek istenirse referans olarak tutuluyor.
 
 **Sade / nötr (İngilizce):**
 - `dailydrop.co`
