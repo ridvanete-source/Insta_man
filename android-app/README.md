@@ -82,12 +82,17 @@ dosya budur (`.apk` değil, Play artık `.aab` istiyor).
    `android/app/build.gradle` içindeki `applicationId`'i istediğin gibi
    değiştirebilirsin.
 3. **Gizlilik politikası URL'si** ekle — Play, içerik olmasa bile zorunlu
-   tutuyor. Basit bir statik sayfa yeterli ("bu uygulama hiçbir veri
-   toplamaz/sunucuya göndermez, skorlar yalnızca cihazında saklanır" gibi).
-   İstersen bu metni de yazabilirim.
-4. **Mağaza listesi**: kısa açıklama, uzun açıklama, ikon (zaten
-   `assets/icon.png`'de var, 512x512'ye küçültülmesi gerekebilir), en az
-   2 ekran görüntüsü (telefon), öne çıkan grafik (1024x500).
+   tutuyor. Hazır: [`store/privacy-policy.html`](./store/privacy-policy.html)
+   (kaynak dosya) ve geçici canlı linki
+   [`store/store-listing.md`](./store/store-listing.md) içinde — Play
+   Console'a girmeden önce o linkin **herkese açık** olduğundan emin ol
+   (bkz. `store-listing.md` içindeki uyarı), ya da sayfayı kendi kalıcı
+   domain'ine taşı.
+4. **Mağaza listesi**: [`store/store-listing.md`](./store/store-listing.md)
+   içinde kopyala-yapıştıra hazır uygulama adı, kısa/uzun açıklama var.
+   İkon (`assets/icon.png`, 512x512'ye küçültülmesi gerekir), en az 2 ekran
+   görüntüsü (telefon) ve öne çıkan grafik (1024x500) hâlâ eksik — istersen
+   onları da üretebilirim.
 5. **İçerik derecelendirme anketi**'ni doldur (basit, şiddet/reklam
    içermeyen bir oyun için birkaç dakika sürer).
 6. `.aab` dosyasını yükle, önce **Internal testing** kanalına at, kendi
