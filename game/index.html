@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Zıpla Kaç! — Çöl Koşusu</title>
+<title>Zıpla Kaç!</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,17 +20,20 @@
 
     <div id="start-screen" class="overlay">
       <div class="card">
-        <span class="eyebrow">Çöl Koşusu</span>
+        <span class="eyebrow" id="theme-eyebrow">Çöl Koşusu</span>
         <h1>Zıpla Kaç!</h1>
-        <p>Ekrana dokun ya da <b>boşluk</b> tuşuna bas, kayalardan zıplayarak kaç.</p>
-        <button id="start-btn">Koşuya Başla</button>
+        <p id="theme-desc">Ekrana dokun ya da <b>boşluk</b> tuşuna bas, kayalardan zıplayarak kaç.</p>
+
+        <div class="theme-picker" id="theme-picker"></div>
+
+        <button class="primary" id="start-btn">Başla</button>
       </div>
     </div>
 
     <div id="gameover-screen" class="overlay hidden">
       <div class="card">
         <span class="eyebrow">Koşu Bitti</span>
-        <h1>Toza Yenildin</h1>
+        <h1 id="gameover-title">Toza Yenildin</h1>
         <div class="stat-row">
           <div class="stat">
             <div class="stat-label">Skor</div>
@@ -41,7 +44,8 @@
             <div class="stat-value" id="final-best">0</div>
           </div>
         </div>
-        <button id="retry-btn">Tekrar Koş</button>
+        <button class="primary" id="retry-btn">Tekrar Dene</button>
+        <button class="ghost-btn" id="change-theme-btn">Temayı değiştir</button>
       </div>
     </div>
   </div>
