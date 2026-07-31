@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Zıpla Kaç</string>
+    <string name="title_activity_main">Zıpla Kaç</string>
+    <string name="package_name">com.instaman.ziplakac</string>
+    <string name="custom_url_scheme">com.instaman.ziplakac</string>
+</resources>
