@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zıpla Kaç! — Gizlilik Politikası</title>
+<style>
+  :root {
+    --paper: #f6f3fb;
+    --paper-raised: #ffffff;
+    --ink: #241b3a;
+    --ink-dim: #5b5568;
+    --rule: #e3ddf0;
+    --accent: #b8631a;
+    --accent-soft: #f3e3d0;
+    --mono: #6b6478;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #1a1526;
+      --paper-raised: #221b32;
+      --ink: #f3ede4;
+      --ink-dim: #b6adc4;
+      --rule: #362c4a;
+      --accent: #e8a552;
+      --accent-soft: #3a2b1a;
+      --mono: #8a8298;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 56px 20px 96px;
+  }
+
+  main {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .brand .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 38px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+
+  .updated {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--mono);
+    margin: 0 0 40px;
+  }
+
+  .lede {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-dim);
+    margin: 0 0 44px;
+    max-width: 62ch;
+  }
+
+  section {
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  section:first-of-type {
+    border-top: 1px solid var(--rule);
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  h2 .icon {
+    font-size: 17px;
+  }
+
+  p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--ink-dim);
+    margin: 0 0 12px;
+    max-width: 62ch;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--ink); font-weight: 700; }
+
+  ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+    color: var(--ink-dim);
+    font-size: 15.5px;
+    line-height: 1.7;
+    max-width: 62ch;
+  }
+
+  li { margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 44px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .badge .icon { font-size: 14px; }
+
+  footer {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--mono);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><span class="dot"></span> Zıpla Kaç!</div>
+
+  <h1>Gizlilik Politikası</h1>
+  <p class="updated">Son güncelleme: 31 Temmuz 2026</p>
+
+  <p class="lede">
+    Kısacası: <strong>Zıpla Kaç!</strong> hiçbir kişisel veri toplamaz,
+    saklamaz ya da hiçbir yere göndermez. Uygulama internete bağlanmaz;
+    her şey telefonunun içinde kalır.
+  </p>
+
+  <div class="badge-row">
+    <span class="badge"><span class="icon">📡</span> İnternet bağlantısı yok</span>
+    <span class="badge"><span class="icon">🚫</span> Reklam yok</span>
+    <span class="badge"><span class="icon">🧾</span> Hesap / kayıt yok</span>
+    <span class="badge"><span class="icon">🔒</span> Takip yok</span>
+  </div>
+
+  <section>
+    <h2><span class="icon">📦</span> Ne topluyoruz?</h2>
+    <p>Hiçbir şey. Zıpla Kaç! kimlik bilgisi, konum, kişi listesi, cihaz
+      tanımlayıcısı, analitik veya kullanım istatistiği gibi hiçbir veri
+      toplamaz. Uygulamanın bir sunucusu yoktur; toplayacak bir yer olsa
+      bile veri gönderemez.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">💾</span> Cihazında ne saklanıyor?</h2>
+    <p>Oyun, deneyimini hatırlaman için birkaç küçük tercihi
+      <strong>yalnızca kendi telefonunda</strong>, tarayıcı depolama
+      alanında (<code>localStorage</code>) tutar:</p>
+    <ul>
+      <li>Her tema için en yüksek skorun</li>
+      <li>Son seçtiğin tema (çöl / deniz / gökyüzü)</li>
+      <li>Müzik açık mı kapalı mı tercihin</li>
+    </ul>
+    <p>Bu bilgiler cihazından hiçbir zaman çıkmaz. Uygulamayı silmek ya da
+      uygulama verilerini temizlemek bu bilgileri tamamen siler.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🌐</span> İnternet ve izinler</h2>
+    <p>Zıpla Kaç! internet izni <strong>istemez</strong> ve hiçbir ağ
+      isteği yapmaz. Kamera, konum, kişiler, mikrofon gibi hiçbir izin
+      talep edilmez, çünkü hiçbirine ihtiyaç duymaz.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🤝</span> Üçüncü taraflarla paylaşım</h2>
+    <p>Hiçbir üçüncü tarafla veri paylaşılmaz, çünkü paylaşılacak veri
+      yoktur. Reklam ağı, analitik SDK'sı veya başka bir üçüncü taraf
+      servisi kullanılmaz.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🧒</span> Çocukların gizliliği</h2>
+    <p>Uygulama hiçbir kullanıcıdan (yaşı fark etmeksizin) veri
+      toplamadığı için tüm yaş grupları için güvenle kullanılabilir.</p>
+  </section>
+
+  <section>
+    <h2><span class="icon">✍️</span> Bu politika değişirse</h2>
+    <p>Uygulamaya gelecekte veri toplayan bir özellik (örneğin çevrimiçi
+      skor tablosu) eklenirse, bu sayfa güncellenir ve uygulama içinde
+      yeni sürüm notlarında belirtilir.</p>
+  </section>
+
+  <footer>
+    Sorularınız için: <a href="mailto:ridvanete@gmail.com">ridvanete@gmail.com</a>
+  </footer>
+</main>
+</body>
+</html>
