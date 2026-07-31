@@ -11,6 +11,22 @@ seyahat/ulaşım, sonra şehir, sonra doğa. Bir fikri çekip paylaştıkça iş
       geziyormuş hissi veren format, yüksek izlenme alıyor.
 - [ ] Bir mekânın "önce/sonra" ya da gün içi/gece karşılaştırması - carousel
       formatına uygun, "kaydet" davranışını tetikler.
+- [ ] Uçak penceresinden bulutların üstünde gün doğumu/batımı - evrensel
+      "wanderlust" hissi, tamamen dil bağımsız.
+- [ ] Havalimanı kalkış panosu + yürüyen bant, sabit kamera - "yolculuk
+      başlıyor" atmosferi, loop'a uygun.
+- [ ] Vapur güvertesinden şehir silüetine yaklaşma (İstanbul'da boğaz +
+      martılar güçlü bir seçenek).
+- [ ] Tramvay/metro kapısından dışarı bakış, duraklar art arda geçerken -
+      ritmik tekrar, loop'a çok uygun.
+- [ ] Araç ön camından yol çizgileri, gece - hipnotik, meditatif izleme.
+- [ ] Gece trafiği ışık izleri (uzun pozlama, "light trails") - görsel
+      olarak çok paylaşılan bir format.
+- [ ] Bilet, pasaport damgası, bavul tekerleği gibi close-up + arka planda
+      bulanık hareket - metin yok ama "seyahat" temasını anlatıyor.
+- [ ] Gece treninde pencereden geçen bulanık ışıklar.
+- [ ] İki farklı şehrin benzer anını yan yana (iki metro istasyonu, iki
+      cadde) - carousel formatı, kültürel merak uyandırır, dil gerektirmez.
 
 ## 2. Şehir / Sokak
 
