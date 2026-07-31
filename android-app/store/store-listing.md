@@ -65,17 +65,20 @@ menüsünden **"herkese açık" / public** yap, ya da bu HTML dosyasını kendi
 kalıcı bir web adresinde (kendi sitende, GitHub Pages'te vb.) barındırıp
 o URL'yi kullan.
 
-## Görseller (henüz üretilmedi)
+## Görseller (hazır)
 
-Play Console şunları istiyor, oyunun içinden ekran görüntüsü alarak
-tamamlaman gerekiyor (istersen bunları da senin için üretebilirim):
+Hepsi bu klasörde, doğrudan Play Console'a yüklenebilir:
 
-- **Uygulama ikonu**: 512×512 PNG — `../assets/icon.png` (1024×1024)
-  dosyasından küçültülebilir.
-- **Öne çıkan grafik (feature graphic)**: 1024×500 PNG/JPG.
-- **Telefon ekran görüntüleri**: en az 2, en fazla 8 (önerilen: her
-  temadan bir tane — çöl, deniz, gökyüzü — ve bir "oyun bitti / devam et"
-  ekranı).
+- **Uygulama ikonu**: [`icon-512.png`](./icon-512.png) (512×512)
+- **Öne çıkan grafik**: [`feature-graphic.png`](./feature-graphic.png) (1024×500)
+- **Telefon ekran görüntüleri**: [`screenshots/`](./screenshots) klasöründe
+  4 tane (1082×2202, gerçek oynanıştan) —
+  `01-tema-secimi.png` (tema seçim ekranı),
+  `02-col.png` (çöl oynanışı),
+  `03-deniz.png` (deniz oynanışı, köpekbalığı görünür),
+  `04-gokyuzu.png` (gökyüzü oynanışı, kapan görünür).
+  Play Console'a yükleme sırası önemli değil, ama `01` başta olursa
+  mağaza sayfasında "önce ne göreceğim" hissi daha iyi olur.
 
 ## İçerik derecelendirmesi
 

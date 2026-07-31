@@ -89,10 +89,10 @@ dosya budur (`.apk` değil, Play artık `.aab` istiyor).
    (bkz. `store-listing.md` içindeki uyarı), ya da sayfayı kendi kalıcı
    domain'ine taşı.
 4. **Mağaza listesi**: [`store/store-listing.md`](./store/store-listing.md)
-   içinde kopyala-yapıştıra hazır uygulama adı, kısa/uzun açıklama var.
-   İkon (`assets/icon.png`, 512x512'ye küçültülmesi gerekir), en az 2 ekran
-   görüntüsü (telefon) ve öne çıkan grafik (1024x500) hâlâ eksik — istersen
-   onları da üretebilirim.
+   içinde kopyala-yapıştıra hazır uygulama adı, kısa/uzun açıklama, ikon
+   (`store/icon-512.png`), öne çıkan grafik (`store/feature-graphic.png`)
+   ve 4 telefon ekran görüntüsü (`store/screenshots/`) var — hepsi
+   doğrudan yüklenebilir.
 5. **İçerik derecelendirme anketi**'ni doldur (basit, şiddet/reklam
    içermeyen bir oyun için birkaç dakika sürer).
 6. `.aab` dosyasını yükle, önce **Internal testing** kanalına at, kendi
