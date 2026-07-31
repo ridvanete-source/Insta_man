@@ -79,6 +79,31 @@ def test_save_round_trips(tmp_path):
     assert reloaded.posts[0].extra_hashtags == ["brand"]
 
 
+def test_source_credit_round_trips(tmp_path):
+    now = datetime.now(timezone.utc)
+    queue_file = tmp_path / "queue.yaml"
+    write_queue(
+        queue_file,
+        [
+            {
+                "id": "reshared-post",
+                "caption": "hello",
+                "media": [{"path": "img1.jpg", "type": "image"}],
+                "scheduled_at": now.isoformat(),
+                "status": "pending",
+                "source_credit": "original_creator",
+            }
+        ],
+    )
+
+    queue = ContentQueue(queue_file)
+    assert queue.posts[0].source_credit == "original_creator"
+
+    queue.save()
+    reloaded = ContentQueue(queue_file)
+    assert reloaded.posts[0].source_credit == "original_creator"
+
+
 def test_recent_hashtags_only_considers_posted(tmp_path):
     now = datetime.now(timezone.utc)
     queue_file = tmp_path / "queue.yaml"

@@ -49,6 +49,10 @@ class ContentPost:
     """Hashtags to always include regardless of the topic-based selection."""
     max_hashtags: int | None = None
     target: PostTarget = PostTarget.FEED
+    source_credit: str | None = None
+    """Original creator's @handle, when this post is a reshare of someone
+    else's content the creator gave permission to repost. Appended to the
+    caption automatically so credit is never dropped."""
     status: PostStatus = PostStatus.PENDING
     published_at: datetime | None = None
     platform_post_id: str | None = None

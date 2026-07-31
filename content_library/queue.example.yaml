@@ -11,4 +11,6 @@
   extra_hashtags: ["mybrand"]   # always included, e.g. a branded/account tag
   max_hashtags: 25              # optional override of INSTA_MAN_MAX_HASHTAGS
   target: feed                  # feed | story - story is instagrapi-only, ignores caption/hashtags
+  source_credit: null            # original creator's @handle if this is a permitted reshare -
+                                  # appended to the caption automatically as "via @handle"
   status: pending                # pending | publishing | posted | failed | skipped

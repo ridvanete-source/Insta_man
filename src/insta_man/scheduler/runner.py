@@ -42,7 +42,11 @@ def run_once(config: Config | None = None) -> list[str]:
             extra=post.extra_hashtags,
             exclude_recent=queue.recent_hashtags(),
         )
-        caption = f"{post.caption}\n\n{HashtagManager.format_for_caption(hashtags)}".strip()
+        caption_parts = [post.caption]
+        if post.source_credit:
+            caption_parts.append(f"🎥 via @{post.source_credit.lstrip('@')}")
+        caption_parts.append(HashtagManager.format_for_caption(hashtags))
+        caption = "\n\n".join(part for part in caption_parts if part).strip()
 
         post.status = PostStatus.PUBLISHING
         result = publisher.publish(post, caption)
