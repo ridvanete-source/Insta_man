@@ -82,12 +82,12 @@ dosya budur (`.apk` değil, Play artık `.aab` istiyor).
    `android/app/build.gradle` içindeki `applicationId`'i istediğin gibi
    değiştirebilirsin.
 3. **Gizlilik politikası URL'si** ekle — Play, içerik olmasa bile zorunlu
-   tutuyor. Hazır: [`store/privacy-policy.html`](./store/privacy-policy.html)
-   (kaynak dosya) ve geçici canlı linki
-   [`store/store-listing.md`](./store/store-listing.md) içinde — Play
-   Console'a girmeden önce o linkin **herkese açık** olduğundan emin ol
-   (bkz. `store-listing.md` içindeki uyarı), ya da sayfayı kendi kalıcı
-   domain'ine taşı.
+   tutuyor. Sayfa `gh-pages` branch'ine push edildi; kalıcı adres
+   `https://ridvanete-source.github.io/Insta_man/privacy-policy.html`
+   olacak. Tek eksik: **Settings → Pages**'te bir kere "Deploy from a
+   branch → gh-pages / (root)" seçip kaydetmen gerekiyor (bkz.
+   `store/store-listing.md` içindeki adım adım talimat). Kaynak dosya:
+   [`store/privacy-policy.html`](./store/privacy-policy.html).
 4. **Mağaza listesi**: [`store/store-listing.md`](./store/store-listing.md)
    içinde kopyala-yapıştıra hazır uygulama adı, kısa/uzun açıklama, ikon
    (`store/icon-512.png`), öne çıkan grafik (`store/feature-graphic.png`)

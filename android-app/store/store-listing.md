@@ -55,15 +55,25 @@ Zıpla Kaç! tamamen cihazında çalışır; hiçbir kişisel veri toplamaz ya d
 
 ## Gizlilik politikası URL'si
 
-`privacy-policy.html` bu klasörde duruyor ve şu an geçici olarak burada
-canlı: https://claude.ai/code/artifact/c1ff07c4-12a0-4987-aa0a-35543f976564
+Kalıcı adres (GitHub Pages, `gh-pages` branch'inden):
 
-⚠️ **Önemli:** Bu link varsayılan olarak yalnızca sende görünür (private).
-Play Console incelemesi bu sayfayı herkese açık olarak çekebilmeli, yoksa
-uygulaman reddedilir. Yüklemeden önce artifact sayfasındaki **paylaş**
-menüsünden **"herkese açık" / public** yap, ya da bu HTML dosyasını kendi
-kalıcı bir web adresinde (kendi sitende, GitHub Pages'te vb.) barındırıp
-o URL'yi kullan.
+```
+https://ridvanete-source.github.io/Insta_man/privacy-policy.html
+```
+
+Bu dosyanın kaynağı `privacy-policy.html` (bu klasörde) ile birebir aynı;
+`gh-pages` branch'ine zaten push edildi.
+
+⚠️ **Tek eksik adım — Settings'te Pages'i açman gerekiyor** (API üzerinden
+otomatik yapılamıyor, GitHub bunu bir admin panel tıklamasıyla istiyor):
+
+1. Repo sayfasında **Settings → Pages**'e git.
+2. **Build and deployment → Source**: "Deploy from a branch" seç.
+3. **Branch**: `gh-pages` / `/ (root)` seç, **Save**'e bas.
+4. Birkaç dakika içinde yukarıdaki URL canlıya çıkar (Settings → Pages
+   sayfasında yeşil bir "your site is live at ..." mesajı görünce hazırdır).
+
+Bundan sonra bu URL kalıcıdır — Play Console'a bunu gir.
 
 ## Görseller (hazır)
 
