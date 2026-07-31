@@ -11,12 +11,20 @@
     <canvas id="game"></canvas>
 
     <div id="hud">
-      <div id="score">0</div>
-      <div id="best">
-        <span class="label">En İyi</span>
-        <span class="value" id="best-value">0</span>
+      <div id="score-block">
+        <div id="score">0</div>
+        <div id="level-badge">Seviye 1</div>
+      </div>
+      <div class="hud-right">
+        <button id="mute-btn" class="icon-btn" type="button" aria-label="Sesi kapat/aç">🔊</button>
+        <div id="best">
+          <span class="label">En İyi</span>
+          <span class="value" id="best-value">0</span>
+        </div>
       </div>
     </div>
+
+    <div id="toast"></div>
 
     <div id="start-screen" class="overlay">
       <div class="card">
@@ -44,7 +52,8 @@
             <div class="stat-value" id="final-best">0</div>
           </div>
         </div>
-        <button class="primary" id="retry-btn">Tekrar Dene</button>
+        <button class="primary hidden" id="continue-btn">Devam Et</button>
+        <button class="secondary" id="retry-btn">Baştan Başla</button>
         <button class="ghost-btn" id="change-theme-btn">Temayı değiştir</button>
       </div>
     </div>
