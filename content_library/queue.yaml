@@ -121,3 +121,21 @@
   published_at: null
   platform_post_id: null
   error: null
+- id: 2026-08-01-golden-morning-meadow
+  caption: Güneş doğdu, gün yeniden başlıyor. Günaydın!
+  media:
+  - path: content_library/media/golden-morning-meadow.jpg
+    type: image
+  scheduled_at: '2026-08-01T09:00:00+03:00'
+  topics:
+  - nature
+  extra_hashtags:
+  - goodmorning
+  - gunaydin
+  - sunrise
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
