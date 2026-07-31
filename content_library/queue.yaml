@@ -102,3 +102,22 @@
   published_at: '2026-07-31T13:02:47.629386+00:00'
   platform_post_id: '3953407774780273003'
   error: null
+- id: 2026-08-01-ocean-waves-sunset
+  caption: Gün biterken deniz en güzel rengini takınıyor.
+  media:
+  - path: content_library/media/ocean-waves-sunset.jpg
+    type: image
+  scheduled_at: '2026-08-01T19:30:00+03:00'
+  topics:
+  - nature
+  - travel
+  extra_hashtags:
+  - sunset
+  - ocean
+  - beach
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
