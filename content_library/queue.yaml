@@ -306,3 +306,102 @@
   published_at: '2026-08-01T17:35:37.719766+00:00'
   platform_post_id: '3954269871202244880'
   error: null
+- id: 2026-08-04-cozy-pastry-breakfast
+  caption: Sıcak bir çörek, bir fincan kahve — güne böyle başlanır. Günaydın!
+  media:
+  - path: content_library/media/cozy-pastry-breakfast.jpg
+    type: image
+  scheduled_at: '2026-08-04T09:00:00+03:00'
+  topics:
+  - food
+  extra_hashtags:
+  - breakfast
+  - pastry
+  - coffeetime
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-06-morning-jog-sunrise
+  caption: Güneş doğarken atılan adımlar en hafif geliyor.
+  media:
+  - path: content_library/media/morning-jog-sunrise.jpg
+    type: image
+  scheduled_at: '2026-08-06T09:00:00+03:00'
+  topics:
+  - fitness
+  - motivation
+  extra_hashtags:
+  - morningrun
+  - running
+  - fitmotivation
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-06-tokyo-neon-street
+  caption: Neon ışıklar, sonsuz hareket — Tokyo gece hiç uyumuyor.
+  media:
+  - path: content_library/media/tokyo-neon-street.jpg
+    type: image
+  scheduled_at: '2026-08-06T20:00:00+03:00'
+  topics:
+  - city
+  - travel
+  extra_hashtags:
+  - tokyo
+  - japan
+  - nightlife
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-07-sunlit-reading-nook
+  caption: Kitaplar arasında, güneşin dokunduğu bir köşe.
+  media:
+  - path: content_library/media/sunlit-reading-nook.jpg
+    type: image
+  scheduled_at: '2026-08-07T09:00:00+03:00'
+  topics:
+  - art
+  - homedecor
+  extra_hashtags:
+  - bookstagram
+  - cozycorner
+  - istanbul
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-07-sahara-desert-dunes
+  caption: Kum dalgaları, sonsuz sessizlik — çöl gün batımında altına bürünüyor.
+  media:
+  - path: content_library/media/sahara-desert-dunes.jpg
+    type: image
+  scheduled_at: '2026-08-07T20:00:00+03:00'
+  topics:
+  - nature
+  - travel
+  extra_hashtags:
+  - sahara
+  - desert
+  - morocco
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
