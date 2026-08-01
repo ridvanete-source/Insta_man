@@ -128,6 +128,43 @@
   published_at: null
   platform_post_id: null
   error: null
+- id: 2026-08-02-cozy-coffee-window
+  caption: Günün ilk yudumu, en güzel başlangıç. Günaydın!
+  media:
+  - path: content_library/media/cozy-coffee-window.jpg
+    type: image
+  scheduled_at: '2026-08-02T09:00:00+03:00'
+  topics:
+  - lifestyle
+  extra_hashtags:
+  - coffee
+  - morningvibes
+  - cozy
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-02-mountain-lake-reflection
+  caption: Dağlar suya, gün ışığı huzura karışıyor.
+  media:
+  - path: content_library/media/mountain-lake-reflection.jpg
+    type: image
+  scheduled_at: '2026-08-02T20:00:00+03:00'
+  topics:
+  - nature
+  - travel
+  extra_hashtags:
+  - mountains
+  - lake
+  - reflection
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-01-golden-morning-meadow
   caption: Güneş doğdu, gün yeniden başlıyor. Günaydın!
   media:
