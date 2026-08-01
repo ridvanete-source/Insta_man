@@ -207,12 +207,12 @@
   published_at: '2026-08-01T06:00:32.809329+00:00'
   platform_post_id: '3953920011420700871'
   error: null
-- id: 2026-08-04-white-persian-cat
+- id: 2026-08-08-white-persian-cat
   caption: İyi bir gün, sevimli bir bakışla başlar. Günaydın!
   media:
   - path: content_library/media/white-persian-cat.jpg
     type: image
-  scheduled_at: '2026-08-04T09:00:00+03:00'
+  scheduled_at: '2026-08-08T09:00:00+03:00'
   topics:
   - lifestyle
   extra_hashtags:
@@ -275,7 +275,6 @@
   scheduled_at: '2026-08-05T20:00:00+03:00'
   topics:
   - travel
-  - culture
   extra_hashtags:
   - waxmuseum
   - madametussauds
