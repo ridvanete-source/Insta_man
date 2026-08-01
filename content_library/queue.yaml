@@ -221,3 +221,79 @@
   published_at: '2026-08-01T06:00:32.809329+00:00'
   platform_post_id: '3953920011420700871'
   error: null
+- id: 2026-08-04-white-persian-cat
+  caption: İyi bir gün, sevimli bir bakışla başlar. Günaydın!
+  media:
+  - path: content_library/media/white-persian-cat.jpg
+    type: image
+  scheduled_at: '2026-08-04T09:00:00+03:00'
+  topics:
+  - lifestyle
+  extra_hashtags:
+  - cat
+  - catsofinstagram
+  - petsofinstagram
+  - whitecat
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-04-rainy-istanbul-window
+  caption: Bu sabah yağmur var İstanbul'da.
+  media:
+  - path: content_library/media/rainy-istanbul-window.jpg
+    type: image
+  scheduled_at: '2026-08-04T20:00:00+03:00'
+  topics:
+  - city
+  - travel
+  extra_hashtags:
+  - istanbul
+  - rain
+  - rainyday
+  - cityview
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-05-turkish-tea
+  caption: Sohbetin en güzel eşlikçisi, bir bardak çay.
+  media:
+  - path: content_library/media/turkish-tea.jpg
+    type: image
+  scheduled_at: '2026-08-05T09:00:00+03:00'
+  topics:
+  - lifestyle
+  extra_hashtags:
+  - turkishtea
+  - cay
+  - teatime
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-05-wax-museum-figure
+  caption: Müzede zamanı durdurmuş bir an.
+  media:
+  - path: content_library/media/wax-museum-figure.jpg
+    type: image
+  scheduled_at: '2026-08-05T20:00:00+03:00'
+  topics:
+  - travel
+  - culture
+  extra_hashtags:
+  - waxmuseum
+  - madametussauds
+  - museum
+  max_hashtags: null
+  target: feed
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
