@@ -15,24 +15,6 @@
   published_at: '2026-07-29T16:17:50.037995+00:00'
   platform_post_id: '3952056379292300705'
   error: null
-- id: 2026-07-30-good-morning-bird
-  caption: Doğa erkenden uyanıyor, biz de kalkalım. Günaydın!
-  media:
-  - path: content_library/media/morning-bird-golden-light.jpg
-    type: image
-  - path: content_library/media/morning-bird-branch.jpg
-    type: image
-  scheduled_at: '2026-08-06T09:00:00+03:00'
-  topics:
-  - nature
-  extra_hashtags: []
-  max_hashtags: null
-  target: feed
-  source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
-  error: null
 - id: 2026-07-29-fener-halftime-story
   caption: 'İlk yarı: Gornik Zabrze 1 - 1 Fenerbahçe'
   media:
