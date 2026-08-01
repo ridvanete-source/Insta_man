@@ -10,6 +10,7 @@
   extra_hashtags: []
   max_hashtags: null
   target: feed
+  source_credit: null
   status: posted
   published_at: '2026-07-29T16:17:50.037995+00:00'
   platform_post_id: '3952056379292300705'
@@ -27,6 +28,7 @@
   extra_hashtags: []
   max_hashtags: null
   target: feed
+  source_credit: null
   status: skipped
   published_at: null
   platform_post_id: null
@@ -41,6 +43,7 @@
   extra_hashtags: []
   max_hashtags: null
   target: story
+  source_credit: null
   status: posted
   published_at: '2026-07-29T19:09:47.472807+00:00'
   platform_post_id: '3952142998833648030'
@@ -60,6 +63,7 @@
   - istanbul
   max_hashtags: null
   target: feed
+  source_credit: null
   status: posted
   published_at: '2026-07-30T09:23:11.870736+00:00'
   platform_post_id: '3952572486168110805'
@@ -79,6 +83,7 @@
   - chryslerbuilding
   max_hashtags: null
   target: feed
+  source_credit: null
   status: posted
   published_at: '2026-07-30T13:04:11.160678+00:00'
   platform_post_id: '3952683682057730971'
@@ -98,6 +103,7 @@
   - norway
   max_hashtags: null
   target: feed
+  source_credit: null
   status: posted
   published_at: '2026-07-31T13:02:47.629386+00:00'
   platform_post_id: '3953407774780273003'
@@ -117,6 +123,7 @@
   - beach
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -135,7 +142,8 @@
   - sunrise
   max_hashtags: null
   target: feed
-  status: pending
-  published_at: null
-  platform_post_id: null
+  source_credit: null
+  status: posted
+  published_at: '2026-08-01T06:00:32.809329+00:00'
+  platform_post_id: '3953920011420700871'
   error: null
