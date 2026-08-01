@@ -124,9 +124,9 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-01T17:35:15.689121+00:00'
+  platform_post_id: '3954269679539355895'
   error: null
 - id: 2026-08-02-cozy-coffee-window
   caption: Günün ilk yudumu, en güzel başlangıç. Günaydın!
@@ -142,6 +142,7 @@
   - cozy
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -161,6 +162,7 @@
   - reflection
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -179,6 +181,7 @@
   - morningstretch
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -198,6 +201,7 @@
   - oia
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -236,6 +240,7 @@
   - whitecat
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -256,6 +261,7 @@
   - cityview
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -274,6 +280,7 @@
   - teatime
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -293,6 +300,7 @@
   - museum
   max_hashtags: null
   target: feed
+  source_credit: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -313,7 +321,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-01T17:35:37.719766+00:00'
+  platform_post_id: '3954269871202244880'
   error: null
