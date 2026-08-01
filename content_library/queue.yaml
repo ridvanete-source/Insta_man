@@ -22,14 +22,14 @@
     type: image
   - path: content_library/media/morning-bird-branch.jpg
     type: image
-  scheduled_at: '2026-07-30T09:00:00+03:00'
+  scheduled_at: '2026-08-06T09:00:00+03:00'
   topics:
   - nature
   extra_hashtags: []
   max_hashtags: null
   target: feed
   source_credit: null
-  status: skipped
+  status: pending
   published_at: null
   platform_post_id: null
   error: null
