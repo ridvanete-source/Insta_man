@@ -1,8 +1,13 @@
 name: Auto-post queue
 
 on:
-  schedule:
-    - cron: "0 * * * *"
+  # Schedule temporarily disabled (2026-08-02): Instagram is requiring 2FA
+  # verification on every non-interactive login attempt, so hourly runs were
+  # just repeated failed logins, adding account risk. Re-enable the schedule
+  # line below once .ig_session.json has been refreshed via an interactive
+  # local login.
+  # schedule:
+  #   - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
