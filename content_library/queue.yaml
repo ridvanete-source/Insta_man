@@ -125,9 +125,9 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-02T08:48:14.996126+00:00'
+  platform_post_id: '3954729198602035421'
   error: null
 - id: 2026-08-02-mountain-lake-reflection
   caption: Dağlar suya, gün ışığı huzura karışıyor.
