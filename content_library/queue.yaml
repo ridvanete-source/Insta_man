@@ -405,3 +405,123 @@
   published_at: null
   platform_post_id: null
   error: null
+- id: 2026-08-09-malli-koy-sunset
+  caption: Güneş dağların ardına çekilirken köy sessizliğe bürünüyor.
+  media:
+  - path: content_library/media/malli_koy1.jpg
+    type: image
+  scheduled_at: '2026-08-09T20:00:00+03:00'
+  topics:
+  - nature
+  - travel
+  extra_hashtags:
+  - sunset
+  - countryside
+  - ruralview
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-10-malli-koy-sheep
+  caption: Akşam olunca sürü kendi evine dönüyor.
+  media:
+  - path: content_library/media/malli_koy3.jpg
+    type: image
+  scheduled_at: '2026-08-10T09:00:00+03:00'
+  topics:
+  - nature
+  - lifestyle
+  extra_hashtags:
+  - sheep
+  - farmlife
+  - countryside
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-10-malli-koy-moonlight
+  caption: Dallar arasından süzülen ay, günün son ışığına eşlik ediyor.
+  media:
+  - path: content_library/media/malli_koy4.jpg
+    type: image
+  scheduled_at: '2026-08-10T20:00:00+03:00'
+  topics:
+  - nature
+  - photography
+  extra_hashtags:
+  - moon
+  - nightsky
+  - silhouette
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-11-malli-koy-garden
+  caption: Küçük bir bahçe köşesi, kendi huzurunu yetiştiriyor.
+  media:
+  - path: content_library/media/malli_koy_modu.jpg
+    type: image
+  scheduled_at: '2026-08-11T09:00:00+03:00'
+  topics:
+  - homedecor
+  - nature
+  extra_hashtags:
+  - gardenlife
+  - homegrown
+  - gardencorner
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-11-malli-koy-pomegranate-flower
+  caption: Nar çiçeği açtı, yaz kendini böyle gösteriyor.
+  media:
+  - path: content_library/media/malli_koy_narcicegi.jpg
+    type: image
+  scheduled_at: '2026-08-11T20:00:00+03:00'
+  topics:
+  - nature
+  - photography
+  extra_hashtags:
+  - pomegranateflower
+  - macro
+  - bloom
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-12-malli-koy-wheat-field
+  caption: Ekinler sararmış, köy kendi sessizliğinde nefes alıyor.
+  media:
+  - path: content_library/media/malli_koy2.jpg
+    type: image
+  scheduled_at: '2026-08-12T09:00:00+03:00'
+  topics:
+  - nature
+  - travel
+  extra_hashtags:
+  - wheatfield
+  - countryside
+  - summer
+  max_hashtags: null
+  target: feed
+  source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
