@@ -18,6 +18,11 @@
           "at": "2026-08-03T14:29:15.088598+00:00",
           "comment_count": 1,
           "like_count": 52
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
+          "comment_count": 1,
+          "like_count": 52
         }
       ],
       "id": "2026-07-29-city-sunset",
@@ -39,6 +44,11 @@
         },
         {
           "at": "2026-08-03T14:29:15.088598+00:00",
+          "comment_count": 0,
+          "like_count": 41
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
           "comment_count": 0,
           "like_count": 41
         }
@@ -63,6 +73,11 @@
           "at": "2026-08-03T14:29:15.088598+00:00",
           "comment_count": 1,
           "like_count": 41
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
+          "comment_count": 1,
+          "like_count": 41
         }
       ],
       "id": "2026-07-30-newyork-chrysler-crossing",
@@ -83,6 +98,11 @@
         },
         {
           "at": "2026-08-03T14:29:15.088598+00:00",
+          "comment_count": 2,
+          "like_count": 45
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
           "comment_count": 2,
           "like_count": 45
         }
@@ -107,10 +127,15 @@
           "at": "2026-08-03T14:29:15.088598+00:00",
           "comment_count": 0,
           "like_count": 35
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
+          "comment_count": 0,
+          "like_count": 36
         }
       ],
       "id": "2026-08-01-golden-morning-meadow",
-      "like_count": 35
+      "like_count": 36
     },
     "3954269679539355895": {
       "comment_count": 2,
@@ -127,6 +152,11 @@
         },
         {
           "at": "2026-08-03T14:29:15.088598+00:00",
+          "comment_count": 2,
+          "like_count": 23
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
           "comment_count": 2,
           "like_count": 23
         }
@@ -151,6 +181,11 @@
           "at": "2026-08-03T14:29:15.088598+00:00",
           "comment_count": 7,
           "like_count": 22
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
+          "comment_count": 7,
+          "like_count": 22
         }
       ],
       "id": "2026-08-01-grenoble-corner",
@@ -171,6 +206,11 @@
         },
         {
           "at": "2026-08-03T14:29:15.088598+00:00",
+          "comment_count": 2,
+          "like_count": 13
+        },
+        {
+          "at": "2026-08-03T14:43:06.127001+00:00",
           "comment_count": 2,
           "like_count": 13
         }
