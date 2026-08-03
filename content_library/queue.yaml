@@ -145,9 +145,9 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-03T17:43:44.301639+00:00'
+  platform_post_id: '3955723472256644513'
   error: null
 - id: 2026-08-04-cat-morning-stretch
   caption: Gerinme vakti, güne enerjik başlamalı. Günaydın!
