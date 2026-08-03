@@ -121,6 +121,22 @@ class InstagrapiPublisher(BasePublisher):
         except Exception as exc:  # instagrapi raises many distinct exception types
             return PublishResult(success=False, error=str(exc))
 
+    def reshare_to_story(self, media_pk: str) -> str:
+        """Reshare an existing feed post to Story (native IG feature, no ToS risk).
+
+        Gives older posts a second wave of visibility without any
+        follow/like/comment automation.
+        """
+        client = self._get_client()
+        result = client.media_share_to_story(media_pk)
+        return str(result.pk)
+
+    def get_engagement(self, media_pk: str) -> dict:
+        """Fetch current like/comment counts for a posted media item."""
+        client = self._get_client()
+        info = client.media_info(client.media_pk(media_pk))
+        return {"like_count": info.like_count, "comment_count": info.comment_count}
+
     def _publish_story(self, client, post: ContentPost) -> PublishResult:
         # Stories are ephemeral single-media items - only the first media
         # entry is used even if the post lists more than one.
