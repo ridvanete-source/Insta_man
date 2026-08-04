@@ -24,7 +24,7 @@ from __future__ import annotations
 import logging
 
 from insta_man.config import Config
-from insta_man.models import ContentPost, MediaType, PostTarget, PublishResult
+from insta_man.models import ContentPost, MediaItem, MediaType, PostTarget, PublishResult
 
 from .base import BasePublisher
 
@@ -121,14 +121,22 @@ class InstagrapiPublisher(BasePublisher):
         except Exception as exc:  # instagrapi raises many distinct exception types
             return PublishResult(success=False, error=str(exc))
 
-    def reshare_to_story(self, media_pk: str) -> str:
-        """Reshare an existing feed post to Story (native IG feature, no ToS risk).
+    def reshare_to_story(self, media: MediaItem) -> str:
+        """Reshare an existing feed post to Story by re-uploading its original file.
 
         Gives older posts a second wave of visibility without any
-        follow/like/comment automation.
+        follow/like/comment automation. Deliberately does NOT use instagrapi's
+        `media_share_to_story` (the native "Share to Story" reshare) - that
+        private-API call is unreliable and was observed producing a blank/
+        black story on the account. Re-uploading through the same
+        photo/video-to-story path used for scheduled Story posts
+        (`_publish_story`) avoids that failure mode.
         """
         client = self._get_client()
-        result = client.media_share_to_story(media_pk)
+        if media.media_type in (MediaType.VIDEO, MediaType.REEL):
+            result = client.video_upload_to_story(media.path)
+        else:
+            result = client.photo_upload_to_story(media.path)
         return str(result.pk)
 
     def get_engagement(self, media_pk: str) -> dict:

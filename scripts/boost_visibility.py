@@ -7,11 +7,13 @@ this project (see CLAUDE.md). Instead this script only:
 
 1. Logs like/comment counts for posted items over time (content-strategy
    signal - which topics/hashtags actually perform).
-2. Reshares an older, well-cooled-down post to Story via instagrapi's native
-   `media_share_to_story` - the same "share to story" action available in
-   the app UI, just automated. Rate-limited to at most once per run and at
-   least MIN_GAP_BETWEEN_RESHARES apart, picking the least-recently-reshared
-   eligible post first.
+2. Reshares an older, well-cooled-down post to Story by re-uploading its
+   original media file through the same story-publish path used for
+   scheduled Story posts (NOT instagrapi's native `media_share_to_story`,
+   which was observed rendering as a blank/black story on the account - see
+   InstagrapiPublisher.reshare_to_story). Rate-limited to at most once per
+   run and at least MIN_GAP_BETWEEN_RESHARES apart, picking the
+   least-recently-reshared eligible post first.
 
 State is kept in content_library/visibility_state.json (committed to git,
 same pattern as queue.yaml) so history survives across runs/machines.
@@ -96,7 +98,7 @@ def main() -> None:
         if candidates:
             chosen = candidates[0]
             try:
-                publisher.reshare_to_story(chosen.platform_post_id)
+                publisher.reshare_to_story(chosen.media[0])
                 print(f"[reshare] {chosen.id} -> story")
                 entry = state["posts"].setdefault(
                     chosen.platform_post_id, {"id": chosen.id, "history": []}
