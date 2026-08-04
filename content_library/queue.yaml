@@ -184,9 +184,9 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-04T17:43:31.466385+00:00'
+  platform_post_id: '3956448165393702218'
   error: null
 - id: 2026-08-01-golden-morning-meadow
   caption: Güneş doğdu, gün yeniden başlıyor. Günaydın!
