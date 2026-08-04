@@ -28,6 +28,11 @@
           "at": "2026-08-03T23:43:18.128719+00:00",
           "comment_count": 1,
           "like_count": 53
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
+          "comment_count": 1,
+          "like_count": 53
         }
       ],
       "id": "2026-07-29-city-sunset",
@@ -59,6 +64,11 @@
         },
         {
           "at": "2026-08-03T23:43:18.128719+00:00",
+          "comment_count": 0,
+          "like_count": 41
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
           "comment_count": 0,
           "like_count": 41
         }
@@ -93,6 +103,11 @@
           "at": "2026-08-03T23:43:18.128719+00:00",
           "comment_count": 1,
           "like_count": 42
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
+          "comment_count": 1,
+          "like_count": 42
         }
       ],
       "id": "2026-07-30-newyork-chrysler-crossing",
@@ -123,6 +138,11 @@
         },
         {
           "at": "2026-08-03T23:43:18.128719+00:00",
+          "comment_count": 2,
+          "like_count": 45
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
           "comment_count": 2,
           "like_count": 45
         }
@@ -157,6 +177,11 @@
           "at": "2026-08-03T23:43:18.128719+00:00",
           "comment_count": 0,
           "like_count": 36
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
+          "comment_count": 0,
+          "like_count": 36
         }
       ],
       "id": "2026-08-01-golden-morning-meadow",
@@ -187,6 +212,11 @@
         },
         {
           "at": "2026-08-03T23:43:18.128719+00:00",
+          "comment_count": 2,
+          "like_count": 23
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
           "comment_count": 2,
           "like_count": 23
         }
@@ -221,6 +251,11 @@
           "at": "2026-08-03T23:43:18.128719+00:00",
           "comment_count": 7,
           "like_count": 23
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
+          "comment_count": 7,
+          "like_count": 23
         }
       ],
       "id": "2026-08-01-grenoble-corner",
@@ -253,6 +288,11 @@
           "at": "2026-08-03T23:43:18.128719+00:00",
           "comment_count": 2,
           "like_count": 13
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
+          "comment_count": 2,
+          "like_count": 13
         }
       ],
       "id": "2026-08-02-cozy-coffee-window",
@@ -263,6 +303,11 @@
       "history": [
         {
           "at": "2026-08-03T23:43:18.128719+00:00",
+          "comment_count": 1,
+          "like_count": 23
+        },
+        {
+          "at": "2026-08-04T00:43:07.167952+00:00",
           "comment_count": 1,
           "like_count": 23
         }
