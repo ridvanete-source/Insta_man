@@ -8,7 +8,6 @@
   const gameoverScreen = document.getElementById('gameover-screen');
   const startBtn = document.getElementById('start-btn');
   const retryBtn = document.getElementById('retry-btn');
-  const continueBtn = document.getElementById('continue-btn');
   const changeThemeBtn = document.getElementById('change-theme-btn');
   const levelBadgeEl = document.getElementById('level-badge');
   const toastEl = document.getElementById('toast');
@@ -21,7 +20,7 @@
   const themePickerEl = document.getElementById('theme-picker');
   const root = document.documentElement;
 
-  const THEME_STORAGE_KEY = 'zipla-kac-theme';
+  const THEME_STORAGE_KEY = 'hoopwave-theme';
 
   const THEMES = {
     desert: {
@@ -35,17 +34,6 @@
         panel: 'rgba(36, 23, 51, 0.72)', panelBorder: 'rgba(255, 224, 138, 0.18)',
         btnInk: '#3a1f05',
       },
-      skyStops: ['#241b3a', '#6a3f6b', '#f0895a'],
-      orbStyle: 'sun', orbColor: '#ffe08a', orbGlow: 'rgba(255, 177, 92, 0.55)',
-      decorFar: '#4a3358', decorNear: '#37243f',
-      groundTop: '#d9a066', groundBottom: '#a86b3f', groundRim: '#7a4a2a',
-      tick: 'rgba(122, 74, 42, 0.5)',
-      particle: 'rgba(251, 234, 217, 0.65)', particleStyle: 'dust',
-      playerBody: '#ffb545', playerAccent: '#3a1f05', playerShape: 'runner',
-      obstacleSet: [
-        { shape: 'boulder', body: '#4a3547', shade: '#33222f' },
-        { shape: 'spike', body: '#4a3547', shade: '#33222f' },
-      ],
     },
     ocean: {
       label: 'Deniz', emoji: '🐟', eyebrow: 'Mercan Resifi',
@@ -59,16 +47,6 @@
         panel: 'rgba(6, 38, 48, 0.74)', panelBorder: 'rgba(150, 230, 240, 0.22)',
         btnInk: '#052a30',
       },
-      skyStops: ['#012636', '#0a5c73', '#3fc2d8'],
-      orbStyle: 'sunbeam', orbColor: '#eafcff', orbGlow: 'rgba(180, 240, 255, 0.35)',
-      topDecorStyle: 'shimmer', topDecorColor: '#bff3ff', topDecorColor2: 'rgba(180,240,255,0.28)',
-      bottomDecorStyle: 'coral', bottomDecorColor: '#0a3540', bottomDecorColor2: '#0f4a55',
-      particle: 'rgba(210, 245, 255, 0.6)', particleStyle: 'bubble',
-      playerBody: '#ff8a3d', playerAccent: '#241b12', playerShape: 'fish',
-      obstacleSet: [
-        { shape: 'creature', body: '#5c7480', shade: '#374850' },
-        { shape: 'orb', body: '#2b2038', shade: '#1a1424' },
-      ],
     },
     air: {
       label: 'Gökyüzü', emoji: '🐦', eyebrow: 'Bulut Katmanları',
@@ -82,16 +60,6 @@
         panel: 'rgba(13, 32, 56, 0.74)', panelBorder: 'rgba(255, 255, 255, 0.2)',
         btnInk: '#3a2705',
       },
-      skyStops: ['#0f2c52', '#3f6fa8', '#a9d8f0'],
-      orbStyle: 'sun', orbColor: '#fff6d8', orbGlow: 'rgba(255, 246, 216, 0.45)',
-      topDecorStyle: 'cloud', topDecorColor: '#7fa3d6', topDecorColor2: '#9fbfe8',
-      bottomDecorStyle: 'cloud', bottomDecorColor: '#3f6fa8', bottomDecorColor2: '#5583bd',
-      particle: 'rgba(255, 255, 255, 0.75)', particleStyle: 'feather',
-      playerBody: '#3fa7ff', playerAccent: '#0a2338', playerShape: 'bird',
-      obstacleSet: [
-        { shape: 'creature', body: '#5c3a28', shade: '#3a2417' },
-        { shape: 'orb', body: '#8a8a8a', shade: '#4a4a4a' },
-      ],
     },
   };
   const THEME_ORDER = ['desert', 'ocean', 'air'];
@@ -159,11 +127,19 @@
   const PLAYER_SIZE = 42;
   const BASE_SPEED = 380;
   const LEVEL_STEP = 25;
+  const BEAT = 0.42; // matches the procedural music tempo below — obstacle cadence locks to it
+
+  function beatsForLevel(lvl) {
+    if (lvl >= 5) return 1;
+    if (lvl >= 3) return 1.5;
+    if (lvl >= 1) return 2;
+    return 3;
+  }
 
   let player, obstacles, particles;
   let speed, spawnTimer, spawnInterval, elapsed, score, best;
-  let level, checkpoint, checkpointReady;
-  let farScroll = 0, nearScroll = 0, groundScroll = 0, flapPhase = 0;
+  let level;
+  let farScroll = 0, groundScroll = 0;
   let running = false;
   let toastTimer = null;
 
@@ -184,7 +160,7 @@
     ocean: [196.0, 233.08, 261.63, 311.13, 349.23],
     air: [329.63, 392.0, 440.0, 523.25, 587.33],
   };
-  let musicOn = localStorage.getItem('zipla-kac-muted') !== '1';
+  let musicOn = localStorage.getItem('hoopwave-muted') !== '1';
   let audioCtx = null;
   let musicGain = null;
   let musicStarted = false;
@@ -229,7 +205,7 @@
       playNote(freq, nextNoteTime, 0.9, 'sine');
       if (noteIndex % 3 === 0) playNote(freq / 2, nextNoteTime, 1.4, 'triangle');
       noteIndex++;
-      nextNoteTime += 0.42;
+      nextNoteTime += BEAT;
     }
     setTimeout(scheduleMusic, 180);
   }
@@ -246,7 +222,7 @@
 
   function toggleMute() {
     musicOn = !musicOn;
-    localStorage.setItem('zipla-kac-muted', musicOn ? '0' : '1');
+    localStorage.setItem('hoopwave-muted', musicOn ? '0' : '1');
     if (musicGain && audioCtx) {
       musicGain.gain.linearRampToValueAtTime(musicOn ? 0.16 : 0, audioCtx.currentTime + 0.1);
     }
@@ -254,10 +230,17 @@
   }
   muteBtn.addEventListener('click', toggleMute);
 
+  // beat-synced flash: peaks right on the beat, decays until the next one
+  function beatPhase() {
+    const t = audioCtx ? audioCtx.currentTime : elapsed;
+    const ph = (t % BEAT) / BEAT;
+    return Math.pow(1 - ph, 3);
+  }
+
   // ---- game state ----
 
   function bestKey() {
-    return 'zipla-kac-best-' + themeId;
+    return 'hoopwave-best-' + themeId;
   }
   function loadBest() {
     return Number(localStorage.getItem(bestKey()) || 0);
@@ -283,13 +266,10 @@
     particles = [];
     speed = BASE_SPEED;
     spawnTimer = 0;
-    spawnInterval = 1.3;
-    elapsed = 0;
-    flapPhase = 0;
-    score = 0;
     level = 0;
-    checkpoint = 0;
-    checkpointReady = false;
+    spawnInterval = BEAT * beatsForLevel(level);
+    elapsed = 0;
+    score = 0;
     best = loadBest();
     scoreEl.textContent = '0';
     bestValueEl.textContent = String(best);
@@ -310,30 +290,33 @@
     if (theme.locomotion === 'free') {
       const bandTopPx = height * theme.bandTop;
       const bandBottomPx = height * theme.bandBottom;
-      const size = 38 + Math.random() * 18;
+      const size = 34 + Math.random() * 16;
       const usable = Math.max(14, (bandBottomPx - bandTopPx) - size);
       const y = bandTopPx + Math.random() * usable;
-      const variant = theme.obstacleSet[Math.random() < 0.5 ? 0 : 1];
-      obstacles.push({ x: width + size, y, w: size, h: size, passed: false, variant });
+      const spike = Math.random() < 0.5;
+      obstacles.push({ x: width + size, y, w: size, h: size, passed: false, spike });
+      if (level >= 3 && Math.random() < 0.3) {
+        const y2 = bandTopPx + Math.random() * usable;
+        obstacles.push({ x: width + size + speed * BEAT * 0.5, y: y2, w: size, h: size, passed: false, spike: !spike });
+      }
       return;
     }
-    const tallChance = Math.min(0.65, 0.35 + level * 0.05);
-    const isTall = Math.random() < tallChance;
-    const w = isTall ? 26 : 32 + Math.random() * 18;
-    const h = isTall ? 60 + Math.random() * 20 : 30 + Math.random() * 16;
-    const variant = theme.obstacleSet[isTall ? 0 : 1];
-    obstacles.push({ x: width + w, y: groundY - h, w, h, passed: false, variant });
+    const isTall = Math.random() < Math.min(0.65, 0.3 + level * 0.06);
+    const w = isTall ? 26 : 34 + Math.random() * 16;
+    const h = isTall ? 56 + Math.random() * 18 : 30 + Math.random() * 14;
+    obstacles.push({ x: width + w, y: groundY - h, w, h, passed: false, spike: isTall });
+    if (level >= 3 && Math.random() < 0.3) {
+      const w2 = 30, h2 = 34 + Math.random() * 14;
+      obstacles.push({ x: width + w + speed * BEAT * 0.55, y: groundY - h2, w: w2, h: h2, passed: false, spike: false });
+    }
   }
 
   function update(dt) {
     elapsed += dt;
-    speed = BASE_SPEED + elapsed * 14 + level * 55;
-    const minInterval = Math.max(0.38, 0.72 - level * 0.06);
-    spawnInterval = Math.max(minInterval, 1.3 - elapsed * 0.01);
+    speed = BASE_SPEED + level * 70 + Math.min(elapsed * 6, 40);
+    spawnInterval = BEAT * beatsForLevel(level);
     farScroll += dt * 18;
-    nearScroll += dt * 46;
     groundScroll += speed * dt;
-    flapPhase += dt * (theme.playerShape === 'bird' ? 12 : theme.playerShape === 'fish' ? 8 : 0);
 
     const isFree = theme.locomotion === 'free';
 
@@ -376,10 +359,8 @@
         const newLevel = Math.floor(score / LEVEL_STEP);
         if (newLevel > level) {
           level = newLevel;
-          checkpoint = level * LEVEL_STEP;
-          checkpointReady = true;
           updateLevelBadge();
-          showToast('🚩 ' + checkpoint + ' puan · Zorluk arttı!');
+          showToast('⚡ Zorluk arttı!');
         }
       }
     }
@@ -401,8 +382,8 @@
           x: player.x + PLAYER_SIZE * 0.2,
           y: player.y + PLAYER_SIZE * 0.5,
           vx: -speed * 0.3 - Math.random() * 30,
-          vy: theme.particleStyle === 'bubble' ? -(30 + Math.random() * 40) : (Math.random() * 20 - 10),
-          life: theme.particleStyle === 'bubble' ? 0.9 : 0.7,
+          vy: Math.random() * 20 - 10,
+          life: 0.7,
           age: 0,
         });
       }
@@ -424,59 +405,6 @@
     particles = particles.filter(p => p.age < p.life);
   }
 
-  function ridgeY(x, offset, baseY, amp) {
-    return baseY
-      - amp * (0.55 + 0.45 * Math.sin((x + offset) * 0.0032))
-      - amp * 0.35 * Math.sin((x + offset) * 0.009 + 1.7);
-  }
-
-  function drawRidge(offset, baseY, amp, color, bottomY) {
-    ctx.beginPath();
-    ctx.moveTo(0, bottomY);
-    for (let x = 0; x <= width; x += 24) {
-      ctx.lineTo(x, ridgeY(x, offset, baseY, amp));
-    }
-    ctx.lineTo(width, bottomY);
-    ctx.closePath();
-    ctx.fillStyle = color;
-    ctx.fill();
-  }
-
-  function drawShimmerLine(offset, baseY, amp, color) {
-    ctx.save();
-    ctx.globalAlpha = 0.55;
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    for (let x = 0; x <= width; x += 20) {
-      const yy = ridgeY(x, offset, baseY, amp);
-      if (x === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
-    }
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawClouds(offset, baseY, amp, color) {
-    ctx.fillStyle = color;
-    const step = 74;
-    const shift = offset % step;
-    for (let x = -step * 2; x <= width + step; x += step) {
-      const cx = x - shift;
-      const cy = baseY + Math.sin((x + offset) * 0.01) * amp * 0.4;
-      const r = amp * 0.55 + 8 * Math.sin((x + offset) * 0.02);
-      const rad = Math.max(10, r);
-      ctx.beginPath();
-      ctx.arc(cx, cy, rad, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(cx + rad * 0.7, cy + rad * 0.2, rad * 0.7, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(cx - rad * 0.6, cy + rad * 0.25, rad * 0.55, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
   function roundRectPath(x, y, w, h, r) {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
@@ -487,288 +415,121 @@
     ctx.closePath();
   }
 
-  function drawOrb() {
-    const ox = width * 0.76, oy = height * 0.2, r = Math.min(width, height) * 0.15;
-
-    if (theme.orbStyle === 'sunbeam') {
-      ctx.save();
-      ctx.globalAlpha = 0.2;
-      ctx.fillStyle = theme.orbColor;
-      for (let i = -1; i <= 1; i++) {
-        ctx.beginPath();
-        ctx.moveTo(ox + i * r * 1.6 - 16, 0);
-        ctx.lineTo(ox + i * r * 1.6 + 16, 0);
-        ctx.lineTo(ox + i * r * 3.6 + 46, height);
-        ctx.lineTo(ox + i * r * 3.6 - 46, height);
-        ctx.closePath();
-        ctx.fill();
-      }
-      ctx.restore();
-      const glow = ctx.createRadialGradient(ox, 0, 0, ox, 0, r * 2.4);
-      glow.addColorStop(0, theme.orbGlow);
-      glow.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, width, height);
-      return;
+  function drawNeonGrid(color, y0, y1, spacing, alpha, offset) {
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 2;
+    const off = offset % spacing;
+    ctx.beginPath();
+    for (let x = -off; x <= width; x += spacing) {
+      ctx.moveTo(x, y0);
+      ctx.lineTo(x, y1);
     }
-
-    const glow = ctx.createRadialGradient(ox, oy, 0, ox, oy, r * 2.2);
-    glow.addColorStop(0, theme.orbGlow);
-    glow.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = glow;
-    ctx.fillRect(0, 0, width, height);
-    ctx.beginPath();
-    ctx.arc(ox, oy, r * 0.55, 0, Math.PI * 2);
-    ctx.fillStyle = theme.orbColor;
-    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
   }
 
-  function drawCreatureObstacle(x, y, w, h, body, shade) {
-    const cx = x + w / 2, cy = y + h / 2;
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, w * 0.5, h * 0.32, 0, 0, Math.PI * 2);
-    ctx.fillStyle = body;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(cx - w * 0.06, cy - h * 0.26);
-    ctx.lineTo(cx + w * 0.14, cy - h * 0.62);
-    ctx.lineTo(cx + w * 0.3, cy - h * 0.2);
-    ctx.closePath();
-    ctx.fillStyle = shade;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(cx - w * 0.46, cy);
-    ctx.lineTo(cx - w * 0.72, cy - h * 0.3);
-    ctx.lineTo(cx - w * 0.72, cy + h * 0.3);
-    ctx.closePath();
-    ctx.fillStyle = shade;
-    ctx.fill();
-  }
-
-  function drawOrbObstacle(x, y, w, h, body, shade) {
-    const cx = x + w / 2, cy = y + h / 2, r = Math.min(w, h) * 0.4;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = body;
-    ctx.fill();
-    ctx.strokeStyle = shade;
+  function drawNeonLine(y, color, glow) {
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = glow;
     ctx.lineWidth = 3;
-    const spikes = 8;
-    for (let i = 0; i < spikes; i++) {
-      const a = (i / spikes) * Math.PI * 2;
-      ctx.beginPath();
-      ctx.moveTo(cx + Math.cos(a) * r * 0.7, cy + Math.sin(a) * r * 0.7);
-      ctx.lineTo(cx + Math.cos(a) * (r + h * 0.3), cy + Math.sin(a) * (r + h * 0.3));
-      ctx.stroke();
-    }
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+    ctx.restore();
   }
 
-  function drawObstacle(o) {
-    const { x, y, w, h } = o;
-    const { shape, body, shade } = o.variant;
+  function drawBackground() {
+    ctx.fillStyle = '#05060b';
+    ctx.fillRect(0, 0, width, height);
 
-    if (shape === 'boulder') {
-      roundRectPath(x, y, w, h, 6);
-      ctx.fillStyle = body;
-      ctx.fill();
-      ctx.fillStyle = shade;
-      ctx.fillRect(x, y + h - 5, w, 5);
-    } else if (shape === 'spike') {
+    const pulse = beatPhase();
+    ctx.save();
+    ctx.globalAlpha = 0.05 + pulse * 0.09;
+    ctx.fillStyle = theme.css.accent;
+    ctx.fillRect(0, 0, width, height);
+    ctx.restore();
+
+    const isFree = theme.locomotion === 'free';
+    const topY = isFree ? height * theme.bandTop : groundY;
+    const botY = isFree ? height * theme.bandBottom : height;
+
+    drawNeonGrid(theme.css.accentDark, topY, botY, 130, 0.12, farScroll);
+    drawNeonGrid(theme.css.accent, topY, botY, 60, 0.16, groundScroll);
+
+    drawNeonLine(topY, theme.css.accent, 8 + pulse * 16);
+    if (isFree) drawNeonLine(botY, theme.css.accent, 8 + pulse * 16);
+  }
+
+  function drawParticles() {
+    ctx.save();
+    ctx.fillStyle = theme.css.accentLight;
+    for (const p of particles) {
+      ctx.globalAlpha = (1 - p.age / p.life) * 0.8;
+      ctx.fillRect(p.x - 2, p.y - 2, 4, 4);
+    }
+    ctx.restore();
+  }
+
+  function drawObstacleNeon(o) {
+    const { x, y, w, h, spike } = o;
+    ctx.save();
+    ctx.shadowColor = theme.css.accent;
+    ctx.shadowBlur = 14;
+    ctx.fillStyle = theme.css.accent;
+    ctx.globalAlpha = 0.22;
+    if (spike) {
       ctx.beginPath();
       ctx.moveTo(x, y + h);
-      ctx.lineTo(x + w * 0.18, y + h * 0.1);
-      ctx.lineTo(x + w * 0.5, y + h * 0.5);
-      ctx.lineTo(x + w * 0.82, y);
+      ctx.lineTo(x + w / 2, y);
       ctx.lineTo(x + w, y + h);
       ctx.closePath();
-      ctx.fillStyle = body;
       ctx.fill();
-      ctx.fillStyle = shade;
-      ctx.fillRect(x, y + h - 4, w, 4);
-    } else if (shape === 'creature') {
-      drawCreatureObstacle(x, y, w, h, body, shade);
-    } else if (shape === 'orb') {
-      drawOrbObstacle(x, y, w, h, body, shade);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = theme.css.accentLight;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    } else {
+      roundRectPath(x, y, w, h, 4);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = theme.css.accentLight;
+      ctx.lineWidth = 2.5;
+      roundRectPath(x, y, w, h, 4);
+      ctx.stroke();
     }
+    ctx.restore();
   }
 
   function drawPlayer() {
     ctx.save();
     ctx.translate(player.x + PLAYER_SIZE / 2, player.y + PLAYER_SIZE / 2);
     ctx.rotate(player.rotation);
-
-    if (theme.playerShape === 'fish') {
-      const tailWag = Math.sin(flapPhase) * 0.35;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, PLAYER_SIZE * 0.5, PLAYER_SIZE * 0.36, 0, 0, Math.PI * 2);
-      ctx.fillStyle = theme.playerBody;
-      ctx.fill();
-      ctx.save();
-      ctx.translate(-PLAYER_SIZE * 0.46, 0);
-      ctx.rotate(tailWag);
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(-PLAYER_SIZE * 0.32, -PLAYER_SIZE * 0.26);
-      ctx.lineTo(-PLAYER_SIZE * 0.32, PLAYER_SIZE * 0.26);
-      ctx.closePath();
-      ctx.fillStyle = theme.playerBody;
-      ctx.fill();
-      ctx.restore();
-      ctx.beginPath();
-      ctx.moveTo(-PLAYER_SIZE * 0.05, -PLAYER_SIZE * 0.34);
-      ctx.lineTo(PLAYER_SIZE * 0.12, -PLAYER_SIZE * 0.55);
-      ctx.lineTo(PLAYER_SIZE * 0.22, -PLAYER_SIZE * 0.3);
-      ctx.closePath();
-      ctx.fillStyle = theme.playerBody;
-      ctx.fill();
-      ctx.fillStyle = theme.playerAccent;
-      ctx.beginPath();
-      ctx.arc(PLAYER_SIZE * 0.24, -PLAYER_SIZE * 0.08, 3.4, 0, Math.PI * 2);
-      ctx.fill();
-    } else if (theme.playerShape === 'bird') {
-      const wingFlap = Math.sin(flapPhase) * 0.8;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, PLAYER_SIZE * 0.42, PLAYER_SIZE * 0.36, 0, 0, Math.PI * 2);
-      ctx.fillStyle = theme.playerBody;
-      ctx.fill();
-      ctx.save();
-      ctx.translate(-PLAYER_SIZE * 0.05, 0);
-      ctx.rotate(wingFlap);
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(-PLAYER_SIZE * 0.58, -PLAYER_SIZE * 0.3);
-      ctx.lineTo(-PLAYER_SIZE * 0.14, PLAYER_SIZE * 0.24);
-      ctx.closePath();
-      ctx.fillStyle = theme.playerBody;
-      ctx.fill();
-      ctx.restore();
-      ctx.beginPath();
-      ctx.moveTo(PLAYER_SIZE * 0.38, -PLAYER_SIZE * 0.08);
-      ctx.lineTo(PLAYER_SIZE * 0.62, 0);
-      ctx.lineTo(PLAYER_SIZE * 0.38, PLAYER_SIZE * 0.1);
-      ctx.closePath();
-      ctx.fillStyle = theme.playerAccent;
-      ctx.fill();
-      ctx.fillStyle = '#fff';
-      ctx.beginPath();
-      ctx.arc(PLAYER_SIZE * 0.18, -PLAYER_SIZE * 0.1, 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = theme.playerAccent;
-      ctx.beginPath();
-      ctx.arc(PLAYER_SIZE * 0.2, -PLAYER_SIZE * 0.1, 2, 0, Math.PI * 2);
-      ctx.fill();
-    } else {
-      roundRectPath(-PLAYER_SIZE / 2, -PLAYER_SIZE / 2, PLAYER_SIZE, PLAYER_SIZE, 10);
-      ctx.fillStyle = theme.playerBody;
-      ctx.fill();
-      ctx.fillStyle = theme.playerAccent;
-      ctx.fillRect(PLAYER_SIZE / 2 - 17, -PLAYER_SIZE / 2 + 9, 6, 6);
-    }
-
-    ctx.restore();
-  }
-
-  function drawGroundScene() {
-    const sky = ctx.createLinearGradient(0, 0, 0, groundY);
-    sky.addColorStop(0, theme.skyStops[0]);
-    sky.addColorStop(0.55, theme.skyStops[1]);
-    sky.addColorStop(1, theme.skyStops[2]);
-    ctx.fillStyle = sky;
-    ctx.fillRect(0, 0, width, groundY);
-
-    drawOrb();
-
-    drawRidge(farScroll, groundY - height * 0.02, height * 0.16, theme.decorFar, groundY + 2);
-    drawRidge(nearScroll, groundY, height * 0.1, theme.decorNear, groundY + 2);
-
-    const groundGrad = ctx.createLinearGradient(0, groundY, 0, height);
-    groundGrad.addColorStop(0, theme.groundTop);
-    groundGrad.addColorStop(1, theme.groundBottom);
-    ctx.fillStyle = groundGrad;
-    ctx.fillRect(0, groundY, width, height - groundY);
-    ctx.fillStyle = theme.groundRim;
-    ctx.fillRect(0, groundY, width, 3);
-
-    ctx.strokeStyle = theme.tick;
-    ctx.lineWidth = 3;
-    const tickOffset = groundScroll % 46;
-    ctx.beginPath();
-    for (let x = -tickOffset; x < width; x += 46) {
-      ctx.moveTo(x, groundY + 14);
-      ctx.lineTo(x + 18, groundY + 14);
-    }
+    ctx.shadowColor = theme.css.accentLight;
+    ctx.shadowBlur = 18;
+    ctx.fillStyle = theme.css.accent;
+    roundRectPath(-PLAYER_SIZE / 2, -PLAYER_SIZE / 2, PLAYER_SIZE, PLAYER_SIZE, 8);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = theme.css.cream;
+    ctx.lineWidth = 2;
+    roundRectPath(-PLAYER_SIZE / 2, -PLAYER_SIZE / 2, PLAYER_SIZE, PLAYER_SIZE, 8);
     ctx.stroke();
-
-    ctx.fillStyle = theme.particle;
-    for (const p of particles) {
-      ctx.globalAlpha = 1 - p.age / p.life;
-      ctx.fillRect(p.x, p.y, 4, 4);
-    }
-    ctx.globalAlpha = 1;
-
-    for (const o of obstacles) drawObstacle(o);
-    drawPlayer();
-  }
-
-  function drawFreeScene() {
-    const sky = ctx.createLinearGradient(0, 0, 0, height);
-    sky.addColorStop(0, theme.skyStops[0]);
-    sky.addColorStop(0.55, theme.skyStops[1]);
-    sky.addColorStop(1, theme.skyStops[2]);
-    ctx.fillStyle = sky;
-    ctx.fillRect(0, 0, width, height);
-
-    drawOrb();
-
-    const bandTopPx = height * theme.bandTop;
-    const bandBottomPx = height * theme.bandBottom;
-
-    if (theme.topDecorStyle === 'cloud') {
-      drawClouds(farScroll, bandTopPx * 0.55, height * 0.065, theme.topDecorColor);
-      drawClouds(nearScroll, bandTopPx * 0.88, height * 0.05, theme.topDecorColor2);
-    } else if (theme.topDecorStyle === 'shimmer') {
-      const glow = ctx.createLinearGradient(0, 0, 0, bandTopPx);
-      glow.addColorStop(0, theme.topDecorColor2);
-      glow.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, width, bandTopPx);
-      drawShimmerLine(farScroll, bandTopPx * 0.92, 6, theme.topDecorColor);
-    }
-
-    if (theme.bottomDecorStyle === 'cloud') {
-      drawClouds(nearScroll, bandBottomPx + (height - bandBottomPx) * 0.3, height * 0.065, theme.bottomDecorColor);
-      drawClouds(farScroll, bandBottomPx + (height - bandBottomPx) * 0.72, height * 0.05, theme.bottomDecorColor2);
-    } else if (theme.bottomDecorStyle === 'coral') {
-      drawRidge(nearScroll, height * 0.98, height * 0.1, theme.bottomDecorColor, height);
-      drawRidge(farScroll, height * 0.92, height * 0.07, theme.bottomDecorColor2, height);
-    }
-
-    ctx.fillStyle = theme.particle;
-    for (const p of particles) {
-      ctx.globalAlpha = 1 - p.age / p.life;
-      if (theme.particleStyle === 'bubble') {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-        ctx.fill();
-      } else if (theme.particleStyle === 'feather') {
-        ctx.beginPath();
-        ctx.ellipse(p.x, p.y, 5, 2.4, p.age * 4, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-    ctx.globalAlpha = 1;
-
-    for (const o of obstacles) drawObstacle(o);
-    drawPlayer();
+    ctx.fillStyle = theme.css.btnInk;
+    ctx.fillRect(PLAYER_SIZE / 2 - 15, -PLAYER_SIZE / 2 + 8, 6, 6);
+    ctx.restore();
   }
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
-    if (theme.locomotion === 'free') {
-      drawFreeScene();
-    } else {
-      drawGroundScene();
-    }
+    drawBackground();
+    drawParticles();
+    for (const o of obstacles) drawObstacleNeon(o);
+    drawPlayer();
   }
 
   let lastTime = null;
@@ -812,39 +573,7 @@
     finalScoreEl.textContent = String(score);
     finalBestEl.textContent = String(best);
     bestValueEl.textContent = String(best);
-    if (checkpointReady) {
-      continueBtn.textContent = 'Devam Et (' + checkpoint + ' puan)';
-      continueBtn.classList.remove('hidden');
-    } else {
-      continueBtn.classList.add('hidden');
-    }
     gameoverScreen.classList.remove('hidden');
-  }
-
-  function continueFromCheckpoint() {
-    if (!checkpointReady) return;
-    checkpointReady = false;
-    score = checkpoint;
-    level = Math.floor(checkpoint / LEVEL_STEP);
-    elapsed = 0;
-    flapPhase = 0;
-    obstacles = [];
-    particles = [];
-    spawnTimer = 0;
-    spawnInterval = 1.3;
-    const isFree = theme.locomotion === 'free';
-    player.x = width * 0.18;
-    player.y = isFree ? freeStartY() : groundY - PLAYER_SIZE;
-    player.vy = 0;
-    player.onGround = !isFree;
-    player.rotation = 0;
-    scoreEl.textContent = String(score);
-    updateLevelBadge();
-    running = true;
-    lastTime = null;
-    startMusic();
-    gameoverScreen.classList.add('hidden');
-    requestAnimationFrame(loop);
   }
 
   function handleInput(e) {
@@ -859,7 +588,6 @@
   window.addEventListener('keydown', handleInput);
   startBtn.addEventListener('click', startGame);
   retryBtn.addEventListener('click', startGame);
-  continueBtn.addEventListener('click', continueFromCheckpoint);
   changeThemeBtn.addEventListener('click', showStartScreen);
 
   resize();

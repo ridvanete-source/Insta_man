@@ -1,7 +1,7 @@
 {
-  "name": "ziplakac-android",
+  "name": "hoopwave-android",
   "version": "1.0.0",
-  "description": "Zıpla Kaç oyununu (../game) Android'e saran Capacitor kabuğu",
+  "description": "Hoopwave oyununu (../game) Android'e saran Capacitor kabuğu",
   "private": true,
   "scripts": {
     "sync": "cap sync android",

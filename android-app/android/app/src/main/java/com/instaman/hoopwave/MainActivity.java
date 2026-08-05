@@ -1,4 +1,4 @@
-package com.instaman.ziplakac;
+package com.instaman.hoopwave;
 
 import com.getcapacitor.BridgeActivity;
 

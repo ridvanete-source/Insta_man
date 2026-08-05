@@ -7,10 +7,10 @@ başka dillere çevirmek istersen aynı yapıyı kullanabilirsin.
 ## Uygulama adı (App name) — maks. 30 karakter
 
 ```
-Zıpla Kaç!
+Hoopwave
 ```
 
-(10 karakter — istersen `Zıpla Kaç! - Kaçış Oyunu` gibi bir alt başlık da
+(8 karakter — istersen `Hoopwave - Kaçış Oyunu` gibi bir alt başlık da
 eklenebilir, 30 karakter sınırının altında kalır.)
 
 ## Kısa açıklama (Short description) — maks. 80 karakter
@@ -24,7 +24,7 @@ eklenebilir, 30 karakter sınırının altında kalır.)
 ## Tam açıklama (Full description) — maks. 4000 karakter
 
 ```
-Zıpla Kaç!, tek dokunuşla oynanan basit ve bağımlılık yapan bir kaçış oyunu. Kayalardan zıpla, köpekbalıklarından kaç ya da avcı kuşların arasından süzül — üç farklı dünyadan birini seç, kendi tarzında oyna.
+Hoopwave, tek dokunuşla oynanan basit ve bağımlılık yapan bir kaçış oyunu. Kayalardan zıpla, köpekbalıklarından kaç ya da avcı kuşların arasından süzül — üç farklı dünyadan birini seç, kendi tarzında oyna.
 
 ÜÇ FARKLI TEMA
 🏜️ Çöl — Gün batımında kayalardan ve sivri kayalıklardan zıplayarak kaç.
@@ -44,10 +44,10 @@ Ekrana dokun (ya da boşluk tuşuna bas) — o kadar. Çöl temasında zıplars�
 • Tamamen çevrimdışı çalışır — internet gerekmez
 • Reklam yok, hesap yok, veri toplama yok
 
-Zıpla Kaç! tamamen cihazında çalışır; hiçbir kişisel veri toplamaz ya da göndermez.
+Hoopwave tamamen cihazında çalışır; hiçbir kişisel veri toplamaz ya da göndermez.
 ```
 
-(1083 karakter)
+(~1079 karakter)
 
 ## Kategori önerisi
 

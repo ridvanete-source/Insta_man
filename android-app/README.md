@@ -1,4 +1,4 @@
-# Zıpla Kaç — Android (Google Play) paketi
+# Hoopwave — Android (Google Play) paketi
 
 `../game` klasöründeki HTML5 oyununu, [Capacitor](https://capacitorjs.com/) ile
 gerçek bir Android uygulamasına saran proje. Oyun tamamen çevrimdışı çalıştığı
@@ -49,8 +49,8 @@ doğrudan test edebilirsin.
 1. **İmzalama anahtarı oluştur** (yalnızca bir kez, sonsuza kadar sakla —
    kaybedersen uygulamayı bir daha güncelleyemezsin):
    ```bash
-   keytool -genkey -v -keystore ziplakac-release.keystore \
-     -alias ziplakac -keyalg RSA -keysize 2048 -validity 10000
+   keytool -genkey -v -keystore hoopwave-release.keystore \
+     -alias hoopwave -keyalg RSA -keysize 2048 -validity 10000
    ```
    Bu dosyayı **asla** git'e commit'leme (`.gitignore`'da zaten hariç
    tutuldu). Şifreleyip güvenli bir yerde (parola yöneticisi, harici disk)
@@ -60,8 +60,8 @@ doğrudan test edebilirsin.
    ```properties
    storePassword=***
    keyPassword=***
-   keyAlias=ziplakac
-   storeFile=../../ziplakac-release.keystore
+   keyAlias=hoopwave
+   storeFile=../../hoopwave-release.keystore
    ```
 
 3. Android Studio'da **Build → Generate Signed Bundle / APK → Android App
@@ -76,7 +76,7 @@ dosya budur (`.apk` değil, Play artık `.aab` istiyor).
 
 1. [Google Play Console](https://play.google.com/console) hesabı aç (tek
    seferlik 25$ kayıt ücreti).
-2. Yeni uygulama oluştur, paket adını gir: **`com.instaman.ziplakac`**
+2. Yeni uygulama oluştur, paket adını gir: **`com.instaman.hoopwave`**
    ⚠️ Bu paket adı ilk yüklemeden sonra **değiştirilemez** — yayınlamadan
    önce `android-app/capacitor.config.json` ve
    `android/app/build.gradle` içindeki `applicationId`'i istediğin gibi
