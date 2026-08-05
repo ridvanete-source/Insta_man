@@ -244,9 +244,9 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-05T17:43:30.737886+00:00'
+  platform_post_id: '3957172927678084860'
   error: null
 - id: 2026-08-06-turkish-tea
   caption: Sohbetin en güzel eşlikçisi, bir bardak çay.
