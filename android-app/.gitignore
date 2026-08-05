@@ -1,0 +1,19 @@
+# Node
+node_modules/
+
+# Capacitor generates this by copying ../game on every `npx cap sync`
+android/app/src/main/assets/public/
+
+# Android / Gradle build output
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+android/captures/
+android/*.iml
+android/.idea/
+
+# Signing keystore — never commit this
+*.keystore
+*.jks
+key.properties

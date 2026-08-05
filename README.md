@@ -24,3 +24,11 @@ python -m insta_man.cli run     # publishes whatever is due now
 ```bash
 pytest
 ```
+
+## Diğer
+
+- [`game/`](./game) — bağımsız, tarayıcı tabanlı bir HTML5 oyunu (Instagram
+  otomasyonundan ayrı, ilgisiz).
+- [`android-app/`](./android-app) — `game/`'i Google Play'e çıkarmak için
+  Capacitor ile sarılmış Android projesi; kurulum ve yayınlama adımları
+  için `android-app/README.md`'ye bak.

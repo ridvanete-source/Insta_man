@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Hoopwave</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game"></canvas>
+
+    <div id="hud">
+      <div id="score-block">
+        <div id="score">0</div>
+        <div id="level-badge">Seviye 1</div>
+      </div>
+      <div class="hud-right">
+        <button id="mute-btn" class="icon-btn" type="button" aria-label="Sesi kapat/aç">🔊</button>
+        <div id="best">
+          <span class="label">En İyi</span>
+          <span class="value" id="best-value">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <div id="start-screen" class="overlay">
+      <div class="card">
+        <span class="eyebrow" id="theme-eyebrow">Çöl Koşusu</span>
+        <h1>Hoopwave</h1>
+        <p id="theme-desc">Ekrana dokun ya da <b>boşluk</b> tuşuna bas, kayalardan zıplayarak kaç.</p>
+
+        <div class="theme-picker" id="theme-picker"></div>
+
+        <button class="primary" id="start-btn">Başla</button>
+      </div>
+    </div>
+
+    <div id="gameover-screen" class="overlay hidden">
+      <div class="card">
+        <span class="eyebrow">Koşu Bitti</span>
+        <h1 id="gameover-title">Toza Yenildin</h1>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-label">Skor</div>
+            <div class="stat-value" id="final-score">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">En İyi</div>
+            <div class="stat-value" id="final-best">0</div>
+          </div>
+        </div>
+        <button class="primary" id="retry-btn">Baştan Başla</button>
+        <button class="ghost-btn" id="change-theme-btn">Temayı değiştir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
