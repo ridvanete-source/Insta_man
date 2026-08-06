@@ -263,9 +263,9 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-06T06:43:32.576208+00:00'
+  platform_post_id: '3957565525840261305'
   error: null
 - id: 2026-08-06-wax-museum-figure
   caption: Müzede zamanı durdurmuş bir an.
