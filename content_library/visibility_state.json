@@ -2,7 +2,7 @@
   "last_reshare_at": "2026-08-06T23:43:08.625358+00:00",
   "posts": {
     "3952056379292300705": {
-      "comment_count": 1,
+      "comment_count": 2,
       "history": [
         {
           "at": "2026-08-03T13:50:14.321449+00:00",
@@ -373,14 +373,19 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 1,
           "like_count": 53
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 2,
+          "like_count": 54
         }
       ],
       "id": "2026-07-29-city-sunset",
       "last_reshared_at": "2026-08-03T13:50:14.321449+00:00",
-      "like_count": 53
+      "like_count": 54
     },
     "3952572486168110805": {
-      "comment_count": 0,
+      "comment_count": 1,
       "history": [
         {
           "at": "2026-08-03T13:50:14.321449+00:00",
@@ -751,11 +756,16 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 0,
           "like_count": 43
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 1,
+          "like_count": 44
         }
       ],
       "id": "2026-07-30-istiklal-caddesi-repost",
       "last_reshared_at": "2026-08-04T10:43:08.239121+00:00",
-      "like_count": 43
+      "like_count": 44
     },
     "3952683682057730971": {
       "comment_count": 1,
@@ -1127,6 +1137,11 @@
         },
         {
           "at": "2026-08-07T18:43:08.725608+00:00",
+          "comment_count": 1,
+          "like_count": 42
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
           "comment_count": 1,
           "like_count": 42
         }
@@ -1507,6 +1522,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 2,
           "like_count": 46
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 2,
+          "like_count": 46
         }
       ],
       "id": "2026-07-31-aurora-sandnes-norway",
@@ -1885,6 +1905,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 0,
           "like_count": 36
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 0,
+          "like_count": 36
         }
       ],
       "id": "2026-08-01-golden-morning-meadow",
@@ -2260,6 +2285,11 @@
         },
         {
           "at": "2026-08-07T18:43:08.725608+00:00",
+          "comment_count": 2,
+          "like_count": 24
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
           "comment_count": 2,
           "like_count": 24
         }
@@ -2640,6 +2670,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 7,
           "like_count": 24
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 7,
+          "like_count": 24
         }
       ],
       "id": "2026-08-01-grenoble-corner",
@@ -3017,6 +3052,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 2,
           "like_count": 15
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 2,
+          "like_count": 15
         }
       ],
       "id": "2026-08-02-cozy-coffee-window",
@@ -3374,6 +3414,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 1,
           "like_count": 29
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 1,
+          "like_count": 29
         }
       ],
       "id": "2026-08-03-mountain-lake-reflection",
@@ -3714,6 +3759,11 @@
         },
         {
           "at": "2026-08-07T18:43:08.725608+00:00",
+          "comment_count": 0,
+          "like_count": 26
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
           "comment_count": 0,
           "like_count": 26
         }
@@ -4058,6 +4108,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 0,
           "like_count": 31
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 0,
+          "like_count": 31
         }
       ],
       "id": "2026-08-04-santorini-blue-dome",
@@ -4370,6 +4425,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 1,
           "like_count": 10
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 1,
+          "like_count": 10
         }
       ],
       "id": "2026-08-05-cozy-pastry-breakfast",
@@ -4627,6 +4687,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 0,
           "like_count": 9
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 0,
+          "like_count": 9
         }
       ],
       "id": "2026-08-05-rainy-istanbul-window",
@@ -4819,6 +4884,11 @@
           "at": "2026-08-07T18:43:08.725608+00:00",
           "comment_count": 3,
           "like_count": 8
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
+          "comment_count": 3,
+          "like_count": 8
         }
       ],
       "id": "2026-08-06-turkish-tea",
@@ -4954,6 +5024,11 @@
         },
         {
           "at": "2026-08-07T18:43:08.725608+00:00",
+          "comment_count": 0,
+          "like_count": 3
+        },
+        {
+          "at": "2026-08-07T19:43:08.534433+00:00",
           "comment_count": 0,
           "like_count": 3
         }
