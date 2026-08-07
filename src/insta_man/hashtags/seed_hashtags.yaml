@@ -77,7 +77,7 @@ beauty:
 
 petcare:
   mega: ["dog", "cat", "petsofinstagram", "pets"]
-  medium: ["doglover", "catlover", "dogsofinstagram", "catsofinstagram"]
+  medium: ["doglover", "catlover", "catsofinstagram"]
   niche: ["rescuedog", "dogtraining", "catcafe"]
 
 homedecor:
