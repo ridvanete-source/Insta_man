@@ -341,9 +341,9 @@
   max_hashtags: null
   target: feed
   source_credit: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-09T10:06:49.971330+00:00'
+  platform_post_id: '3959842228360499557'
   error: null
 - id: 2026-08-07-tokyo-neon-street
   caption: Neon ışıklar, sonsuz hareket — Tokyo gece hiç uyumuyor.
