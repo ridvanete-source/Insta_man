@@ -15,21 +15,6 @@
   published_at: '2026-07-29T16:17:50.037995+00:00'
   platform_post_id: '3952056379292300705'
   error: null
-- id: 2026-07-29-fener-halftime-story
-  caption: 'İlk yarı: Gornik Zabrze 1 - 1 Fenerbahçe'
-  media:
-  - path: content_library/media/fener-halftime-2026-07-29.jpg
-    type: image
-  scheduled_at: '2026-07-29T22:09:03+03:00'
-  topics: []
-  extra_hashtags: []
-  max_hashtags: null
-  target: story
-  source_credit: null
-  status: posted
-  published_at: '2026-07-29T19:09:47.472807+00:00'
-  platform_post_id: '3952142998833648030'
-  error: null
 - id: 2026-07-30-istiklal-caddesi-repost
   caption: Bayraklar, tramvay, kalabalık — İstiklal Caddesi.
   media:
