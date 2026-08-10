@@ -1,7 +1,7 @@
 - id: 2026-07-29-city-sunset
   caption: Gökyüzü alev alev, sokak sessiz.
   media:
-  - path: content_library/media/city-sunset-toronto.jpg
+  - path: content_library/media/sent/city-sunset-toronto.jpg
     type: image
   scheduled_at: '2026-07-29T19:00:00+03:00'
   topics:
@@ -33,7 +33,7 @@
 - id: 2026-07-30-istiklal-caddesi-repost
   caption: Bayraklar, tramvay, kalabalık — İstiklal Caddesi.
   media:
-  - path: content_library/media/istiklal-caddesi-taksim.jpg
+  - path: content_library/media/sent/istiklal-caddesi-taksim.jpg
     type: image
   scheduled_at: '2026-07-30T12:20:49+03:00'
   topics:
@@ -53,7 +53,7 @@
 - id: 2026-07-30-newyork-chrysler-crossing
   caption: Herkesin bir yere yetişme telaşı var.
   media:
-  - path: content_library/media/newyork-chrysler-crossing.jpg
+  - path: content_library/media/sent/newyork-chrysler-crossing.jpg
     type: image
   scheduled_at: '2026-07-30T16:00:00+03:00'
   topics:
@@ -73,7 +73,7 @@
 - id: 2026-07-31-aurora-sandnes-norway
   caption: Gökyüzü bazen kelimelerden daha güzel konuşur.
   media:
-  - path: content_library/media/aurora-sandnes-norway.jpg
+  - path: content_library/media/sent/aurora-sandnes-norway.jpg
     type: image
   scheduled_at: '2026-07-31T15:00:00+03:00'
   topics:
@@ -93,7 +93,7 @@
 - id: 2026-08-01-ocean-waves-sunset
   caption: Gün biterken deniz en güzel rengini takınıyor.
   media:
-  - path: content_library/media/ocean-waves-sunset.jpg
+  - path: content_library/media/sent/ocean-waves-sunset.jpg
     type: image
   scheduled_at: '2026-08-01T19:30:00+03:00'
   topics:
@@ -113,7 +113,7 @@
 - id: 2026-08-02-cozy-coffee-window
   caption: Günün ilk yudumu, en güzel başlangıç. Günaydın!
   media:
-  - path: content_library/media/cozy-coffee-window.jpg
+  - path: content_library/media/sent/cozy-coffee-window.jpg
     type: image
   scheduled_at: '2026-08-02T09:00:00+03:00'
   topics:
@@ -132,7 +132,7 @@
 - id: 2026-08-03-mountain-lake-reflection
   caption: Dağlar suya, gün ışığı huzura karışıyor.
   media:
-  - path: content_library/media/mountain-lake-reflection.jpg
+  - path: content_library/media/sent/mountain-lake-reflection.jpg
     type: image
   scheduled_at: '2026-08-03T20:00:00+03:00'
   topics:
@@ -152,7 +152,7 @@
 - id: 2026-08-04-cat-morning-stretch
   caption: Gerinme vakti, güne enerjik başlamalı. Günaydın!
   media:
-  - path: content_library/media/cat-morning-stretch.jpg
+  - path: content_library/media/sent/cat-morning-stretch.jpg
     type: image
   scheduled_at: '2026-08-04T09:00:00+03:00'
   topics:
@@ -171,7 +171,7 @@
 - id: 2026-08-04-santorini-blue-dome
   caption: Beyaz duvarlar, mavi kubbeler, sonsuz deniz.
   media:
-  - path: content_library/media/santorini-blue-dome.jpg
+  - path: content_library/media/sent/santorini-blue-dome.jpg
     type: image
   scheduled_at: '2026-08-04T20:00:00+03:00'
   topics:
@@ -191,7 +191,7 @@
 - id: 2026-08-01-golden-morning-meadow
   caption: Güneş doğdu, gün yeniden başlıyor. Günaydın!
   media:
-  - path: content_library/media/golden-morning-meadow.jpg
+  - path: content_library/media/sent/golden-morning-meadow.jpg
     type: image
   scheduled_at: '2026-08-01T09:00:00+03:00'
   topics:
@@ -230,7 +230,7 @@
 - id: 2026-08-05-rainy-istanbul-window
   caption: Bu sabah yağmur var İstanbul'da.
   media:
-  - path: content_library/media/rainy-istanbul-window.jpg
+  - path: content_library/media/sent/rainy-istanbul-window.jpg
     type: image
   scheduled_at: '2026-08-05T20:00:00+03:00'
   topics:
@@ -251,7 +251,7 @@
 - id: 2026-08-06-turkish-tea
   caption: Sohbetin en güzel eşlikçisi, bir bardak çay.
   media:
-  - path: content_library/media/turkish-tea.jpg
+  - path: content_library/media/sent/turkish-tea.jpg
     type: image
   scheduled_at: '2026-08-06T09:00:00+03:00'
   topics:
@@ -270,7 +270,7 @@
 - id: 2026-08-06-wax-museum-figure
   caption: Müzede zamanı durdurmuş bir an.
   media:
-  - path: content_library/media/wax-museum-figure.jpg
+  - path: content_library/media/sent/wax-museum-figure.jpg
     type: image
   scheduled_at: '2026-08-06T20:00:00+03:00'
   topics:
@@ -289,7 +289,7 @@
 - id: 2026-08-01-grenoble-corner
   caption: Dar sokaklar, sarı cepheler — bir Fransız köşe başı.
   media:
-  - path: content_library/media/grenoble.jpg
+  - path: content_library/media/sent/grenoble.jpg
     type: image
   scheduled_at: '2026-08-01T19:00:00+03:00'
   topics:
@@ -309,7 +309,7 @@
 - id: 2026-08-05-cozy-pastry-breakfast
   caption: Sıcak bir çörek, bir fincan kahve — güne böyle başlanır. Günaydın!
   media:
-  - path: content_library/media/cozy-pastry-breakfast.jpg
+  - path: content_library/media/sent/cozy-pastry-breakfast.jpg
     type: image
   scheduled_at: '2026-08-05T09:00:00+03:00'
   topics:
@@ -328,7 +328,7 @@
 - id: 2026-08-07-morning-jog-sunrise
   caption: Güneş doğarken atılan adımlar en hafif geliyor.
   media:
-  - path: content_library/media/morning-jog-sunrise.jpg
+  - path: content_library/media/sent/morning-jog-sunrise.jpg
     type: image
   scheduled_at: '2026-08-09T13:00:00+03:00'
   topics:
