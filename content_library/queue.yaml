@@ -11,6 +11,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-07-29T16:17:50.037995+00:00'
   platform_post_id: '3952056379292300705'
@@ -31,6 +32,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-07-30T09:23:11.870736+00:00'
   platform_post_id: '3952572486168110805'
@@ -51,6 +53,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-07-30T13:04:11.160678+00:00'
   platform_post_id: '3952683682057730971'
@@ -71,6 +74,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-07-31T13:02:47.629386+00:00'
   platform_post_id: '3953407774780273003'
@@ -91,6 +95,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-01T17:35:15.689121+00:00'
   platform_post_id: '3954269679539355895'
@@ -110,6 +115,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-02T08:48:14.996126+00:00'
   platform_post_id: '3954729198602035421'
@@ -130,6 +136,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-03T17:43:44.301639+00:00'
   platform_post_id: '3955723472256644513'
@@ -149,6 +156,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-04T06:43:32.322515+00:00'
   platform_post_id: '3956115991264066551'
@@ -169,6 +177,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-04T17:43:31.466385+00:00'
   platform_post_id: '3956448165393702218'
@@ -188,6 +197,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-01T06:00:32.809329+00:00'
   platform_post_id: '3953920011420700871'
@@ -208,6 +218,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -229,6 +240,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-05T17:43:30.737886+00:00'
   platform_post_id: '3957172927678084860'
@@ -248,6 +260,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-06T06:43:32.576208+00:00'
   platform_post_id: '3957565525840261305'
@@ -267,6 +280,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-06T17:43:34.368242+00:00'
   platform_post_id: '3957897721453167282'
@@ -287,6 +301,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-01T17:35:37.719766+00:00'
   platform_post_id: '3954269871202244880'
@@ -306,6 +321,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-05T06:43:30.243725+00:00'
   platform_post_id: '3956840746443285785'
@@ -326,6 +342,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: posted
   published_at: '2026-08-09T10:06:49.971330+00:00'
   platform_post_id: '3959842228360499557'
@@ -346,6 +363,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -366,6 +384,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -386,6 +405,7 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  location: null
   status: pending
   published_at: null
   platform_post_id: null
@@ -532,9 +552,10 @@
   max_hashtags: null
   target: feed
   source_credit: ewwel3
-  status: pending
-  published_at: null
-  platform_post_id: null
+  location: null
+  status: posted
+  published_at: '2026-08-10T10:00:43.561454+00:00'
+  platform_post_id: '3960563800381913917'
   error: null
 - id: 2026-08-10-highway-sunset-rays-story
   caption: Yol bitmiyor ama gökyüzü bazen buna değer.
@@ -547,7 +568,8 @@
   max_hashtags: null
   target: story
   source_credit: ewwel3
-  status: pending
-  published_at: null
-  platform_post_id: null
+  location: null
+  status: posted
+  published_at: '2026-08-10T10:01:06.623498+00:00'
+  platform_post_id: '3960564070126087787'
   error: null
