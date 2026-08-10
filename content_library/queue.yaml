@@ -212,7 +212,7 @@
   media:
   - path: content_library/media/white-persian-cat.jpg
     type: image
-  scheduled_at: '2026-08-13T13:00:00+03:00'
+  scheduled_at: '2026-08-14T13:00:00+03:00'
   topics:
   - lifestyle
   extra_hashtags:
@@ -350,7 +350,7 @@
   media:
   - path: content_library/media/tokyo-neon-street.jpg
     type: image
-  scheduled_at: '2026-08-10T13:00:00+03:00'
+  scheduled_at: '2026-08-11T13:00:00+03:00'
   topics:
   - city
   - travel
@@ -370,7 +370,7 @@
   media:
   - path: content_library/media/sunlit-reading-nook.jpg
     type: image
-  scheduled_at: '2026-08-11T13:00:00+03:00'
+  scheduled_at: '2026-08-12T13:00:00+03:00'
   topics:
   - art
   - homedecor
@@ -390,7 +390,7 @@
   media:
   - path: content_library/media/sahara-desert-dunes.jpg
     type: image
-  scheduled_at: '2026-08-12T13:00:00+03:00'
+  scheduled_at: '2026-08-13T13:00:00+03:00'
   topics:
   - nature
   - travel
@@ -410,7 +410,7 @@
   media:
   - path: content_library/media/malli_koy1.jpg
     type: image
-  scheduled_at: '2026-08-14T13:00:00+03:00'
+  scheduled_at: '2026-08-15T13:00:00+03:00'
   topics:
   - nature
   - travel
@@ -430,7 +430,7 @@
   media:
   - path: content_library/media/malli_koy3.jpg
     type: image
-  scheduled_at: '2026-08-15T13:00:00+03:00'
+  scheduled_at: '2026-08-16T13:00:00+03:00'
   topics:
   - nature
   - lifestyle
@@ -450,7 +450,7 @@
   media:
   - path: content_library/media/malli_koy4.jpg
     type: image
-  scheduled_at: '2026-08-16T13:00:00+03:00'
+  scheduled_at: '2026-08-17T13:00:00+03:00'
   topics:
   - nature
   - photography
@@ -470,7 +470,7 @@
   media:
   - path: content_library/media/malli_koy_modu.jpg
     type: image
-  scheduled_at: '2026-08-17T13:00:00+03:00'
+  scheduled_at: '2026-08-18T13:00:00+03:00'
   topics:
   - homedecor
   - nature
@@ -490,7 +490,7 @@
   media:
   - path: content_library/media/malli_koy_narcicegi.jpg
     type: image
-  scheduled_at: '2026-08-18T13:00:00+03:00'
+  scheduled_at: '2026-08-19T13:00:00+03:00'
   topics:
   - nature
   - photography
@@ -510,7 +510,7 @@
   media:
   - path: content_library/media/malli_koy2.jpg
     type: image
-  scheduled_at: '2026-08-19T13:00:00+03:00'
+  scheduled_at: '2026-08-20T13:00:00+03:00'
   topics:
   - nature
   - travel
@@ -521,6 +521,41 @@
   max_hashtags: null
   target: feed
   source_credit: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-10-highway-sunset-rays
+  caption: Yol bitmiyor ama gökyüzü bazen buna değer.
+  media:
+  - path: content_library/media/ewwel3.jpeg
+    type: image
+  scheduled_at: '2026-08-10T13:00:00+03:00'
+  topics:
+  - nature
+  - travel
+  extra_hashtags:
+  - sunset
+  - sky
+  - roadtrip
+  max_hashtags: null
+  target: feed
+  source_credit: ewwel3
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
+- id: 2026-08-10-highway-sunset-rays-story
+  caption: Yol bitmiyor ama gökyüzü bazen buna değer.
+  media:
+  - path: content_library/media/ewwel3.jpeg
+    type: image
+  scheduled_at: '2026-08-10T13:00:00+03:00'
+  topics: []
+  extra_hashtags: []
+  max_hashtags: null
+  target: story
+  source_credit: ewwel3
   status: pending
   published_at: null
   platform_post_id: null
