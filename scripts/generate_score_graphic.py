@@ -50,26 +50,30 @@ SILVER = (196, 202, 214)
 
 W, H = 1080, 1920
 MARGIN = 90
-FONT_DIR = Path("C:/Windows/Fonts")
 ASSETS_DIR = Path(__file__).parent / "assets"
+FONT_DIR = ASSETS_DIR / "fonts"
 FENER_LOGO = ASSETS_DIR / "fenerbahce_logo.png"
+
+# Bundled font (not the OS's) so this also runs on non-Windows machines,
+# e.g. a cloud sandbox with no C:/Windows/Fonts.
+BOLD_FONT = FONT_DIR / "Montserrat-Bold.ttf"
 
 
 def _font(name: str, size: int) -> ImageFont.FreeTypeFont:
-    return ImageFont.truetype(str(FONT_DIR / name), size)
+    return ImageFont.truetype(str(name), size)
 
 
-def _fit_font(draw: ImageDraw.ImageDraw, text: str, font_name: str, max_width: int,
+def _fit_font(draw: ImageDraw.ImageDraw, text: str, font_path: Path, max_width: int,
               start_size: int, min_size: int = 20) -> ImageFont.FreeTypeFont:
     """Shrink the font until `text` fits max_width - competition/season
     labels vary a lot in length, so this can't be a fixed size."""
     size = start_size
     while size > min_size:
-        font = _font(font_name, size)
+        font = _font(font_path, size)
         if draw.textlength(text, font=font) <= max_width:
             return font
         size -= 2
-    return _font(font_name, min_size)
+    return _font(font_path, min_size)
 
 
 def _paste_logo(img: Image.Image, path: Path, center: tuple[int, int], size: int) -> None:
@@ -135,10 +139,10 @@ def generate(
     img = _build_background(background)
     draw = ImageDraw.Draw(img, "RGBA")
 
-    label_font = _fit_font(draw, competition_label.upper(), "segoeuib.ttf", W - 2 * MARGIN, start_size=34)
+    label_font = _fit_font(draw, competition_label.upper(), BOLD_FONT, W - 2 * MARGIN, start_size=34)
     draw.text((MARGIN, 120), competition_label.upper(), font=label_font, fill=WHITE)
 
-    title_font = _font("segoeuib.ttf", 108)
+    title_font = _font(BOLD_FONT, 108)
     draw.text((MARGIN, 175), "MAÇ SONUCU", font=title_font, fill=YELLOW)
 
     _gradient_bar(img, MARGIN, W - MARGIN, 340, 6)
@@ -155,8 +159,8 @@ def generate(
     if opponent_logo and opponent_logo.exists():
         _paste_logo(img, opponent_logo, (right_logo_x, row_y), size=logo_size)
 
-    score_font = _font("segoeuib.ttf", 130)
-    vs_font = _font("segoeuib.ttf", 56)
+    score_font = _font(BOLD_FONT, 130)
+    vs_font = _font(BOLD_FONT, 56)
 
     left_text, right_text = str(fener_score), str(opponent_score)
     left_w = draw.textlength(left_text, font=score_font)
