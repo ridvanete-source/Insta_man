@@ -89,7 +89,7 @@ def _build_background(background: Path | None) -> Image.Image:
         y = (photo.height - H) // 2
         photo = photo.crop((x, y, x + W, y + H))
         base = photo.convert("RGBA")
-        tint = Image.new("RGBA", (W, H), (*NAVY, 210))
+        tint = Image.new("RGBA", (W, H), (*NAVY, 175))
         return Image.alpha_composite(base, tint)
 
     gradient = Image.new("RGB", (W, H), NAVY)
@@ -145,7 +145,7 @@ def generate(
 
     # --- Score row: [Fenerbahce logo]  score  VS  score  [opponent logo] ---
     row_y = 900
-    _dark_band(img, y_center=row_y, half_height=200, max_alpha=210)
+    _dark_band(img, y_center=row_y, half_height=190, max_alpha=150)
     logo_size = 230
     left_logo_x = MARGIN + logo_size // 2
     right_logo_x = W - MARGIN - logo_size // 2
