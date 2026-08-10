@@ -89,7 +89,7 @@ def _build_background(background: Path | None) -> Image.Image:
         y = (photo.height - H) // 2
         photo = photo.crop((x, y, x + W, y + H))
         base = photo.convert("RGBA")
-        tint = Image.new("RGBA", (W, H), (*NAVY, 175))
+        tint = Image.new("RGBA", (W, H), (*NAVY, 210))
         return Image.alpha_composite(base, tint)
 
     gradient = Image.new("RGB", (W, H), NAVY)
@@ -100,6 +100,18 @@ def _build_background(background: Path | None) -> Image.Image:
         b = round(NAVY_DARK[2] + (NAVY[2] - NAVY_DARK[2]) * t)
         ImageDraw.Draw(gradient).line([(0, y), (W, y)], fill=(r, g, b))
     return gradient.convert("RGBA")
+
+
+def _dark_band(img: Image.Image, y_center: int, half_height: int, max_alpha: int) -> None:
+    """Soft horizontal darkening band so the score row stays legible over a
+    busy background photo, regardless of what's behind it."""
+    band = Image.new("RGBA", (W, half_height * 2), (0, 0, 0, 0))
+    bdraw = ImageDraw.Draw(band)
+    for i in range(half_height * 2):
+        d = abs(i - half_height) / half_height
+        alpha = round(max_alpha * max(0.0, 1 - d))
+        bdraw.line([(0, i), (W, i)], fill=(0, 0, 0, alpha))
+    img.alpha_composite(band, (0, y_center - half_height))
 
 
 def _gradient_bar(img: Image.Image, x0: int, x1: int, y: int, height: int) -> None:
@@ -133,6 +145,7 @@ def generate(
 
     # --- Score row: [Fenerbahce logo]  score  VS  score  [opponent logo] ---
     row_y = 900
+    _dark_band(img, y_center=row_y, half_height=200, max_alpha=210)
     logo_size = 230
     left_logo_x = MARGIN + logo_size // 2
     right_logo_x = W - MARGIN - logo_size // 2
