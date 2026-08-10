@@ -12,5 +12,10 @@
   max_hashtags: 25              # optional override of INSTA_MAN_MAX_HASHTAGS
   target: feed                  # feed | story - story is instagrapi-only, ignores caption/hashtags
   source_credit: null            # original creator's @handle if this is a permitted reshare -
-                                  # appended to the caption automatically as "via @handle"
+                                  # appended to the caption automatically as "via @handle", and
+                                  # (instagrapi backend only) applied as a real tag: a photo
+                                  # usertag on feed posts, a mention sticker on Story posts
+  location: null                  # free-text place name (instagrapi backend only) - resolved to
+                                  # a real Instagram Location via search at publish time, e.g.
+                                  # "Çanakkale, Çan, Mallı Köy"; posts without a match if not found
   status: pending                # pending | publishing | posted | failed | skipped

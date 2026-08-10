@@ -52,7 +52,13 @@ class ContentPost:
     source_credit: str | None = None
     """Original creator's @handle, when this post is a reshare of someone
     else's content the creator gave permission to repost. Appended to the
-    caption automatically so credit is never dropped."""
+    caption automatically so credit is never dropped, and (instagrapi backend
+    only) applied as a real Instagram tag - a photo usertag on feed posts, a
+    mention sticker on Story posts."""
+    location: str | None = None
+    """Free-text place name to attach as an Instagram location tag
+    (instagrapi backend only) - resolved to a real Location via IG's search
+    at publish time, e.g. "Çanakkale, Çan, Mallı Köy"."""
     status: PostStatus = PostStatus.PENDING
     published_at: datetime | None = None
     platform_post_id: str | None = None

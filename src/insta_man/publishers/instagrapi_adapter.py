@@ -106,20 +106,66 @@ class InstagrapiPublisher(BasePublisher):
             if post.target == PostTarget.STORY:
                 return self._publish_story(client, post)
 
+            usertags = self._build_usertags(client, post)
+            location = self._resolve_location(client, post.location)
+
             if len(post.media) > 1:
                 paths = [m.path for m in post.media]
-                result = client.album_upload(paths, caption_with_hashtags)
+                result = client.album_upload(
+                    paths, caption_with_hashtags, usertags=usertags, location=location
+                )
             else:
                 media = post.media[0]
                 if media.media_type == MediaType.REEL:
-                    result = client.clip_upload(media.path, caption_with_hashtags)
+                    result = client.clip_upload(
+                        media.path, caption_with_hashtags, usertags=usertags, location=location
+                    )
                 elif media.media_type == MediaType.VIDEO:
-                    result = client.video_upload(media.path, caption_with_hashtags)
+                    result = client.video_upload(
+                        media.path, caption_with_hashtags, usertags=usertags, location=location
+                    )
                 else:
-                    result = client.photo_upload(media.path, caption_with_hashtags)
+                    result = client.photo_upload(
+                        media.path, caption_with_hashtags, usertags=usertags, location=location
+                    )
             return PublishResult(success=True, platform_post_id=str(result.pk))
         except Exception as exc:  # instagrapi raises many distinct exception types
             return PublishResult(success=False, error=str(exc))
+
+    def _build_usertags(self, client, post: ContentPost) -> list:
+        """Real tap-to-reveal photo tags for feed posts (not caption text -
+        that credit line is added separately in runner.py)."""
+        from instagrapi.types import Usertag
+
+        if not post.source_credit:
+            return []
+        user = self._resolve_user_short(client, post.source_credit)
+        if user is None:
+            return []
+        return [Usertag(user=user, x=0.5, y=0.9)]
+
+    def _resolve_user_short(self, client, username: str):
+        from instagrapi.types import UserShort
+
+        try:
+            user_id = client.user_id_from_username(username.lstrip("@"))
+            return UserShort(pk=str(user_id), username=username.lstrip("@"))
+        except Exception:
+            logger.warning("Could not resolve Instagram user @%s for tagging", username, exc_info=True)
+            return None
+
+    def _resolve_location(self, client, location_name: str | None):
+        if not location_name:
+            return None
+        try:
+            candidates = client.location_search_name(location_name)
+            if not candidates:
+                logger.warning("No Instagram location match for %r, posting without a location tag", location_name)
+                return None
+            return client.location_complete(candidates[0])
+        except Exception:
+            logger.warning("Location lookup failed for %r, posting without a location tag", location_name, exc_info=True)
+            return None
 
     def reshare_to_story(self, media: MediaItem) -> str:
         """Reshare an existing feed post to Story by re-uploading its original file.
@@ -148,9 +194,23 @@ class InstagrapiPublisher(BasePublisher):
     def _publish_story(self, client, post: ContentPost) -> PublishResult:
         # Stories are ephemeral single-media items - only the first media
         # entry is used even if the post lists more than one.
+        from instagrapi.types import StoryLocation, StoryMention
+
         media = post.media[0]
+
+        mentions = []
+        if post.source_credit:
+            user = self._resolve_user_short(client, post.source_credit)
+            if user is not None:
+                mentions = [StoryMention(user=user, x=0.5, y=0.9, width=0.5, height=0.15)]
+
+        locations = []
+        resolved_location = self._resolve_location(client, post.location)
+        if resolved_location is not None:
+            locations = [StoryLocation(location=resolved_location, x=0.5, y=0.15, width=0.4, height=0.1)]
+
         if media.media_type == MediaType.VIDEO or media.media_type == MediaType.REEL:
-            result = client.video_upload_to_story(media.path)
+            result = client.video_upload_to_story(media.path, mentions=mentions, locations=locations)
         else:
-            result = client.photo_upload_to_story(media.path)
+            result = client.photo_upload_to_story(media.path, mentions=mentions, locations=locations)
         return PublishResult(success=True, platform_post_id=str(result.pk))
