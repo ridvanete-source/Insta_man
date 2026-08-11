@@ -1,12 +1,11 @@
-"""Generate a pre-match "hype" graphic for tonight's Fenerbahçe match, in a
-framed-poster layout: the supplied hero photo (e.g. a fan-art / squad photo)
-is kept completely untouched in the middle, with solid navy bars added
-above and below it (expanding the canvas, not overlaying the photo) to hold
-the text. Modeled on the same navy/gold visual language as
-generate_score_graphic.py.
+"""Generate a pre-match "hype" graphic for tonight's Fenerbahçe match, for
+either the feed or a Story - the two targets need different canvases and
+can't share one output file (see --target below).
 
-Layout, top to bottom (each section lives in its own bar, never over the
-photo):
+Feed layout ("framed poster"): the supplied hero photo (e.g. a fan-art /
+squad photo) is kept completely untouched in the middle, with solid navy
+bars added above and below it (expanding the canvas, not overlaying the
+photo) to hold the text.
     [top bar]    competition label (centered) + first-leg result
                  (small, top-right corner - a footnote, not a headline)
     ---- thin gold divider ----
@@ -14,6 +13,16 @@ photo):
     ---- thin gold divider ----
     [bottom bar] "BU AKŞAM" label -> team names (poster headline) -> short
                  gold rule -> kickoff time -> hashtag (small footer)
+
+Story layout: Instagram Stories render full-bleed at a fixed 1080x1920
+(9:16) canvas - reusing the feed poster file here (which takes on whatever
+aspect ratio the hero photo happens to have, e.g. a landscape photo made it
+~1536x1614) makes Instagram scale/crop it unpredictably and the top/bottom
+text bars can end up pushed off-screen. So --target story instead cover-crops
+the hero photo to fill a fixed 1080x1920 canvas (same technique as
+generate_score_graphic.py's _build_background) and overlays the same text
+content on darkened bands near the top/bottom, matching the feed poster's
+navy/gold visual language without expanding the canvas.
 
 Usage:
     python scripts/generate_matchday_hype_graphic.py \
@@ -23,7 +32,12 @@ Usage:
         --match-line "STURM GRAZ  -  FENERBAHÇE" \
         --kickoff-label "21:30" \
         --hashtag "#fenerinmaçıvar" \
+        --target feed \
         --out content_library/media/fenerbahce_sturmgraz_macgunu.jpg
+
+    # For the Story post, run again with --target story and a distinct --out
+    # (e.g. the same filename with a "_story" suffix) - never point the feed
+    # and story queue entries at the same file.
 
 Standalone script, not part of the insta_man package - only needed for
 one-off matchday hype posts, not the general publishing pipeline.
@@ -46,6 +60,9 @@ MARGIN = 70
 TOP_BAR_H = 190
 BOTTOM_BAR_H = 400
 DIVIDER_H = 5
+
+STORY_W, STORY_H = 1080, 1920
+STORY_MARGIN = 90
 
 ASSETS_DIR = Path(__file__).parent / "assets"
 FONT_DIR = ASSETS_DIR / "fonts"
@@ -87,6 +104,18 @@ def _right_text(draw: ImageDraw.ImageDraw, text: str, right_x: int, y: int,
     draw.text((right_x - w, y), text, font=font, fill=fill)
 
 
+def _dark_band(img: Image.Image, y_center: int, half_height: int, max_alpha: int) -> None:
+    """Soft horizontal darkening band so text stays legible over a busy
+    background photo, regardless of what's behind it."""
+    band = Image.new("RGBA", (img.width, half_height * 2), (0, 0, 0, 0))
+    bdraw = ImageDraw.Draw(band)
+    for i in range(half_height * 2):
+        d = abs(i - half_height) / half_height
+        alpha = round(max_alpha * max(0.0, 1 - d))
+        bdraw.line([(0, i), (img.width, i)], fill=(0, 0, 0, alpha))
+    img.alpha_composite(band, (0, y_center - half_height))
+
+
 def generate(
     background: Path,
     competition_label: str,
@@ -96,6 +125,7 @@ def generate(
     hashtag: str,
     out_path: Path,
 ) -> None:
+    """Feed layout: hero photo kept fully untouched, bars expand the canvas."""
     photo = Image.open(background).convert("RGB")
     W, H = photo.size
     total_h = TOP_BAR_H + H + BOTTOM_BAR_H
@@ -137,6 +167,68 @@ def generate(
     print(f"Saved {out_path}")
 
 
+def generate_story(
+    background: Path,
+    competition_label: str,
+    first_leg_result: str,
+    match_line: str,
+    kickoff_label: str,
+    hashtag: str,
+    out_path: Path,
+) -> None:
+    """Story layout: fixed 1080x1920 canvas, hero photo cover-cropped to
+    fill it completely (no letterboxing, no unpredictable IG-side cropping),
+    text overlaid on darkened bands near the top/bottom instead of bars that
+    would need extra canvas height Stories don't have room for."""
+    photo = Image.open(background).convert("RGB")
+    scale = max(STORY_W / photo.width, STORY_H / photo.height)
+    photo = photo.resize(
+        (round(photo.width * scale), round(photo.height * scale)), Image.LANCZOS
+    )
+    x = (photo.width - STORY_W) // 2
+    y = (photo.height - STORY_H) // 2
+    photo = photo.crop((x, y, x + STORY_W, y + STORY_H))
+
+    canvas = photo.convert("RGBA")
+    draw = ImageDraw.Draw(canvas, "RGBA")
+    cx = STORY_W // 2
+    max_width = STORY_W - 2 * STORY_MARGIN
+
+    # --- Top: competition label + first-leg result, on a darkened band ---
+    _dark_band(canvas, y_center=140, half_height=140, max_alpha=190)
+    _centered_text(draw, competition_label, cx, 70, max_width,
+                    start_size=34, fill=WHITE, min_size=20)
+    _centered_text(draw, first_leg_result, cx, 150, max_width,
+                    start_size=26, fill=SILVER, min_size=18)
+
+    # --- Bottom: poster headline (teams + kickoff), hashtag as footer ---
+    block_top = STORY_H - 560
+    _dark_band(canvas, y_center=block_top + 280, half_height=300, max_alpha=210)
+
+    y = block_top
+    y += _centered_text(draw, "BU AKŞAM", cx, y, max_width,
+                         start_size=32, fill=SILVER, min_size=20) + 18
+
+    y += _centered_text(draw, match_line, cx, y, max_width,
+                         start_size=64, fill=GOLD, min_size=30) + 28
+
+    draw.rectangle([(cx - 110, y), (cx + 110, y + 4)], fill=GOLD)
+    y += 4 + 30
+
+    y += _centered_text(draw, kickoff_label, cx, y, max_width,
+                         start_size=90, fill=WHITE, min_size=44) + 36
+
+    _centered_text(draw, hashtag, cx, y, max_width,
+                    start_size=32, fill=GOLD, min_size=20)
+
+    # --- Thin gold accent bar at the very bottom, matching the brand language ---
+    draw.rectangle([(0, STORY_H - 10), (STORY_W, STORY_H)], fill=(*GOLD, 255))
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    canvas.convert("RGB").save(out_path, quality=95)
+    print(f"Saved {out_path}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--background", type=Path, required=True)
@@ -145,9 +237,13 @@ def main() -> None:
     parser.add_argument("--match-line", required=True)
     parser.add_argument("--kickoff-label", required=True)
     parser.add_argument("--hashtag", required=True)
+    parser.add_argument("--target", choices=["feed", "story"], default="feed",
+                         help="feed: untouched photo + expanding bars. "
+                              "story: fixed 1080x1920 cover-cropped canvas.")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    generate(
+    fn = generate_story if args.target == "story" else generate
+    fn(
         args.background, args.competition_label, args.first_leg_result,
         args.match_line, args.kickoff_label, args.hashtag, args.out,
     )
