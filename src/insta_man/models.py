@@ -59,6 +59,11 @@ class ContentPost:
     """Free-text place name to attach as an Instagram location tag
     (instagrapi backend only) - resolved to a real Location via IG's search
     at publish time, e.g. "Çanakkale, Çan, Mallı Köy"."""
+    reshare_eligible: bool = True
+    """Whether scripts/boost_visibility.py may pick this feed post to
+    reshare to Story later. Set False for time-sensitive content (e.g. a
+    match-day graphic) that would be wrong or confusing once reshared out
+    of context."""
     status: PostStatus = PostStatus.PENDING
     published_at: datetime | None = None
     platform_post_id: str | None = None

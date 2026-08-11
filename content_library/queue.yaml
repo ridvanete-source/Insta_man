@@ -593,6 +593,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: false
   status: posted
   published_at: '2026-08-11T16:43:29.317432+00:00'
   platform_post_id: '3961491388705068973'

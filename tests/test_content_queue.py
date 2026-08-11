@@ -104,6 +104,40 @@ def test_source_credit_round_trips(tmp_path):
     assert reloaded.posts[0].source_credit == "original_creator"
 
 
+def test_reshare_eligible_defaults_true_and_round_trips(tmp_path):
+    now = datetime.now(timezone.utc)
+    queue_file = tmp_path / "queue.yaml"
+    write_queue(
+        queue_file,
+        [
+            {
+                "id": "default-post",
+                "caption": "hello",
+                "media": [{"path": "img1.jpg", "type": "image"}],
+                "scheduled_at": now.isoformat(),
+                "status": "pending",
+            },
+            {
+                "id": "time-sensitive-post",
+                "caption": "hello",
+                "media": [{"path": "img2.jpg", "type": "image"}],
+                "scheduled_at": now.isoformat(),
+                "status": "pending",
+                "reshare_eligible": False,
+            },
+        ],
+    )
+
+    queue = ContentQueue(queue_file)
+    assert queue.posts[0].reshare_eligible is True
+    assert queue.posts[1].reshare_eligible is False
+
+    queue.save()
+    reloaded = ContentQueue(queue_file)
+    assert reloaded.posts[0].reshare_eligible is True
+    assert reloaded.posts[1].reshare_eligible is False
+
+
 def test_recent_hashtags_only_considers_posted(tmp_path):
     now = datetime.now(timezone.utc)
     queue_file = tmp_path / "queue.yaml"

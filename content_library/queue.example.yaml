@@ -18,4 +18,6 @@
   location: null                  # free-text place name (instagrapi backend only) - resolved to
                                   # a real Instagram Location via search at publish time, e.g.
                                   # "Çanakkale, Çan, Mallı Köy"; posts without a match if not found
+  reshare_eligible: true          # set false for time-sensitive content (e.g. a match-day graphic)
+                                  # so scripts/boost_visibility.py never reshares it to Story later
   status: pending                # pending | publishing | posted | failed | skipped

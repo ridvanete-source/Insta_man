@@ -13,7 +13,9 @@ this project (see CLAUDE.md). Instead this script only:
    which was observed rendering as a blank/black story on the account - see
    InstagrapiPublisher.reshare_to_story). Rate-limited to at most once per
    run and at least MIN_GAP_BETWEEN_RESHARES apart, picking the
-   least-recently-reshared eligible post first.
+   least-recently-reshared eligible post first. Posts with
+   `reshare_eligible: false` in queue.yaml (time-sensitive content such as
+   match-day graphics) are never picked.
 
 State is kept in content_library/visibility_state.json (committed to git,
 same pattern as queue.yaml) so history survives across runs/machines.
@@ -86,7 +88,9 @@ def main() -> None:
         candidates = [
             p
             for p in feed_posted
-            if p.published_at and (now - p.published_at) >= MIN_POST_AGE_FOR_RESHARE
+            if p.reshare_eligible
+            and p.published_at
+            and (now - p.published_at) >= MIN_POST_AGE_FOR_RESHARE
         ]
 
         def _last_reshared(p):
