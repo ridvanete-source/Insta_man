@@ -616,3 +616,24 @@
   published_at: '2026-08-11T16:43:54.997031+00:00'
   platform_post_id: '3961491558599568376'
   error: null
+- id: 2026-08-11-sturm-graz-mac-sonucu
+  caption: Graz'da son düdük öttü. Sturm Graz deplasmanında 1-0 kazanan sarı-lacivertliler,
+    ilk maçtaki 2-0'lık avantajla birlikte toplamda 3-0 üstünlük sağladı ve Şampiyonlar
+    Ligi play-off turuna yükseldi!
+  media:
+  - path: content_library/media/2026-08-11-sturm-graz-mac-sonucu.jpg
+    type: image
+  scheduled_at: '2026-08-11T23:52:23+03:00'
+  topics: []
+  extra_hashtags:
+  - fenerbahce
+  - sturmgraz
+  - sampiyonlarligi
+  max_hashtags: null
+  target: story
+  source_credit: null
+  location: null
+  status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
