@@ -12,6 +12,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-07-29T16:17:50.037995+00:00'
   platform_post_id: '3952056379292300705'
@@ -33,6 +34,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-07-30T09:23:11.870736+00:00'
   platform_post_id: '3952572486168110805'
@@ -54,6 +56,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-07-30T13:04:11.160678+00:00'
   platform_post_id: '3952683682057730971'
@@ -75,6 +78,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-07-31T13:02:47.629386+00:00'
   platform_post_id: '3953407774780273003'
@@ -96,6 +100,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-01T17:35:15.689121+00:00'
   platform_post_id: '3954269679539355895'
@@ -116,6 +121,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-02T08:48:14.996126+00:00'
   platform_post_id: '3954729198602035421'
@@ -137,6 +143,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-03T17:43:44.301639+00:00'
   platform_post_id: '3955723472256644513'
@@ -157,6 +164,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-04T06:43:32.322515+00:00'
   platform_post_id: '3956115991264066551'
@@ -178,6 +186,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-04T17:43:31.466385+00:00'
   platform_post_id: '3956448165393702218'
@@ -198,6 +207,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-01T06:00:32.809329+00:00'
   platform_post_id: '3953920011420700871'
@@ -219,6 +229,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -241,6 +252,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-05T17:43:30.737886+00:00'
   platform_post_id: '3957172927678084860'
@@ -261,6 +273,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-06T06:43:32.576208+00:00'
   platform_post_id: '3957565525840261305'
@@ -281,6 +294,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-06T17:43:34.368242+00:00'
   platform_post_id: '3957897721453167282'
@@ -302,6 +316,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-01T17:35:37.719766+00:00'
   platform_post_id: '3954269871202244880'
@@ -322,6 +337,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-05T06:43:30.243725+00:00'
   platform_post_id: '3956840746443285785'
@@ -343,6 +359,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-09T10:06:49.971330+00:00'
   platform_post_id: '3959842228360499557'
@@ -364,6 +381,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-11T10:00:31.006230+00:00'
   platform_post_id: '3961288563756890571'
@@ -385,6 +403,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -406,6 +425,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -427,6 +447,7 @@
   target: feed
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -448,6 +469,7 @@
   target: feed
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -469,6 +491,7 @@
   target: feed
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -490,6 +513,7 @@
   target: feed
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -511,6 +535,7 @@
   target: feed
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -532,6 +557,7 @@
   target: feed
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -553,6 +579,7 @@
   target: feed
   source_credit: ewwel3
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-10T10:00:43.561454+00:00'
   platform_post_id: '3960563800381913917'
@@ -569,6 +596,7 @@
   target: story
   source_credit: ewwel3
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-10T10:01:06.623498+00:00'
   platform_post_id: '3960564070126087787'
@@ -612,6 +640,7 @@
   target: story
   source_credit: null
   location: null
+  reshare_eligible: true
   status: posted
   published_at: '2026-08-11T16:43:54.997031+00:00'
   platform_post_id: '3961491558599568376'
@@ -633,9 +662,10 @@
   target: story
   source_credit: null
   location: null
-  status: pending
-  published_at: null
-  platform_post_id: null
+  reshare_eligible: true
+  status: posted
+  published_at: '2026-08-11T21:43:32.930707+00:00'
+  platform_post_id: '3961642403530224295'
   error: null
 - id: 2026-08-11-olive-grove-sunset-path
   caption: Yaprakların arasından süzülen ışık, patikayı altına boyuyor.
@@ -654,6 +684,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -675,6 +706,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -696,6 +728,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
@@ -717,6 +750,7 @@
   target: feed
   source_credit: null
   location: null
+  reshare_eligible: true
   status: pending
   published_at: null
   platform_post_id: null
