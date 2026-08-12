@@ -404,9 +404,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-12T10:43:33.080389+00:00'
+  platform_post_id: '3962034993329073039'
   error: null
 - id: 2026-08-08-sahara-desert-dunes
   caption: Kum dalgaları, sonsuz sessizlik — çöl gün batımında altına bürünüyor.
