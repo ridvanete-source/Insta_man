@@ -477,7 +477,7 @@
 - id: 2026-08-10-malli-koy-moonlight
   caption: Dallar arasından süzülen ay, günün son ışığına eşlik ediyor.
   media:
-  - path: content_library/media/malli_koy4.jpg
+  - path: content_library/media/malli_koy4_moon_crop.jpg
     type: image
   scheduled_at: '2026-08-17T13:00:00+03:00'
   topics:
