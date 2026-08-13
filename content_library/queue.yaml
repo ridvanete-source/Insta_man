@@ -426,9 +426,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-13T10:43:32.857531+00:00'
+  platform_post_id: '3962759762861057460'
   error: null
 - id: 2026-08-09-malli-koy-sunset
   caption: Güneş dağların ardına çekilirken köy sessizliğe bürünüyor.
