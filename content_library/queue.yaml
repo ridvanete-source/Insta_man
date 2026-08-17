@@ -492,9 +492,9 @@
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-17T10:43:43.413095+00:00'
+  platform_post_id: '3965658964788099508'
   error: null
 - id: 2026-08-11-malli-koy-garden
   caption: Küçük bir bahçe köşesi, kendi huzurunu yetiştiriyor.
