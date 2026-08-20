@@ -558,9 +558,9 @@
   source_credit: null
   location: Çanakkale, Çan, Mallı Köy
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-08-20T10:43:45.028527+00:00'
+  platform_post_id: '3967833290337548147'
   error: null
 - id: 2026-08-10-highway-sunset-rays
   caption: Yol bitmiyor ama gökyüzü bazen buna değer.
