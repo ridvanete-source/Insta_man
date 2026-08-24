@@ -1,5 +1,5 @@
 ﻿$ErrorActionPreference = "Stop"
-Set-Location "C:\Users\RIDVA\OneDrive\Masaüstü\inst"
+Set-Location "D:\Claude_project\instagram_bot"
 
 git pull --rebase --autostash
 
