@@ -6,3 +6,7 @@ __pycache__/
 
 .env
 .ig_session.json
+
+# Hoopwave (BCZGWE) game project — separate git worktree of this same repo,
+# nested here at the user's request; not part of this repo's tracked content.
+/bczgwe/
