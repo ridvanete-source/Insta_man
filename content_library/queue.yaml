@@ -774,7 +774,10 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
+  status: posted
+  published_at: '2026-08-25T10:43:44.259598+00:00'
+  platform_post_id: '3971457152761572962'
+  error: null
 - id: 2026-08-24-split-then-now-street
   caption: Aynı köşe, iki farklı zaman. 80'ler ve bugün aynı karede yan yana.
   media:
@@ -794,6 +797,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-statue-of-liberty
   caption: '2100''de New York: özgürlük artık ışıktan.'
   media:
@@ -814,6 +820,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-split-then-now-arcade
   caption: Joystick'ten kumandaya, oyun hiç bitmedi sadece şekil değiştirdi.
   media:
@@ -833,6 +842,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-christ-redeemer
   caption: '2100''de Rio: kollar hâlâ açık, şehir artık holografik.'
   media:
@@ -853,6 +865,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-split-then-now-computer-desk
   caption: Disketten dokunmatik ekrana, aynı masada geçen onlarca yıl.
   media:
@@ -872,6 +887,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-bosphorus-bridges
   caption: '2100''de İstanbul: iki kıtayı ışık telleri birleştiriyor.'
   media:
@@ -892,6 +910,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-split-then-now-phone-portrait
   caption: 'Antenden cam ekrana, elimizdeki hep aynı şey: bağlantı kurmak.'
   media:
@@ -911,6 +932,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-egypt-pyramids
   caption: '2100''de Gize: taş piramitler artık enerjiyle nefes alıyor.'
   media:
@@ -931,6 +955,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-split-then-now-boombox
   caption: Kaset çalardan kablosuz hoparlöre, müzik hep yanımızdaydı.
   media:
@@ -950,8 +977,11 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-kiz-kulesi
-  caption: '2100''de Boğaz''ın ortasında, küçük kule hâlâ ışık saçıyor.'
+  caption: 2100'de Boğaz'ın ortasında, küçük kule hâlâ ışık saçıyor.
   media:
   - path: content_library/media/future-2100-kiz-kulesi.png
     type: image
@@ -970,6 +1000,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-split-then-now-diner-jukebox
   caption: Neon ışıklardan dokunmatik ekrana, aynı masa aynı melodi.
   media:
@@ -989,6 +1022,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-venice-canal
   caption: '2100''de Venedik: kanallar artık holografik fenerlerle aydınlanıyor.'
   media:
@@ -1009,6 +1045,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-split-then-now-subway-train
   caption: Raylar hiç değişmedi, üzerinden geçen zaman değişti.
   media:
@@ -1028,6 +1067,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-pisa-tower
   caption: '2100''de Pisa: kule hâlâ eğik, artık ışıktan.'
   media:
@@ -1048,6 +1090,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-galata-tower
   caption: '2100''de İstanbul: Galata''nın ışıkları hâlâ sönmüyor.'
   media:
@@ -1068,6 +1113,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-istiklal-caddesi
   caption: '2100''de İstiklal: kırmızı tramvay artık ışıktan iz bırakıyor.'
   media:
@@ -1088,6 +1136,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-hagia-sophia
   caption: '2100''de İstanbul: Ayasofya''nın kubbesi hâlâ gökyüzüne bakıyor.'
   media:
@@ -1108,6 +1159,9 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
 - id: 2026-08-24-future-2100-stonehenge
   caption: '2100''de İngiltere: taşlar hâlâ ayakta, artık ışıkla nefes alıyor.'
   media:
@@ -1128,3 +1182,6 @@
   location: null
   reshare_eligible: true
   status: pending
+  published_at: null
+  platform_post_id: null
+  error: null
