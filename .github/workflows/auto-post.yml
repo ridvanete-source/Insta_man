@@ -1,8 +1,8 @@
 name: Auto-post queue
 
 on:
-  schedule:
-    - cron: "13 * * * *"
+  # schedule disabled 2026-08-31: posts are being triggered manually for now
+  # - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
