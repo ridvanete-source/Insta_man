@@ -918,7 +918,7 @@
   media:
   - path: content_library/media/split-then-now-phone-portrait.png
     type: image
-  scheduled_at: '2026-09-01T13:00:00+03:00'
+  scheduled_at: '2026-09-13T13:00:00+03:00'
   topics:
   - tech
   - fashion
@@ -931,16 +931,16 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: posted
-  published_at: '2026-09-04T19:56:21.362154+00:00'
-  platform_post_id: '3978983059680159474'
+  status: pending
+  published_at: null
+  platform_post_id: null
   error: null
 - id: 2026-08-24-future-2100-egypt-pyramids
   caption: '2100''de Gize: taş piramitler artık enerjiyle nefes alıyor.'
   media:
   - path: content_library/media/future-2100-egypt-pyramids.png
     type: image
-  scheduled_at: '2026-09-02T13:00:00+03:00'
+  scheduled_at: '2026-09-14T13:00:00+03:00'
   topics:
   - travel
   - art
@@ -954,16 +954,16 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: posted
-  published_at: '2026-09-04T19:56:47.448168+00:00'
-  platform_post_id: '3978983266593737509'
+  status: pending
+  published_at: null
+  platform_post_id: null
   error: null
 - id: 2026-08-24-split-then-now-boombox
   caption: Kaset çalardan kablosuz hoparlöre, müzik hep yanımızdaydı.
   media:
   - path: content_library/media/split-then-now-boombox.png
     type: image
-  scheduled_at: '2026-09-03T13:00:00+03:00'
+  scheduled_at: '2026-09-15T13:00:00+03:00'
   topics:
   - music
   - art
@@ -976,16 +976,16 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: posted
-  published_at: '2026-09-04T19:57:11.138231+00:00'
-  platform_post_id: '3978983487700604294'
+  status: pending
+  published_at: null
+  platform_post_id: null
   error: null
 - id: 2026-08-24-future-2100-kiz-kulesi
   caption: 2100'de Boğaz'ın ortasında, küçük kule hâlâ ışık saçıyor.
   media:
   - path: content_library/media/future-2100-kiz-kulesi.png
     type: image
-  scheduled_at: '2026-09-04T13:00:00+03:00'
+  scheduled_at: '2026-09-16T13:00:00+03:00'
   topics:
   - travel
   - art
@@ -999,9 +999,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: posted
-  published_at: '2026-09-04T19:57:37.210810+00:00'
-  platform_post_id: '3978983686854509591'
+  status: pending
+  published_at: null
+  platform_post_id: null
   error: null
 - id: 2026-08-24-split-then-now-diner-jukebox
   caption: Neon ışıklardan dokunmatik ekrana, aynı masa aynı melodi.

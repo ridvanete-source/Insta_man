@@ -32,36 +32,49 @@ def run_once(config: Config | None = None) -> list[str]:
         logger.info("No due posts.")
         return ["No due posts."]
 
+    # Publish only the single earliest-due post per run. If a pause (outage,
+    # paused automation, etc.) let several posts fall overdue, this run's
+    # caller (an hourly cron/timer) will simply catch up one at a time on
+    # subsequent runs instead of firing a burst of back-to-back posts in one
+    # call - which reads as spammy/bot-like and risks platform rate limits.
+    due.sort(key=lambda p: p.scheduled_at)
+    post = due[0]
+    if len(due) > 1:
+        logger.info(
+            "%d posts are due; publishing only the earliest (%s) this run.",
+            len(due),
+            post.id,
+        )
+
     publisher.authenticate()
 
-    for post in due:
-        max_tags = post.max_hashtags or config.max_hashtags
-        hashtags = hashtag_manager.select(
-            topics=post.topics,
-            max_hashtags=max_tags,
-            extra=post.extra_hashtags,
-            exclude_recent=queue.recent_hashtags(),
-        )
-        caption_parts = [post.caption]
-        if post.source_credit:
-            caption_parts.append(f"🎥 via @{post.source_credit.lstrip('@')}")
-        caption_parts.append(HashtagManager.format_for_caption(hashtags))
-        caption = "\n\n".join(part for part in caption_parts if part).strip()
+    max_tags = post.max_hashtags or config.max_hashtags
+    hashtags = hashtag_manager.select(
+        topics=post.topics,
+        max_hashtags=max_tags,
+        extra=post.extra_hashtags,
+        exclude_recent=queue.recent_hashtags(),
+    )
+    caption_parts = [post.caption]
+    if post.source_credit:
+        caption_parts.append(f"🎥 via @{post.source_credit.lstrip('@')}")
+    caption_parts.append(HashtagManager.format_for_caption(hashtags))
+    caption = "\n\n".join(part for part in caption_parts if part).strip()
 
-        post.status = PostStatus.PUBLISHING
-        result = publisher.publish(post, caption)
+    post.status = PostStatus.PUBLISHING
+    result = publisher.publish(post, caption)
 
-        if result.success:
-            post.status = PostStatus.POSTED
-            post.published_at = datetime.now(timezone.utc)
-            post.platform_post_id = result.platform_post_id
-            summaries.append(f"[OK] {post.id} -> {result.platform_post_id}")
-            logger.info("Published %s -> %s", post.id, result.platform_post_id)
-        else:
-            post.status = PostStatus.FAILED
-            post.error = result.error
-            summaries.append(f"[FAILED] {post.id}: {result.error}")
-            logger.error("Failed to publish %s: %s", post.id, result.error)
+    if result.success:
+        post.status = PostStatus.POSTED
+        post.published_at = datetime.now(timezone.utc)
+        post.platform_post_id = result.platform_post_id
+        summaries.append(f"[OK] {post.id} -> {result.platform_post_id}")
+        logger.info("Published %s -> %s", post.id, result.platform_post_id)
+    else:
+        post.status = PostStatus.FAILED
+        post.error = result.error
+        summaries.append(f"[FAILED] {post.id}: {result.error}")
+        logger.error("Failed to publish %s: %s", post.id, result.error)
 
     queue.save()
     return summaries
