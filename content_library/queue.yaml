@@ -931,9 +931,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-04T19:56:21.362154+00:00'
+  platform_post_id: '3978983059680159474'
   error: null
 - id: 2026-08-24-future-2100-egypt-pyramids
   caption: '2100''de Gize: taş piramitler artık enerjiyle nefes alıyor.'
@@ -954,9 +954,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-04T19:56:47.448168+00:00'
+  platform_post_id: '3978983266593737509'
   error: null
 - id: 2026-08-24-split-then-now-boombox
   caption: Kaset çalardan kablosuz hoparlöre, müzik hep yanımızdaydı.
@@ -976,9 +976,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-04T19:57:11.138231+00:00'
+  platform_post_id: '3978983487700604294'
   error: null
 - id: 2026-08-24-future-2100-kiz-kulesi
   caption: 2100'de Boğaz'ın ortasında, küçük kule hâlâ ışık saçıyor.
@@ -999,9 +999,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-04T19:57:37.210810+00:00'
+  platform_post_id: '3978983686854509591'
   error: null
 - id: 2026-08-24-split-then-now-diner-jukebox
   caption: Neon ışıklardan dokunmatik ekrana, aynı masa aynı melodi.
