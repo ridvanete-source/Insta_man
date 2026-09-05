@@ -1021,9 +1021,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-05T10:43:37.069239+00:00'
+  platform_post_id: '3979429636286897143'
   error: null
 - id: 2026-08-24-future-2100-venice-canal
   caption: '2100''de Venedik: kanallar artık holografik fenerlerle aydınlanıyor.'
