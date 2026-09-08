@@ -1,8 +1,10 @@
 name: Auto-post queue
 
 on:
-  schedule:
-    - cron: "13 * * * *"
+  # schedule disabled 2026-09-08: session invalid again, every run since
+  # 09-06 was hammering Instagram's login endpoint and getting 429'd
+  # (PleaseWaitFewMinutes) - paused to stop making it worse. See PROJECTS.md.
+  # - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
