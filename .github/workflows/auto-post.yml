@@ -1,13 +1,8 @@
 name: Auto-post queue
 
 on:
-  # schedule stays disabled until the session is actually recovered (see
-  # PROJECTS.md) - re-enabling now would just burn 3 more guaranteed-to-fail
-  # login attempts against the still-rate-limited account before the new
-  # circuit breaker (health.py) trips and stops it. Turn back on once
-  # .ig_session.json/IG_SESSION_B64 are refreshed.
-  # schedule:
-  #   - cron: "13 * * * *"
+  schedule:
+    - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
