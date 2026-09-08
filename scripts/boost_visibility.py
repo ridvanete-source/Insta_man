@@ -27,6 +27,7 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from insta_man import health
 from insta_man.config import load_config
 from insta_man.models import PostStatus, PostTarget
 from insta_man.publishers import get_publisher
@@ -52,13 +53,27 @@ def _save_state(state: dict) -> None:
 
 
 def main() -> None:
+    # Shares insta_man.cli's circuit breaker (see health.py docstring) -
+    # this script also calls authenticate()/login(), so it must back off
+    # the same way once the shared failure counter has tripped, otherwise
+    # it keeps hammering the login endpoint even while `insta_man run` has
+    # already given up.
+    if health.should_skip_run() is not None:
+        print("Skipping visibility actions: automation is paused by the circuit breaker.")
+        return
+
     config = load_config()
     publisher = get_publisher(config)
     if not isinstance(publisher, InstagrapiPublisher):
         print("Visibility actions only support the instagrapi backend, skipping.")
         return
 
-    publisher.authenticate()
+    try:
+        publisher.authenticate()
+    except Exception as exc:
+        health.record_failure(config, f"{type(exc).__name__}: {exc}")
+        raise
+    health.record_success()
     queue = ContentQueue(config.queue_file)
     state = _load_state()
     now = datetime.now(timezone.utc)

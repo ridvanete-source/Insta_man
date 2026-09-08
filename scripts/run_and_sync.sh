@@ -7,9 +7,13 @@ cd /home/ubuntu/insta_man
 
 git pull --rebase --autostash
 
-.venv/bin/python -m insta_man.cli run
+# `|| true`: health_state.json/queue.yaml must still be committed below even
+# when this fails - `set -e` would otherwise abort the whole script right
+# here and the failure-count/circuit-breaker state would never reach git
+# (see insta_man/health.py docstring for the incident that caused this).
+.venv/bin/python -m insta_man.cli run || true
 
-git add content_library/queue.yaml
+git add content_library/queue.yaml content_library/health_state.json
 if ! git diff --cached --quiet; then
   git commit -m "chore: update queue status (vps run) [skip ci]"
   git push
@@ -20,7 +24,7 @@ fi
 # for why this never does follow/like/comment automation.
 .venv/bin/python scripts/boost_visibility.py || true
 
-git add content_library/visibility_state.json
+git add content_library/visibility_state.json content_library/health_state.json
 if ! git diff --cached --quiet; then
   git commit -m "chore: update visibility state (vps run) [skip ci]"
   git push

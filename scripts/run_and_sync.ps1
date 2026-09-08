@@ -18,12 +18,16 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 & ".venv\Scripts\python.exe" -m insta_man.cli run *>> $logFile
-if ($LASTEXITCODE -ne 0) {
-    Write-Log "ERROR insta_man.cli run exit=$LASTEXITCODE"
-    exit $LASTEXITCODE
+$runExitCode = $LASTEXITCODE
+if ($runExitCode -ne 0) {
+    # Don't exit here - health_state.json (the failure-count circuit breaker,
+    # see insta_man/health.py) still needs to be committed below even on
+    # failure, otherwise this run's failure is invisible to the shared
+    # cross-machine counter.
+    Write-Log "ERROR insta_man.cli run exit=$runExitCode"
 }
 
-git add content_library/queue.yaml
+git add content_library/queue.yaml content_library/health_state.json
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     git commit -m "chore: update queue status (local run) [skip ci]" *>> $logFile
@@ -34,4 +38,8 @@ if ($LASTEXITCODE -ne 0) {
     }
 }
 
+if ($runExitCode -ne 0) {
+    Write-Log "=== run finished with errors ==="
+    exit $runExitCode
+}
 Write-Log "=== run finished OK ==="

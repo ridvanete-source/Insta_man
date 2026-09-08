@@ -12,6 +12,7 @@ import argparse
 import logging
 import sys
 
+from insta_man import health
 from insta_man.config import load_config
 from insta_man.queue import ContentQueue
 from insta_man.scheduler import run_once
@@ -29,8 +30,21 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "run":
-        for line in run_once():
-            print(line)
+        skip_state = health.should_skip_run()
+        if skip_state is not None:
+            print(
+                f"Skipping run: {skip_state.consecutive_failures} consecutive failures since "
+                f"{skip_state.last_failure_at} (already notified at {skip_state.notified_at}). "
+                f"Fix the session, then delete content_library/health_state.json to resume."
+            )
+            return 0
+        try:
+            for line in run_once():
+                print(line)
+        except Exception as exc:
+            health.record_failure(load_config(), f"{type(exc).__name__}: {exc}")
+            raise
+        health.record_success()
         return 0
 
     if args.command == "list":

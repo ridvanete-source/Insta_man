@@ -32,6 +32,16 @@ class Config:
     ig_password: str | None = os.getenv("IG_PASSWORD")
     ig_session_file: Path = Path(os.getenv("IG_SESSION_FILE", ".ig_session.json"))
 
+    # Bildirim (sadece health.py'nin devre-kesici uyarısı için) - Binance/MT5/
+    # US Signals botlarıyla aynı Gmail hesabı/desen.
+    notify_email_enabled: bool = os.getenv("NOTIFY_EMAIL_ENABLED", "false").strip().lower() == "true"
+    notify_email_to: str | None = os.getenv("NOTIFY_EMAIL_TO")
+    smtp_host: str = os.getenv("SMTP_HOST", "smtp.gmail.com")
+    smtp_port: int = int(os.getenv("SMTP_PORT") or "465")
+    smtp_user: str | None = os.getenv("SMTP_USER")
+    smtp_app_password: str | None = os.getenv("SMTP_APP_PASSWORD")
+    smtp_from: str | None = os.getenv("SMTP_FROM")
+
 
 def load_config() -> Config:
     return Config()

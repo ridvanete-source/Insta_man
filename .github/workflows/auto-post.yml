@@ -1,10 +1,13 @@
 name: Auto-post queue
 
 on:
-  # schedule disabled 2026-09-08: session invalid again, every run since
-  # 09-06 was hammering Instagram's login endpoint and getting 429'd
-  # (PleaseWaitFewMinutes) - paused to stop making it worse. See PROJECTS.md.
-  # - cron: "13 * * * *"
+  # schedule stays disabled until the session is actually recovered (see
+  # PROJECTS.md) - re-enabling now would just burn 3 more guaranteed-to-fail
+  # login attempts against the still-rate-limited account before the new
+  # circuit breaker (health.py) trips and stops it. Turn back on once
+  # .ig_session.json/IG_SESSION_B64 are refreshed.
+  # schedule:
+  #   - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -36,18 +39,32 @@ jobs:
           IG_USERNAME=${{ secrets.IG_USERNAME }}
           IG_PASSWORD=${{ secrets.IG_PASSWORD }}
           IG_SESSION_FILE=.ig_session.json
+          NOTIFY_EMAIL_ENABLED=true
+          NOTIFY_EMAIL_TO=${{ secrets.NOTIFY_EMAIL_TO }}
+          SMTP_HOST=${{ secrets.SMTP_HOST }}
+          SMTP_PORT=${{ secrets.SMTP_PORT }}
+          SMTP_USER=${{ secrets.SMTP_USER }}
+          SMTP_APP_PASSWORD=${{ secrets.SMTP_APP_PASSWORD }}
+          SMTP_FROM=${{ secrets.SMTP_FROM }}
           EOF
 
       - name: Restore Instagram session
         run: echo "${{ secrets.IG_SESSION_B64 }}" | base64 -d > .ig_session.json
 
       - name: Run due posts
+        id: run_step
         run: python -m insta_man.cli run
+        continue-on-error: true
 
       - name: Commit queue updates
+        if: always()
         run: |
           git config user.name "insta-man-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add content_library/queue.yaml
+          git add content_library/queue.yaml content_library/health_state.json
           git diff --cached --quiet || git commit -m "chore: update queue status [skip ci]"
           git push
+
+      - name: Fail job if the run step failed
+        if: steps.run_step.outcome == 'failure'
+        run: exit 1
