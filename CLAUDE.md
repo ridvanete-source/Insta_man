@@ -38,6 +38,11 @@ src/insta_man/
 │   └── content_queue.py   # queue.yaml'ı okur/yazar, "şu an paylaşılacak" postları bulur
 ├── scheduler/
 │   └── runner.py          # run_once(): due post'ları bulur, hashtag ekler, publisher'a yollar
+├── health.py              # devre kesici: art arda 3 başarısız çalıştırmadan sonra otomasyonu
+│                            durdurur + bir kereliğine mail uyarısı gönderir (2026-09-08 eklendi,
+│                            bkz. "Devre kesici" bölümü)
+├── notifier.py            # sadece health.py'nin uyarısı için e-posta (Binance/MT5/US Signals
+│                            botlarıyla aynı Gmail hesabı)
 └── cli.py                # `insta_man run|list|validate` komutları
 
 content_library/
@@ -194,6 +199,43 @@ python -m insta_man.cli run        # şu an zamanı gelmiş postları paylaşır
   ederken kullanılır.
 - Eski `.github/workflows/scheduled_post.yml.example` dosyası artık
   kullanılmıyor (Graph API'ye özgüydü) - referans amaçlı repoda duruyor.
+
+## Devre kesici (`health.py`) — 2026-09-08 eklendi
+
+**Neden eklendi:** 2026-09-06 13:43'ten 2026-09-08'e kadar (57+ saat) session
+geçersiz olduğu için hem VPS timer hem GitHub Actions cron'unun **her saatlik
+çalıştırması** başarısız oldu — her biri Instagram'ın login endpoint'ini
+tekrar tekrar dövdü (100+ başarısız deneme), 429/`PleaseWaitFewMinutes`
+rate-limit'ine sebep oldu, ve kimseye hiçbir uyarı gitmedi (kullanıcı fark
+edip sormasa hâlâ devam ediyor olurdu).
+
+**Nasıl çalışır:**
+- `content_library/health_state.json`'da (queue.yaml gibi git'e commit'lenen,
+  VPS/GitHub Actions/yerel makine arasında paylaşılan) art arda başarısız
+  çalıştırma sayısı tutulur.
+- 3 art arda başarısızlıktan sonra (`FAILURE_THRESHOLD`) `insta_man.cli run`
+  **yeni bir login denemesi yapmaz**, sadece "skipping" yazıp çıkar — rate
+  limit'i kötüleştirmeyi durdurur.
+- Eşik ilk aşıldığında **bir kez** e-posta gönderilir (Binance/MT5/US Signals
+  ile aynı Gmail hesabı, `NOTIFY_EMAIL_TO`/`SMTP_*` — hem `.env`'de hem
+  GitHub Actions secrets'ında ayrı ayrı tanımlı, aynı değerler
+  us-signals'tan kopyalandı).
+- `scripts/boost_visibility.py` da aynı devre kesiciyi kontrol eder (o da
+  `authenticate()` çağırıyor, session ölüyken bağımsız olarak login
+  denemeye devam etmesin diye).
+- **Kurtarma:** Session manuel olarak yenilendikten sonra
+  `content_library/health_state.json` silinmeli/sıfırlanmalı ki otomasyon
+  tekrar denemeye başlasın — otomatik sıfırlanmaz, kasıtlı olarak elle bir
+  "sorun çözüldü" onayı gerektirir. Bir çalıştırma gerçekten başarılı
+  olursa (`run_once()` hata fırlatmazsa) sayaç zaten otomatik sıfırlanır.
+
+**Ayrıca düzeltilen bağlı bir hata:** `run_and_sync.sh`/`.ps1` ve
+`auto-post.yml`'de `set -e` (veya erken `exit`) yüzünden başarısız bir
+çalıştırma hiçbir zaman git-commit adımına ulaşmıyordu — yani
+`health_state.json` hiçbir zaman commit'lenip paylaşılamıyordu. Üçü de
+düzeltildi (çalıştırma başarısız olsa bile commit adımına devam ediyor,
+GitHub Actions'ta iş yine de kırmızı X gösteriyor ama commit önce
+tamamlanıyor).
 
 ## Testler
 
