@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 0,
-  "last_error": null,
-  "last_failure_at": null,
+  "consecutive_failures": 1,
+  "last_error": "RetryError: HTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/accounts/login/ (Caused by ResponseError('too many 429 error responses'))",
+  "last_failure_at": "2026-09-09T06:43:25.549161+00:00",
   "notified_at": null
 }
