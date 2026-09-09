@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 0,
-  "last_error": null,
-  "last_failure_at": null,
+  "consecutive_failures": 1,
+  "last_error": "RuntimeError: Instagram bir dogrulama kodu istedi ama bu ortam etkilesimli degil (ör. GitHub Actions) - kod girilemedi. Yerel makinede `python -m insta_man.cli run` calistirip session'i (.ig_session.json) tazeleyin, ardindan IG_SESSION_B64 secret'ini guncelleyin.",
+  "last_failure_at": "2026-09-09T19:20:20.489697+00:00",
   "notified_at": null
 }
