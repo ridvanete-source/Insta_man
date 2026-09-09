@@ -1112,10 +1112,11 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
+  status: failed
   published_at: null
   platform_post_id: null
-  error: null
+  error: 'HTTPSConnectionPool(host=''i.instagram.com'', port=443): Max retries exceeded
+    with url: /api/v1/qe/expose/ (Caused by ResponseError(''too many 500 error responses''))'
 - id: 2026-08-24-future-2100-istiklal-caddesi
   caption: '2100''de İstiklal: kırmızı tramvay artık ışıktan iz bırakıyor.'
   media:
