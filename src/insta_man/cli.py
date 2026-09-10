@@ -17,6 +17,15 @@ from insta_man.config import load_config
 from insta_man.queue import ContentQueue
 from insta_man.scheduler import run_once
 
+# Manually engaged 2026-09-10 at the user's explicit request, after a
+# boost_visibility.py bug caused the same Story to be reposted hourly
+# overnight (root cause fixed separately). This is a deliberate full stop
+# of all automated posting - independent of health.py's automatic circuit
+# breaker - covering every caller of `insta_man run` (auto-post.yml on
+# GitHub Actions and the VPS's run_and_sync.sh) regardless of which
+# machine's session happens to be valid. Flip back to False to resume.
+AUTOMATION_PAUSED = True
+
 
 def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -30,6 +39,9 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "run":
+        if AUTOMATION_PAUSED:
+            print("Skipping run: automation manually paused (see cli.py AUTOMATION_PAUSED).")
+            return 0
         skip_state = health.should_skip_run()
         if skip_state is not None:
             print(
