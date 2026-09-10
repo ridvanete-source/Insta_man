@@ -39,14 +39,12 @@ STATE_FILE = Path("content_library/visibility_state.json")
 MIN_POST_AGE_FOR_RESHARE = timedelta(days=3)
 MIN_GAP_BETWEEN_RESHARES = timedelta(hours=20)
 
-# Stopped 2026-09-10 at the user's explicit request after a bug (fixed in
-# commit 1f6acec - the cooldown timestamp was only recorded on a
-# *successful* reshare, so a swallowed network exception let the same post
-# get reshared to Story every hour overnight instead of every 20h) caused
-# the same Story to be posted repeatedly on a live, personal account. The
-# underlying bug is fixed, but the user asked to stop Story resharing
-# outright rather than rely on that fix alone. Flip back to True to resume.
-RESHARE_ENABLED = False
+# Re-enabled 2026-09-10 after the root cause (fixed in commit 1f6acec - the
+# cooldown timestamp was only recorded on a *successful* reshare, so a
+# swallowed network exception let the same post get reshared to Story every
+# hour overnight instead of every 20h) was fixed and the user approved
+# resuming. See CLAUDE.md for the incident writeup.
+RESHARE_ENABLED = True
 
 
 def _load_state() -> dict:
