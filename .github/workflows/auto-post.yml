@@ -1,11 +1,8 @@
 name: Auto-post queue
 
 on:
-  # schedule paused 2026-09-10: user reports the same Story being posted
-  # hourly since the night before - root cause not yet confirmed (see
-  # CLAUDE.md / commit history). Re-enable once diagnosed and fixed.
-  # schedule:
-  #   - cron: "13 * * * *"
+  schedule:
+    - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
