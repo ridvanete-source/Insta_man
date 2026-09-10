@@ -116,16 +116,24 @@ def main() -> None:
         candidates.sort(key=_last_reshared)
         if candidates:
             chosen = candidates[0]
+            # Record this as "reshared now" *before* attempting the upload,
+            # not just on success. A client-side exception (timeout, dropped
+            # connection) doesn't mean Instagram's server didn't already
+            # accept the upload - if we only recorded successes, that one
+            # ambiguous failure would leave the cooldown/candidate-ordering
+            # untouched forever, and this same post would be picked again
+            # (and re-uploaded) on every subsequent run with no backoff at
+            # all. See the 2026-09-10 hourly-duplicate-Story incident.
+            entry = state["posts"].setdefault(
+                chosen.platform_post_id, {"id": chosen.id, "history": []}
+            )
+            entry["last_reshared_at"] = now.isoformat()
+            state["last_reshare_at"] = now.isoformat()
             try:
                 publisher.reshare_to_story(chosen.media[0])
                 print(f"[reshare] {chosen.id} -> story")
-                entry = state["posts"].setdefault(
-                    chosen.platform_post_id, {"id": chosen.id, "history": []}
-                )
-                entry["last_reshared_at"] = now.isoformat()
-                state["last_reshare_at"] = now.isoformat()
             except Exception as exc:
-                print(f"[reshare] {chosen.id}: failed ({exc})")
+                print(f"[reshare] {chosen.id}: failed ({exc}) - will not retry for {MIN_GAP_BETWEEN_RESHARES}")
         else:
             print("[reshare] no eligible (cooled-down) post found")
     else:
