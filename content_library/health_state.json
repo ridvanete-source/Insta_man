@@ -1,1 +1,6 @@
-{"consecutive_failures": 0, "last_error": null, "last_failure_at": null, "notified_at": null}
+{
+  "consecutive_failures": 0,
+  "last_error": null,
+  "last_failure_at": null,
+  "notified_at": null
+}
