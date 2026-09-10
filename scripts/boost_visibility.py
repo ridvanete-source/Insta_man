@@ -126,7 +126,12 @@ def main() -> None:
             ts = entry.get("last_reshared_at")
             return datetime.fromisoformat(ts) if ts else datetime.min.replace(tzinfo=timezone.utc)
 
-        candidates.sort(key=_last_reshared)
+        # Tie-break on published_at (not queue.yaml's file order, which
+        # doesn't match publish order) so the rotation through
+        # never-reshared posts - and each subsequent full lap once
+        # everyone has a real last_reshared_at - proceeds sequentially by
+        # original publish date instead of an arbitrary file-position order.
+        candidates.sort(key=lambda p: (_last_reshared(p), p.published_at))
         if candidates:
             chosen = candidates[0]
             # Record this as "reshared now" *before* attempting the upload,
