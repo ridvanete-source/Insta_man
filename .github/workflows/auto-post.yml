@@ -1,8 +1,13 @@
 name: Auto-post queue
 
 on:
-  schedule:
-    - cron: "13 * * * *"
+  # schedule paused 2026-09-10 at the user's explicit request, after a
+  # boost_visibility.py bug caused the same Story to be reposted hourly
+  # overnight (root cause fixed in commit 1f6acec, but the user asked to
+  # stop the bot outright rather than rely on that fix alone). Re-enable
+  # only when the user asks.
+  # schedule:
+  #   - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
