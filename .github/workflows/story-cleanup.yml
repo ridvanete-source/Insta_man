@@ -1,0 +1,62 @@
+name: Story cleanup (manual)
+
+# Manual-only helper workflow for the 2026-09-10 duplicate-Story incident
+# (see scripts/boost_visibility.py fix). Not on any schedule - dispatch it
+# by hand: "list" to see current Stories, "delete" (with explicit pks) to
+# remove specific ones after a human has reviewed the list.
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "list (read-only) or delete (requires pks)"
+        required: true
+        default: "list"
+        type: choice
+        options:
+          - list
+          - delete
+      pks:
+        description: "Space-separated Story pks to delete (only used when action=delete)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install "instagrapi>=2.18"
+          pip install -e .
+
+      - name: Write .env
+        run: |
+          cat > .env << EOF
+          INSTA_MAN_PUBLISHER=instagrapi
+          INSTA_MAN_QUEUE_FILE=content_library/queue.yaml
+          IG_USERNAME=${{ secrets.IG_USERNAME }}
+          IG_PASSWORD=${{ secrets.IG_PASSWORD }}
+          IG_SESSION_FILE=.ig_session.json
+          EOF
+
+      - name: Restore Instagram session
+        run: echo "${{ secrets.IG_SESSION_B64 }}" | base64 -d > .ig_session.json
+
+      - name: List current stories
+        if: inputs.action == 'list'
+        run: python scripts/list_current_stories.py
+
+      - name: Delete specified stories
+        if: inputs.action == 'delete'
+        run: python scripts/delete_stories.py ${{ inputs.pks }}
