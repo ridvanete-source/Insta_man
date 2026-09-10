@@ -1,13 +1,11 @@
 name: Auto-post queue
 
 on:
-  # schedule paused 2026-09-10 at the user's explicit request, after a
-  # boost_visibility.py bug caused the same Story to be reposted hourly
-  # overnight (root cause fixed in commit 1f6acec, but the user asked to
-  # stop the bot outright rather than rely on that fix alone). Re-enable
-  # only when the user asks.
-  # schedule:
-  #   - cron: "13 * * * *"
+  # re-enabled 2026-09-10: session refreshed, circuit breaker reset, the
+  # duplicate-Story bug's root cause was already fixed in 1f6acec, and the
+  # leftover duplicate Stories expired on their own (24h TTL) - user approved.
+  schedule:
+    - cron: "13 * * * *"
   workflow_dispatch: {}
 
 permissions:
