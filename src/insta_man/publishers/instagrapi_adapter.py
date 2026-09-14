@@ -63,6 +63,14 @@ class InstagrapiPublisher(BasePublisher):
                 ) from exc
 
             client = Client()
+            # Instagram's abuse detection flagged a burst of ~35 back-to-back
+            # engagement-check requests from boost_visibility.py on 2026-09-14
+            # (started erroring with "Exceeded 30 redirects", then the session
+            # went LoginRequired). instagrapi inserts this delay before every
+            # private request when delay_range is set - applied client-wide
+            # (not just the visibility script) since any future caller that
+            # loops over many posts would hit the same pattern.
+            client.delay_range = [1, 3]
 
             def challenge_code_handler(username: str, choice) -> str:
                 method = "SMS" if choice == ChallengeChoice.SMS else "email"
