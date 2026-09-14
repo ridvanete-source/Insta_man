@@ -19,12 +19,11 @@ from insta_man.scheduler import run_once
 
 # Manually engaged 2026-09-10 at the user's explicit request, after a
 # boost_visibility.py bug caused the same Story to be reposted hourly
-# overnight (root cause fixed separately). This is a deliberate full stop
-# of all automated posting - independent of health.py's automatic circuit
-# breaker - covering every caller of `insta_man run` (auto-post.yml on
-# GitHub Actions and the VPS's run_and_sync.sh) regardless of which
-# machine's session happens to be valid. Flip back to False to resume.
-AUTOMATION_PAUSED = True
+# overnight. Root cause fixed the same day (commit 1f6acec - cooldown is
+# now recorded before the upload attempt, not only on success). Flipped
+# back to False on 2026-09-14 at the user's explicit request, alongside a
+# separate session recovery (see content_library/health_state.json history).
+AUTOMATION_PAUSED = False
 
 
 def main(argv: list[str] | None = None) -> int:
