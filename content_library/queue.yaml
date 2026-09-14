@@ -1136,9 +1136,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-14T09:54:35.723029+00:00'
+  platform_post_id: '3985928011244738003'
   error: null
 - id: 2026-08-24-future-2100-hagia-sophia
   caption: '2100''de İstanbul: Ayasofya''nın kubbesi hâlâ gökyüzüne bakıyor.'
