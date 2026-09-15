@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 1,
-  "last_error": "ChallengeRequired: Manual verification required via Instagram native challenge flow. This checkpoint is not handled by challenge_code_handler or change_password_handler; complete it in the official Instagram app or web flow on a trusted device. Retry with the same saved client settings, device identifiers, and proxy/IP.",
-  "last_failure_at": "2026-09-15T07:43:25.616129+00:00",
+  "consecutive_failures": 0,
+  "last_error": null,
+  "last_failure_at": null,
   "notified_at": null
 }
