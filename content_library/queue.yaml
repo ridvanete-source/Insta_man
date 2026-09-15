@@ -976,9 +976,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-15T10:44:04.486237+00:00'
+  platform_post_id: '3986677679750869004'
   error: null
 - id: 2026-08-24-future-2100-kiz-kulesi
   caption: 2100'de Boğaz'ın ortasında, küçük kule hâlâ ışık saçıyor.
