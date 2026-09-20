@@ -237,6 +237,31 @@ düzeltildi (çalıştırma başarısız olsa bile commit adımına devam ediyor
 GitHub Actions'ta iş yine de kırmızı X gösteriyor ama commit önce
 tamamlanıyor).
 
+## Tekrarlayan ChallengeRequired/429 kökeni ve rezidansiyel proxy desteği — 2026-09-20 eklendi
+
+**Kök neden bulundu:** 08-29, 09-08, 09-14 ve 09-16 tarihli dört ayrı session-ölümü
+olayının hepsinde aynı desen tekrarladı — session bir şekilde geçersiz olunca,
+bir sonraki saatlik çalıştırma (`authenticate()` her çalıştırmada koşulsuz
+`client.login(username, password)` çağırıyor) Oracle VPS'in veya GitHub Actions
+runner'ının **datacenter IP'sinden gerçek bir şifre girişi denemesi** yapıyor.
+Instagram'ın istismar tespiti datacenter IP'den gelen girişleri işaretleyip
+`ChallengeRequired` veya 429 ile engelliyor — bu, headless bir botun çözemeyeceği
+bir engel (aynı hesap kullanıcının kendi rezidansiyel IP'sinden hiç sorun
+yaşamadan giriş yapabiliyor, 09-08'de doğrulandı). Devre kesici (`health.py`)
+bunu 3 denemede durdurup mail atıyor ama **kökeni çözmüyor** — her seferinde
+kullanıcının kendi makinesinden elle giriş yapıp session'ı yeniden dağıtması
+gerekiyor (2FA gerektirdiği için otomatikleştirilemez).
+
+**Eklenen mitigasyon:** `config.py`'ye `IG_PROXY_URL` (opsiyonel, varsayılan
+boş → davranış değişmez), `instagrapi_adapter.py`'de ayarlıysa
+`client.set_proxy()` ile uygulanıyor. **Bunun gerçekten işe yaraması için
+kullanıcının statik bir rezidansiyel proxy edinip `.env`/GitHub secret'ına
+`IG_PROXY_URL` olarak eklemesi gerekiyor** — bu bir maliyet/tedarikçi kararı,
+henüz yapılmadı. Proxy eklenene kadar aynı senaryo (session ölür → sonraki
+login datacenter IP'den denenir → challenge) tekrarlanmaya devam edecek;
+devre kesici sayesinde artık en azından 100+ deneme yerine 3'te durup mail
+atıyor, ama tam otomatik kurtarma hâlâ yok.
+
 ## Testler
 
 ```bash

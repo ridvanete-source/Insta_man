@@ -72,6 +72,14 @@ class InstagrapiPublisher(BasePublisher):
             # loops over many posts would hit the same pattern.
             client.delay_range = [1, 3]
 
+            if self._config.ig_proxy_url:
+                # VPS/GitHub Actions runner IP'lerinden gelen login denemeleri
+                # Instagram tarafından datacenter IP olarak işaretlenip
+                # challenge/rate-limit tetikliyor (bkz. CLAUDE.md) - statik bir
+                # rezidansiyel proxy bunu normal bir kullanıcı girişi gibi
+                # gösteriyor.
+                client.set_proxy(self._config.ig_proxy_url)
+
             def challenge_code_handler(username: str, choice) -> str:
                 method = "SMS" if choice == ChallengeChoice.SMS else "email"
                 logger.info("Instagram requested a %s verification code for %s", method, username)

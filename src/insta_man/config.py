@@ -31,6 +31,12 @@ class Config:
     ig_username: str | None = os.getenv("IG_USERNAME")
     ig_password: str | None = os.getenv("IG_PASSWORD")
     ig_session_file: Path = Path(os.getenv("IG_SESSION_FILE", ".ig_session.json"))
+    # Datacenter IP'lerden (Oracle VPS, GitHub Actions runner'ları) gelen
+    # login denemeleri Instagram'ın istismar tespitini tetikliyor (bkz.
+    # CLAUDE.md "Tekrarlayan ChallengeRequired/429 kökeni"). Ayarlanırsa
+    # instagrapi tüm istekleri bu proxy üzerinden yollar - statik bir
+    # rezidansiyel proxy kullanılması önerilir. Boşsa davranış değişmez.
+    ig_proxy_url: str | None = os.getenv("IG_PROXY_URL")
 
     # Bildirim (sadece health.py'nin devre-kesici uyarısı için) - Binance/MT5/
     # US Signals botlarıyla aynı Gmail hesabı/desen.
