@@ -999,9 +999,9 @@
   source_credit: null
   location: null
   reshare_eligible: true
-  status: pending
-  published_at: null
-  platform_post_id: null
+  status: posted
+  published_at: '2026-09-20T12:17:23.339248+00:00'
+  platform_post_id: '3990348529544773614'
   error: null
 - id: 2026-08-24-split-then-now-diner-jukebox
   caption: Neon ışıklardan dokunmatik ekrana, aynı masa aynı melodi.
