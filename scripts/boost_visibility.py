@@ -7,7 +7,7 @@ this project (see CLAUDE.md). Instead this script only:
 
 1. Logs like/comment counts for posted items over time (content-strategy
    signal - which topics/hashtags actually perform).
-2. (DISABLED 2026-09-10, see RESHARE_ENABLED below) Reshares an older,
+2. (DISABLED 2026-09-20, see RESHARE_ENABLED below) Reshares an older,
    well-cooled-down post to Story by re-uploading its original media file
    through the same story-publish path used for scheduled Story posts (NOT
    instagrapi's native `media_share_to_story`, which was observed rendering
@@ -39,12 +39,18 @@ STATE_FILE = Path("content_library/visibility_state.json")
 MIN_POST_AGE_FOR_RESHARE = timedelta(days=3)
 MIN_GAP_BETWEEN_RESHARES = timedelta(hours=20)
 
-# Re-enabled 2026-09-10 after the root cause (fixed in commit 1f6acec - the
-# cooldown timestamp was only recorded on a *successful* reshare, so a
-# swallowed network exception let the same post get reshared to Story every
-# hour overnight instead of every 20h) was fixed and the user approved
-# resuming. See CLAUDE.md for the incident writeup.
-RESHARE_ENABLED = True
+# Disabled again 2026-09-20, this time for good: re-tested instagrapi's
+# native media_share_to_story (the only version that actually links back to
+# the original post via a tap-through sticker) on the current library
+# version (3.0.2) and it still renders as a plain black story with no
+# sticker - confirmed by the user looking at the live account, not just the
+# API response. That means this fallback (a disconnected re-upload of the
+# same image, no link back to the post) can never move the original post's
+# own view count either way - it only creates unrelated Story impressions.
+# User will reshare old posts to Story manually from the official app
+# instead (which renders the sticker correctly since it's Instagram's own
+# client). See CLAUDE.md for the write-up.
+RESHARE_ENABLED = False
 
 
 def _load_state() -> dict:

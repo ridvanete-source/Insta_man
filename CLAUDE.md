@@ -262,6 +262,48 @@ login datacenter IP'den denenir → challenge) tekrarlanmaya devam edecek;
 devre kesici sayesinde artık en azından 100+ deneme yerine 3'te durup mail
 atıyor, ama tam otomatik kurtarma hâlâ yok.
 
+## Story reshare kalıcı olarak kapatıldı — native yöntem doğrulanmış şekilde bozuk (2026-09-20)
+
+**Tetikleyici:** kullanıcı eski postların izlenme sayısının artmadığını
+fark etti ("ilk eklenen fotonun izleme sayısı sabit kaldı"). İnceleme iki
+ayrı sorun ortaya çıkardı:
+
+1. **Yapısal:** `boost_visibility.py`'nin reshare mekanizması
+   (`InstagrapiPublisher.reshare_to_story`) eski postu **bağlantısız, yeni
+   bir Story olarak** yeniden yüklüyor — Instagram'ın gerçek "gönderiyi
+   Story'de paylaş" özelliğinin sağladığı "dokunup gönderiye git" etiketi
+   (sticker) yok. Bu, postun kendi izlenme/reach sayısına yapısal olarak
+   hiç katkı sağlayamaz, sadece ayrı/ilgisiz Story gösterimleri yaratır.
+2. **Operasyonel:** aynı zamanda otomasyon 2026-09-16 10:44'ten
+   2026-09-20'ye kadar (~4 gün) `ChallengeRequired` ile durmuştu, kimse
+   fark etmemişti (bkz. yukarıdaki devre kesici notu — mail gitmiş olmalı
+   ama fark edilmemiş).
+
+**Native yöntem yeniden test edildi, hâlâ bozuk çıktı:** 2026-08-04'te
+`media_share_to_story` (gerçek paylaş özelliği, tap-through sticker'lı)
+siyah/boş story ürettiği için kapatılıp bağlantısız yeniden-yükleme
+yöntemine geçilmişti (`a2f443d`). instagrapi o zamandan beri güncellendi
+(şu an 3.0.2), bu yüzden `scripts/test_native_reshare.py` ile tek bir test
+postuyla (ilk eklenen foto, `3952056379292300705`) tekrar denendi —
+**kullanıcı canlı hesaptan doğruladı: hâlâ sadece siyah ekran, hiç sticker
+yok.** Kök neden muhtemelen instagrapi'nin `media_share_to_story`
+implementasyonunda (`_media_share_story_background()` ile siyah bir arka
+plan üretip üzerine `StoryMedia` sticker'ı `extra_data` ile ekliyor) —
+sticker'ın kendisi hiç render olmuyor, sadece siyah arka plan kalıyor.
+
+**Yan etki:** test story'sini silmeye çalışırken Instagram `feedback_required`
+(rate-limit) hatası verdi — tekrar denenmedi, story 24 saatte kendiliğinden
+düştü.
+
+**Karar (kullanıcı onayı ile): `RESHARE_ENABLED = False` kalıcı yapıldı**
+(`scripts/boost_visibility.py`) — hem native hem bağlantısız yöntem
+amacına ulaşamadığı için otomatik reshare tamamen durduruldu. Engagement
+loglama (`get_engagement`, like/comment sayısı takibi) etkilenmedi, hâlâ
+çalışıyor. **Kullanıcı eski postları bundan sonra resmi Instagram
+uygulamasından elle Story'de paylaşacak** — uygulamanın kendi istemcisi
+olduğu için sticker doğru render oluyor ve gerçekten postun izlenmesine
+katkı sağlıyor, otomatikleştirilemeyen ama sıfır riskli tek yol bu.
+
 ## Testler
 
 ```bash
