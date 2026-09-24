@@ -69520,6 +69520,11 @@
           "at": "2026-09-20T22:43:22.732697+00:00",
           "comment_count": 0,
           "like_count": 5
+        },
+        {
+          "at": "2026-09-24T17:43:22.931744+00:00",
+          "comment_count": 0,
+          "like_count": 5
         }
       ],
       "id": "2026-08-24-future-2100-istiklal-caddesi",
@@ -69532,16 +69537,26 @@
           "at": "2026-09-20T22:43:22.732697+00:00",
           "comment_count": 1,
           "like_count": 4
+        },
+        {
+          "at": "2026-09-24T17:43:22.931744+00:00",
+          "comment_count": 1,
+          "like_count": 5
         }
       ],
       "id": "2026-08-24-future-2100-hagia-sophia",
-      "like_count": 4
+      "like_count": 5
     },
     "3985952907769297682": {
       "comment_count": 0,
       "history": [
         {
           "at": "2026-09-20T22:43:22.732697+00:00",
+          "comment_count": 0,
+          "like_count": 6
+        },
+        {
+          "at": "2026-09-24T17:43:22.931744+00:00",
           "comment_count": 0,
           "like_count": 6
         }
