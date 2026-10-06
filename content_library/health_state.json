@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 0,
-  "last_error": null,
-  "last_failure_at": null,
+  "consecutive_failures": 1,
+  "last_error": "ClientError: CAA preflight did not return account access and attestation data",
+  "last_failure_at": "2026-10-06T08:43:23.627681+00:00",
   "notified_at": null
 }
