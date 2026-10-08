@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 0,
-  "last_error": null,
-  "last_failure_at": null,
+  "consecutive_failures": 1,
+  "last_error": "ClientThrottledError: 429 Client Error:  for url: https://b.i.instagram.com/api/v1/bloks/async_action/com.bloks.www.bloks.caa.login.async.send_login_request/",
+  "last_failure_at": "2026-10-08T05:43:35.954521+00:00",
   "notified_at": null
 }
