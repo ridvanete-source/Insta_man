@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 1,
-  "last_error": "TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'",
-  "last_failure_at": "2026-10-19T23:43:36.960358+00:00",
+  "consecutive_failures": 0,
+  "last_error": null,
+  "last_failure_at": null,
   "notified_at": null
 }
