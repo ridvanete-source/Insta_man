@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 1,
-  "last_error": "Timeout: curl private transport failed (Timeout)",
-  "last_failure_at": "2026-11-16T10:45:40.060637+00:00",
+  "consecutive_failures": 0,
+  "last_error": null,
+  "last_failure_at": null,
   "notified_at": null
 }
