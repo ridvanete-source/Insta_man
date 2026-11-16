@@ -1,6 +1,6 @@
 {
-  "consecutive_failures": 0,
-  "last_error": null,
-  "last_failure_at": null,
+  "consecutive_failures": 1,
+  "last_error": "ConnectionError: HTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/qe/sync/ (Caused by NewConnectionError(\"HTTPSConnection(host='i.instagram.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+  "last_failure_at": "2026-11-16T09:52:45.662993+00:00",
   "notified_at": null
 }
